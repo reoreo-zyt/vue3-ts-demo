@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
+    "prepare": "husky install",
     "lint": "eslint . --ext .vue,.js,.cjs,.mjs,.ts,.jsx,.tsx --fix",
     "lint:style": "stylelint \"./**/*.{css,less,vue,html}\" --fix",
     "format": "prettier --write \"./**/*.{html,vue,ts,js,css,scss,json,cjs,mjs,md}\""
@@ -22,6 +23,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-vue": "^9.7.0",
+    "husky": "^8.0.2",
     "postcss": "^8.4.19",
     "postcss-html": "^1.5.0",
     "postcss-scss": "^4.0.5",
