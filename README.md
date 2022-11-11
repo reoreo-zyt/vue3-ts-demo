@@ -41,3 +41,9 @@ test：新增测试用例或是更新现有测试
 ci:主要目的是修改项目继续完成集成流程(例如 Travis，Jenkins，GitLab CI,Circle)的提交
 
 build: 主要目的是修改项目构建系统(例如 glup，webpack，rollup 的配置等)的提交
+
+## 2. 项目工程规范
+
+- eslint 代码质量
+- prettier 代码的统一格式、风格
+- husky github hook，保证提交后代码的质量和格式
