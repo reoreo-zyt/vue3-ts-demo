@@ -7,5 +7,3 @@ import HelloWorld from './components/HelloWorld.vue'
 <template>
   <HelloWorld msg="Hello Scss" />
 </template>
-
-<style lang="scss" scoped></style>
