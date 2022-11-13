@@ -10,6 +10,29 @@ windows 系统使用 git 时，在提交代码时会把 CRLF 更改为 LF，在�
 
 windows 端行尾序列为 CRLF。MAC 端行尾序列为 LF
 
+### yarn 安装问题 There appears to be trouble with your network connection. Retrying…
+
+yarn 安装超时
+
+一般解决方法都是解决代理
+
+```bash
+#查看代理
+yarn config list
+#删除代理
+yarn config delete proxy
+#更换淘宝镜像
+yarn config set registry https://registry.npm.taobao.org
+```
+
+以下解决了我的问题：
+
+yarn.lock里是通过别的仓库抓取的。这里set registry后执行yarn install依然走的是别的仓库。可以通过yarn install --verbose验证。可以通过忽略lock文件，同时install的时候加registry参数解决：
+
+```bash
+yarn install --no-lockfile --registry https://registry.npm.taobao.org
+```
+
 ## 1. 代码提交规范
 
 br: 此项特别针对 bug 号，用于向测试反馈 bug 列表的 bug 修改情况
