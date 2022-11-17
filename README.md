@@ -27,7 +27,7 @@ yarn config set registry https://registry.npm.taobao.org
 
 以下解决了我的问题：
 
-yarn.lock里是通过别的仓库抓取的。这里set registry后执行yarn install依然走的是别的仓库。可以通过yarn install --verbose验证。可以通过忽略lock文件，同时install的时候加registry参数解决：
+yarn.lock 里是通过别的仓库抓取的。这里 set registry 后执行 yarn install 依然走的是别的仓库。可以通过 yarn install --verbose 验证。可以通过忽略 lock 文件，同时 install 的时候加 registry 参数解决：
 
 ```bash
 yarn install --no-lockfile --registry https://registry.npm.taobao.org
