@@ -33,6 +33,10 @@ yarn.lock 里是通过别的仓库抓取的。这里 set registry 后执行 yarn
 yarn install --no-lockfile --registry https://registry.npm.taobao.org
 ```
 
+### TODO: dist 文件貌似会包含 lint 检查中，导致 commit 提交前堵塞，打包后需要删除 dist 文件夹。
+
+考虑 eslint 检查忽略相关文件夹
+
 ## 1. 代码提交规范
 
 br: 此项特别针对 bug 号，用于向测试反馈 bug 列表的 bug 修改情况
