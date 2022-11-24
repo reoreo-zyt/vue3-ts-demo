@@ -15,10 +15,10 @@ import Cesium from './components/CesiumTest.vue'
 
 <style scoped>
 .app {
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
   width: 100%;
   height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
 }
 </style>
