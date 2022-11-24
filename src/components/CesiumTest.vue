@@ -7,6 +7,7 @@ import { Viewer } from 'cesium'
 import { onMounted, ref } from 'vue'
 
 onMounted(() => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const viewer = ref(new Viewer('cesium-container'))
 })
 </script>
