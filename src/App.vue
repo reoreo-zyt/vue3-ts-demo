@@ -1,7 +1,11 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import GUIMove from './components/Sample/GUIMove.vue'
+</script>
 
 <template>
-  <div class="app"></div>
+  <div class="app">
+    <GUIMove></GUIMove>
+  </div>
 </template>
 
 <style scoped>
