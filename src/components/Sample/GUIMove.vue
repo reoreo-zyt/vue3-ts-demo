@@ -194,7 +194,7 @@ export default defineComponent({
 <style scoped>
 .stats {
   position: absolute;
-  left: 0;
   top: 0;
+  left: 0;
 }
 </style>
