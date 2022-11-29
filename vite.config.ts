@@ -4,6 +4,16 @@ import vue from '@vitejs/plugin-vue'
 import ViteRestart from 'vite-plugin-restart'
 import cesium from 'vite-plugin-cesium'
 
+const viteRestartValue = (() => {
+  try {
+    return ViteRestart({ restart: ['tsconfig.node.json'] })
+  } catch {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore - Doesn't look like `vite-plugin-restart` exports correctly.
+    return ViteRestart.default({ restart: ['tsconfig.node.json'] })
+  }
+})()
+
 // https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
@@ -20,11 +30,5 @@ export default defineConfig({
       },
     },
   },
-  plugins: [
-    vue(),
-    ViteRestart({
-      restart: ['my.config.[jt]s'],
-    }),
-    cesium(),
-  ],
+  plugins: [vue(), viteRestartValue, cesium()],
 })
