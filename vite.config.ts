@@ -8,11 +8,6 @@ import { VITE_PORT } from './build/constant'
 export default ({ command }: ConfigEnv): UserConfig => {
   const isBuild = command === 'build'
   let base: string
-  if (command === 'build') {
-    base = '/fast-vue3/'
-  } else {
-    base = '/'
-  }
   return {
     base,
     resolve: {
@@ -23,7 +18,6 @@ export default ({ command }: ConfigEnv): UserConfig => {
     },
     // plugins
     plugins: createVitePlugins(isBuild),
-
     // css
     css: {
       preprocessorOptions: {
@@ -32,7 +26,6 @@ export default ({ command }: ConfigEnv): UserConfig => {
         },
       },
     },
-
     // server
     server: {
       hmr: { overlay: false }, // 禁用或配置 HMR 连接 设置 server.hmr.overlay 为 false 可以禁用服务器错误遮罩层

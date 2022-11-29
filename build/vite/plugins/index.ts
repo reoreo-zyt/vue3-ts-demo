@@ -6,18 +6,27 @@ import { PluginOption } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { ConfigCompressPlugin } from './compress'
 import { ConfigRestartPlugin } from './restart'
+import { ConfigHtmlPlugin } from './html'
+import { ConfigProgressPlugin } from './progress'
 
+// TODO:
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function createVitePlugins(isBuild: boolean) {
   const vitePlugins: (PluginOption | PluginOption[])[] = [
     // vue支持
     vue(),
   ]
 
-  // 开启.gz压缩  rollup-plugin-gzip
-  vitePlugins.push(ConfigCompressPlugin())
+  const plugins = [
+    ConfigCompressPlugin(),
+    ConfigRestartPlugin(),
+    ConfigHtmlPlugin(),
+    ConfigProgressPlugin(),
+  ]
 
-  // 监听配置文件改动重启
-  vitePlugins.push(ConfigRestartPlugin())
+  for (let i = 0; i < plugins.length; i++) {
+    vitePlugins.push(plugins[i])
+  }
 
   return vitePlugins
 }
