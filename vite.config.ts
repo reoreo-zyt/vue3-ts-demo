@@ -1,34 +1,47 @@
-import { defineConfig } from 'vite'
+import { UserConfig, ConfigEnv } from 'vite'
+import { createVitePlugins } from './build/vite/plugins'
 import path from 'path'
-import vue from '@vitejs/plugin-vue'
-import ViteRestart from 'vite-plugin-restart'
-import cesium from 'vite-plugin-cesium'
-
-const viteRestartValue = (() => {
-  try {
-    return ViteRestart({ restart: ['tsconfig.node.json'] })
-  } catch {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore - Doesn't look like `vite-plugin-restart` exports correctly.
-    return ViteRestart.default({ restart: ['tsconfig.node.json'] })
-  }
-})()
+import proxy from './build/vite/proxy'
+import { VITE_PORT } from './build/constant'
 
 // https://vitejs.dev/config/
-export default defineConfig({
-  resolve: {
-    // Vite 路径别名配置
-    alias: {
-      '@': path.resolve('./src'),
-    },
-  },
-  // 将 css 变量加载到全局，在 style 标签中可以使用
-  css: {
-    preprocessorOptions: {
-      scss: {
-        additionalData: '@import "@/styles/constant.scss";',
+export default ({ command }: ConfigEnv): UserConfig => {
+  const isBuild = command === 'build'
+  let base: string
+  if (command === 'build') {
+    base = '/fast-vue3/'
+  } else {
+    base = '/'
+  }
+  return {
+    base,
+    resolve: {
+      // Vite 路径别名配置
+      alias: {
+        '@': path.resolve('./src'),
       },
     },
-  },
-  plugins: [vue(), viteRestartValue, cesium()],
-})
+    // plugins
+    plugins: createVitePlugins(isBuild),
+
+    // css
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: '@import "@/styles/constant.scss";',
+        },
+      },
+    },
+
+    // server
+    server: {
+      hmr: { overlay: false }, // 禁用或配置 HMR 连接 设置 server.hmr.overlay 为 false 可以禁用服务器错误遮罩层
+      // 服务配置
+      port: VITE_PORT, // 类型： number 指定服务器端口;
+      open: false, // 类型： boolean | string在服务器启动时自动在浏览器中打开应用程序；
+      cors: false, // 类型： boolean | CorsOptions 为开发服务器配置 CORS。默认启用并允许任何源
+      host: '0.0.0.0', // IP配置，支持从IP启动
+      proxy,
+    },
+  }
+}
