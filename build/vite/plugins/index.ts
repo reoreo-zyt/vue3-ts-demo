@@ -8,6 +8,7 @@ import { ConfigCompressPlugin } from './compress'
 import { ConfigRestartPlugin } from './restart'
 import { ConfigHtmlPlugin } from './html'
 import { ConfigProgressPlugin } from './progress'
+import { ConfigImageminPlugin } from './imagemin'
 
 // TODO:
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -22,6 +23,7 @@ export function createVitePlugins(isBuild: boolean) {
     ConfigRestartPlugin(),
     ConfigHtmlPlugin(),
     ConfigProgressPlugin(),
+    ConfigImageminPlugin(),
   ]
 
   for (let i = 0; i < plugins.length; i++) {
