@@ -4,8 +4,10 @@
  */
 import { PluginOption } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import { ConfigCompressPlugin } from './compress'
+// dev
 import { ConfigRestartPlugin } from './restart'
+// build
+import { ConfigCompressPlugin } from './compress'
 import { ConfigHtmlPlugin } from './html'
 import { ConfigProgressPlugin } from './progress'
 import { ConfigImageminPlugin } from './imagemin'
@@ -16,19 +18,21 @@ export function createVitePlugins(isBuild: boolean) {
   const vitePlugins: (PluginOption | PluginOption[])[] = [
     // vue支持
     vue(),
+    ConfigRestartPlugin(),
   ]
 
+  console.log(process.env.VITE_NODE_ENV)
+
+  // 打包构建插件
   const plugins = [
+    // 这些插件应该在执行打包时才push进去
     ConfigCompressPlugin(),
-    ConfigRestartPlugin(),
     ConfigHtmlPlugin(),
     ConfigProgressPlugin(),
     ConfigImageminPlugin(),
   ]
 
-  for (let i = 0; i < plugins.length; i++) {
-    vitePlugins.push(plugins[i])
-  }
+  vitePlugins.push(...plugins)
 
   return vitePlugins
 }
