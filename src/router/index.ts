@@ -7,7 +7,16 @@ import {
 } from 'vue-router'
 
 const routes: RouteRecordRaw[] = [
-  { path: '/', name: 'Home', component: () => import('../views/Home.vue') },
+  {
+    path: '/',
+    name: 'homePage',
+    component: () => import('../views/homePage.vue'),
+  },
+  {
+    path: '/element/buttonCom',
+    name: 'elementButtonCom',
+    component: () => import('../views/element/buttonCom.vue'),
+  },
 ]
 
 const options: RouterOptions = {

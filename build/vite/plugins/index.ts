@@ -6,6 +6,7 @@ import { PluginOption } from 'vite'
 import vue from '@vitejs/plugin-vue'
 // dev
 import { ConfigRestartPlugin } from './restart'
+import { ConfigVueJsx } from './vueTsx'
 // build
 import { ConfigCompressPlugin } from './compress'
 import { ConfigHtmlPlugin } from './html'
@@ -18,6 +19,8 @@ export function createVitePlugins(isBuild: boolean) {
   const vitePlugins: (PluginOption | PluginOption[])[] = [
     // vue支持
     vue(),
+    // Jsx支持
+    ConfigVueJsx(),
     ConfigRestartPlugin(),
   ]
 

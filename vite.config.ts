@@ -3,6 +3,10 @@ import { createVitePlugins } from './build/vite/plugins'
 import path from 'path'
 import proxy from './build/vite/proxy'
 import { VITE_PORT } from './build/constant'
+// element plus
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 // https://vitejs.dev/config/
 export default ({ command }: ConfigEnv): UserConfig => {
@@ -15,9 +19,20 @@ export default ({ command }: ConfigEnv): UserConfig => {
       alias: {
         '@': path.resolve('./src'),
       },
+      // 解决引入 element plus 后报错问题
+      // https://github.com/jbaysolutions/vue-grid-layout/issues/666
+      dedupe: ['vue'],
     },
     // plugins
-    plugins: createVitePlugins(isBuild),
+    plugins: [
+      createVitePlugins(isBuild),
+      AutoImport({
+        resolvers: [ElementPlusResolver()],
+      }),
+      Components({
+        resolvers: [ElementPlusResolver()],
+      }),
+    ],
     // css
     css: {
       preprocessorOptions: {

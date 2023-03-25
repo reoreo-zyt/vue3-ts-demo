@@ -80,3 +80,10 @@ build: 主要目的是修改项目构建系统(例如 glup，webpack，rollup �
 - eslint 代码质量
 - prettier 代码的统一格式、风格
 - husky github hook，保证提交后代码的质量和格式
+
+## 3. 配置的工程记录
+
+- unplugin-vue-components 自动引入组件
+- npm install -g npm-check-updates
+  - ncu 展示最新依赖包
+  - ncu -u 更新全部依赖包
