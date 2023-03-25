@@ -1,7 +1,7 @@
 <template>
   <nav class="app-header">
-    <div class="app-header-logo">CIM开放平台</div>
-    <app-menu></app-menu>
+    <div class="app-header-logo">测试功能</div>
+    <app-menu class="app-header-menu"></app-menu>
     <div class="app-header-avatar">
       <el-dropdown>
         <span class="el-dropdown-link">
@@ -39,6 +39,10 @@ export default defineComponent({
   box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
   user-select: none;
   border-bottom: solid 1px #e6e6e6;
+
+  &-menu {
+    width: 500px;
+  }
 
   &-logo {
     display: flex;

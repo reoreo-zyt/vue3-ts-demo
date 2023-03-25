@@ -7,26 +7,23 @@
     :active-text-color="menuConfig.menuActiveText"
     mode="horizontal"
     @select="handleSelect">
-    <!-- TODO: 实现无限菜单项 -->
-    <!-- 没有子节点、使用 el-menu-item 渲染 -->
-    <!-- 有子节点、使用 el-sub-menu 渲染 -->
-    <!-- 循环渲染、使用 app-header -->
-    <!-- 模板写法的菜单组件 -->
-    <el-menu-item index="1">主页</el-menu-item>
-    <el-sub-menu index="2">
-      <template #title>Workspace</template>
-      <el-menu-item index="2-1">item one</el-menu-item>
-      <el-menu-item index="2-2">item two</el-menu-item>
-      <el-menu-item index="2-3">item three</el-menu-item>
-      <el-sub-menu index="2-4">
-        <template #title>item four</template>
-        <el-menu-item index="2-4-1">item one</el-menu-item>
-        <el-menu-item index="2-4-2">item two</el-menu-item>
-        <el-menu-item index="2-4-3">item three</el-menu-item>
+    <!-- TODO: 只实现了二级菜单，应该实现无限菜单项，考虑模板渲染和tsx渲染 -->
+    <div
+      v-for="(navItem, index) in navigation"
+      :key="'app-meun-navigation' + index">
+      <el-menu-item v-if="!navItem.children" :index="String(index)">
+        {{ navItem.name }}
+      </el-menu-item>
+      <el-sub-menu v-if="navItem.children" :index="String(index)">
+        <template #title>{{ navItem.name }}</template>
+        <el-menu-item
+          v-for="(navCItem, cIndex) in navItem.children"
+          :key="'app-meun-navigation' + cIndex"
+          :index="String(index) + String(cIndex)">
+          {{ navCItem.name }}
+        </el-menu-item>
       </el-sub-menu>
-    </el-sub-menu>
-    <el-menu-item index="3">Info</el-menu-item>
-    <el-menu-item index="4">Orders</el-menu-item>
+    </div>
   </el-menu>
 </template>
 
@@ -43,7 +40,6 @@ import { ref } from 'vue'
 
 // 定义类型
 defineProps<{
-  // asdasd
   menuConfig: object
   activeIndex: string
 }>()
@@ -56,37 +52,17 @@ const menuConfig = {
 }
 
 // 导航栏数据
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const navigation = [
-  { name: '首页', path: '/home' },
-  { name: '数据中心', path: '/data_center' },
+  { name: '项目搭建', path: '/home' },
   {
-    name: '开发中心',
+    name: '组件示例',
     path: '',
     children: [
-      { name: 'API文档', path: '/api_document' },
+      { name: 'element-plus', path: '/api_document' },
       { name: 'API示例', path: '/api_example' },
-      { name: 'UI规范', path: '/ui_standard' },
-      { name: 'UI组件', path: '/ui_component' },
-      { name: 'UI应用', path: '/ui_application' },
-      { name: '问题库', path: '/api_question' },
     ],
   },
-  { name: '应用中心', path: '/application_center' },
-  {
-    name: '文档中心',
-    path: '/document_center',
-    children: [
-      { name: 'API文档', path: '/document_center/api_document' },
-      { name: '平台介绍', path: '/platform_introduction' },
-      { name: '运维文档', path: '/operational_documents' },
-      { name: '建设方案', path: '/Construction_plan' },
-      { name: '建模规范', path: '/modeling_normalization' },
-      { name: 'UE规范', path: '/ue_standard' },
-    ],
-  },
-  { name: '案例中心', path: '/case_center' },
-  { name: '多级菜单测试', path: '' },
+  { name: '我的博客', path: '/application_center' },
 ]
 
 const activeIndex = ref('1')
