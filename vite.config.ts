@@ -5,6 +5,8 @@ import proxy from './build/vite/proxy'
 import { VITE_PORT } from './build/constant'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
+import Icons from 'unplugin-icons/vite'
+import IconsResolver from 'unplugin-icons/resolver'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 const pathSrc = path.resolve(__dirname, 'src')
@@ -40,9 +42,15 @@ export default ({ command }: ConfigEnv): UserConfig => {
           // Auto register Element Plus components
           // 自动导入 Element Plus 组件
           ElementPlusResolver(),
+          // 自动按需加载iconify图标库图标
+          IconsResolver(),
         ],
 
         dts: path.resolve(pathSrc, 'components.d.ts'),
+      }),
+      Icons({
+        // 自动安装图标
+        autoInstall: true,
       }),
     ],
     // css

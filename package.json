@@ -18,6 +18,8 @@
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
+    "@iconify-json/ep": "^1.1.10",
+    "@iconify/vue": "^4.1.0",
     "@types/node": "^18.15.10",
     "@typescript-eslint/eslint-plugin": "^5.56.0",
     "@typescript-eslint/parser": "^5.56.0",
@@ -41,6 +43,7 @@
     "stylelint-scss": "^4.5.0",
     "typescript": "^5.0.2",
     "unplugin-auto-import": "^0.15.2",
+    "unplugin-icons": "^0.15.3",
     "unplugin-vue-components": "^0.24.1",
     "vite": "^4.2.1",
     "vite-plugin-compression": "^0.5.1",

@@ -1,7 +1,10 @@
 <template>
   <nav class="app-header">
     <div class="app-header-logo">测试功能</div>
-    <app-menu class="app-header-menu"></app-menu>
+    <app-menu
+      class="app-header-menu"
+      :menu-config="{}"
+      :active-index="String(0)"></app-menu>
     <div class="app-header-avatar">
       <el-dropdown>
         <span class="el-dropdown-link">

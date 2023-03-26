@@ -2,6 +2,12 @@
   <main>
     <div v-for="(item, index) in data" :key="'views-homePage' + index">
       <div>{{ item.name }}</div>
+      <!-- <i-图标集-标图名/> -->
+      <!-- element-plus -->
+      <i-ep-Plus />
+      <!-- https://icon-sets.iconify.design/openmoji/anxious-face-with-sweat/ -->
+      <!-- 直接使用图标 -->
+      <app-icon :icon="'openmoji:anxious-face-with-sweat'"></app-icon>
       <div>{{ item.params }}</div>
     </div>
   </main>
