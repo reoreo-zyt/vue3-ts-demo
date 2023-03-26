@@ -57,10 +57,7 @@ const navigation = [
   {
     name: '组件示例',
     path: '',
-    children: [
-      { name: 'element-plus', path: '/api_document' },
-      { name: 'API示例', path: '/api_example' },
-    ],
+    children: [{ name: 'element-plus', path: '/api_document' }],
   },
   { name: '我的博客', path: '/application_center' },
 ]
