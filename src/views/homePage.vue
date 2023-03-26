@@ -1,37 +1,58 @@
 <template>
-  <div v-for="(item, index) in examples" :key="'homePage' + index">
-    <div>{{ item.name }}</div>
-    <div v-for="(i, index) in item.routers" :key="'homePage-item' + index">
-      <el-link :href="i.route" target="_blank">
-        {{ i.name }}
-        <el-icon class="el-icon--right">
-          <icon-view />
-        </el-icon>
-      </el-link>
+  <main>
+    <div v-for="(item, index) in data" :key="'views-homePage' + index">
+      <div>{{ item.name }}</div>
+      <div>{{ item.params }}</div>
     </div>
-    <el-test></el-test>
-  </div>
+  </main>
 </template>
 
 <script lang="ts" setup>
-import { View as IconView } from '@element-plus/icons-vue'
-import ElTest from '@/components/test/index'
+// 定义类型
+defineProps<{
+  data: Array<object>
+}>()
 
-const examples = [
+// 数据
+const data = [
   {
-    name: 'element plus 示例',
-    routers: [
-      {
-        name: '查看 buttonCom',
-        route: '/#/element/buttonCom',
-      },
-    ],
+    name: 'element-plus',
+    url: 'https://element-plus.gitee.io/zh-CN/guide/design.html',
+    params: ``,
+  },
+  {
+    name: 'vite',
+    url: 'https://element-plus.gitee.io/zh-CN/guide/design.html',
+    params: ``,
   },
 ]
 </script>
 
 <style scoped>
-.el-link {
-  margin-right: 8px;
+@font-face {
+  font-family: 'Sucrose Bold Two';
+  src: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/sucrose.woff2')
+    format('woff2');
+}
+
+@font-face {
+  font-family: 'IM Fell French Canon Pro';
+  src: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/im-fell-french-canon-pro.woff2')
+    format('woff2');
+}
+
+main {
+  position: relative;
+  padding: 2rem 25%;
+  font-size: 1.4rem;
+  font-family: 'IM Fell French Canon Pro';
+  background: #fff;
+  line-height: 1.6;
+}
+
+@media all and (max-width: 400px) {
+  main {
+    padding: 2rem;
+  }
 }
 </style>

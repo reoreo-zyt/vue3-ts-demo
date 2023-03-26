@@ -3,10 +3,11 @@ import { createVitePlugins } from './build/vite/plugins'
 import path from 'path'
 import proxy from './build/vite/proxy'
 import { VITE_PORT } from './build/constant'
-// element plus
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+
+const pathSrc = path.resolve(__dirname, 'src')
 
 // https://vitejs.dev/config/
 export default ({ command }: ConfigEnv): UserConfig => {
@@ -17,7 +18,7 @@ export default ({ command }: ConfigEnv): UserConfig => {
     resolve: {
       // Vite 路径别名配置
       alias: {
-        '@': path.resolve('./src'),
+        '@': pathSrc,
       },
       // 解决引入 element plus 后报错问题
       // https://github.com/jbaysolutions/vue-grid-layout/issues/666
@@ -27,10 +28,21 @@ export default ({ command }: ConfigEnv): UserConfig => {
     plugins: [
       createVitePlugins(isBuild),
       AutoImport({
+        // Auto import functions from Vue, e.g. ref, reactive, toRef...
+        // 自动导入 Vue 相关函数，如：ref, reactive, toRef 等
+        imports: ['vue'],
         resolvers: [ElementPlusResolver()],
+
+        dts: path.resolve(pathSrc, 'auto-imports.d.ts'),
       }),
       Components({
-        resolvers: [ElementPlusResolver()],
+        resolvers: [
+          // Auto register Element Plus components
+          // 自动导入 Element Plus 组件
+          ElementPlusResolver(),
+        ],
+
+        dts: path.resolve(pathSrc, 'components.d.ts'),
       }),
     ],
     // css

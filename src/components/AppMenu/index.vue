@@ -65,7 +65,7 @@ const navigation = [
   { name: '我的博客', path: '/application_center' },
 ]
 
-const activeIndex = ref('1')
+const activeIndex = ref('0')
 const handleSelect = (key: string, keyPath: string[]) => {
   console.log(key, keyPath)
 }
