@@ -30,13 +30,13 @@ const data = [
 
 <style scoped>
 @font-face {
-  font-family: 'Sucrose Bold Two';
+  font-family: 'Sucrose Bold Two', sans-serif;
   src: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/sucrose.woff2')
     format('woff2');
 }
 
 @font-face {
-  font-family: 'IM Fell French Canon Pro';
+  font-family: 'IM Fell French Canon Pro', sans-serif;
   src: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/im-fell-french-canon-pro.woff2')
     format('woff2');
 }
