@@ -83,7 +83,51 @@ build: 主要目的是修改项目构建系统(例如 glup，webpack，rollup �
 
 ## 3. 配置的工程记录
 
+### 自动引入组件
+
+<!-- TODO: 应当自动生成组件文档 -->
 - unplugin-vue-components 自动引入组件
+  - 在 components 下的文件可以自动注册成组件
+    - AppHeader `<app-header></app-header>`
+
+### ncu 更新依赖包
+
 - npm install -g npm-check-updates
   - ncu 展示最新依赖包
   - ncu -u 更新全部依赖包
+
+### 使用 tsx
+
+- @vitejs/plugin-vue-jsx
+
+使用 element-plus 按钮的示例
+
+```tsx
+import { defineComponent } from 'vue'
+// !在JSX中引入组件需要手动引入组件和组件样式，自动引入并不生效，复杂的功能再使用jsx吧
+import { ElButton } from 'element-plus'
+
+export default defineComponent({
+  name: 'el-test',
+
+  setup(props, context) {
+    console.log(props, context)
+
+    return () => <ElButton type='primary'>Primary</ElButton>
+  },
+})
+```
+
+### 使用图标
+
+- 提供两种图标
+  - element-plus [图标](https://element-plus.org/zh-CN/component/icon.html#%E5%9B%BE%E6%A0%87%E9%9B%86%E5%90%88)
+  - iconify [图标](https://icon-sets.iconify.design/openmoji/anxious-face-with-sweat/)
+
+```html
+<i-ep-Plus />
+```
+
+```html
+<app-icon icon="icon-park:click" style="cursor: pointer"></app-icon>
+```
