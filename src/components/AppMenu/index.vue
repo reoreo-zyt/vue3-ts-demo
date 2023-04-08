@@ -27,14 +27,6 @@
   </el-menu>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  name: 'app-menu',
-})
-</script>
-
 <script lang="ts" setup>
 import { ref } from 'vue'
 
