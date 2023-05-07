@@ -52,50 +52,14 @@ fetch('../../package.json')
         params: ``,
       })
     }
-    // data.frame = [
-    //   {
-    //     name: 'element-plus',
-    //     pkg: dependencies['element-plus'],
-    //     url: 'https://element-plus.gitee.io/zh-CN/guide/design.html',
-    //     icon: 'logos:element',
-    //     params: ``,
-    //   },
-    //   {
-    //     name: 'vue',
-    //     pkg: dependencies['vue'],
-    //     url: '',
-    //     icon: 'vscode-icons:file-type-vue',
-    //     params: ``,
-    //   },
-    //   {
-    //     name: 'vue-router',
-    //     pkg: dependencies['vue-router'],
-    //     url: '',
-    //     icon: 'vscode-icons:file-type-vue',
-    //     params: ``,
-    //   },
-    // ]
   })
 </script>
 
 <style scoped lang="scss">
-@font-face {
-  font-family: 'Sucrose Bold Two';
-  src: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/sucrose.woff2')
-    format('woff2');
-}
-
-@font-face {
-  font-family: 'IM Fell French Canon Pro';
-  src: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/im-fell-french-canon-pro.woff2')
-    format('woff2');
-}
-
 .main {
   position: relative;
   padding: 2rem 25%;
   font-size: 1.4rem;
-  font-family: 'IM Fell French Canon Pro', sans-serif;
   background: #fff;
   line-height: 1.6;
 

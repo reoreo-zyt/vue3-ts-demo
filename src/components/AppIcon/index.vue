@@ -2,14 +2,6 @@
   <Icon :icon="iconName" :color="color" :style="style" />
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  name: 'app-icon',
-})
-</script>
-
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Icon } from '@iconify/vue'
