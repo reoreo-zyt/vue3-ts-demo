@@ -98,6 +98,7 @@ fetch('../../package.json')
   font-family: 'IM Fell French Canon Pro', sans-serif;
   background: #fff;
   line-height: 1.6;
+
   &-item {
     &-icon {
       margin-right: 8px;
