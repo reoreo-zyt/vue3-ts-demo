@@ -106,7 +106,7 @@ fetch('../../package.json')
   }
 }
 
-@media all and (max-width: 400px) {
+@media all and (width <= 400px) {
   .main {
     padding: 2rem;
   }
