@@ -85,8 +85,6 @@ build: 主要目的是修改项目构建系统(例如 glup，webpack，rollup �
 
 ### 自动引入组件
 
-<!-- TODO: 应当自动生成组件文档 -->
-
 - unplugin-vue-components 自动引入组件
   - 在 components 下的文件可以自动注册成组件
     - AppHeader `<app-header></app-header>`
@@ -121,6 +119,7 @@ export default defineComponent({
 
 ### 使用图标
 
+<!-- TODO: 提供 vscode 插件，显示图标以及代码 -->
 - 提供两种图标
   - element-plus [图标](https://element-plus.org/zh-CN/component/icon.html#%E5%9B%BE%E6%A0%87%E9%9B%86%E5%90%88)
   - iconify [图标](https://icon-sets.iconify.design/openmoji/anxious-face-with-sweat/)

@@ -30,12 +30,6 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-// 定义类型
-defineProps<{
-  menuConfig: object
-  activeIndex: string
-}>()
-
 // 菜单栏配置项
 const menuConfig = {
   menuBg: '',

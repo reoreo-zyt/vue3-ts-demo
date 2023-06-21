@@ -2,18 +2,16 @@
   <div class="main">
     <div v-for="(item, index) in data.frame" :key="'views-homePage' + index">
       <div class="main-item">
-        <!-- <i-图标集-标图名/> -->
-        <!-- element-plus -->
-        <!-- <i-ep-Plus /> -->
-        <!-- https://icon-sets.iconify.design/openmoji/anxious-face-with-sweat/ -->
-        <!-- 直接使用图标 -->
         <span class="main-item-icon">
           <app-icon :icon="item.icon"></app-icon>
         </span>
         <span>{{ item.name }}</span>
         <span>
           {{ item.pkg }}
-          <app-icon icon="icon-park:click" style="cursor: pointer"></app-icon>
+          <app-icon
+            icon="icon-park:click"
+            style="cursor: pointer"
+            @click="locateTo(item.link)"></app-icon>
         </span>
       </div>
       <div>{{ item.params }}</div>
@@ -24,7 +22,6 @@
 <script lang="ts" setup>
 import { reactive } from 'vue'
 
-// 统一为 data 形式
 let data = reactive({
   frame: [
     {
@@ -33,6 +30,7 @@ let data = reactive({
       url: '',
       icon: '',
       params: ``,
+      link: '',
     },
   ],
 })
@@ -50,9 +48,14 @@ fetch('../../package.json')
         url: 'https://element-plus.gitee.io/zh-CN/guide/design.html',
         icon: 'logos:element',
         params: ``,
+        link: '',
       })
     }
   })
+
+function locateTo(link: string) {
+  console.log(link)
+}
 </script>
 
 <style scoped lang="scss">
