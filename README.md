@@ -120,6 +120,7 @@ export default defineComponent({
 ### 使用图标
 
 <!-- TODO: 提供 vscode 插件，显示图标以及代码 -->
+
 - 提供两种图标
   - element-plus [图标](https://element-plus.org/zh-CN/component/icon.html#%E5%9B%BE%E6%A0%87%E9%9B%86%E5%90%88)
   - iconify [图标](https://icon-sets.iconify.design/openmoji/anxious-face-with-sweat/)
