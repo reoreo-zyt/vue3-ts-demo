@@ -2,6 +2,8 @@
  * 公共配置
  */
 const path = require('path')
+const { VueLoaderPlugin } = require('vue-loader')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
     entry: path.join(__dirname, '../src/index.ts'), // 入口文件
@@ -39,6 +41,10 @@ module.exports = {
     plugins: [
         // ...
         new VueLoaderPlugin(), // vue-loader插件
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, '../public/index.html'), // 模板取定义root节点的模板
+            inject: true, // 自动注入静态资源
+        })
     ],
     resolve: {
         extensions: ['.vue', '.ts', '.js', '.json'],
