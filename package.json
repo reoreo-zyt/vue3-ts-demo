@@ -1,59 +1,31 @@
 {
-  "name": "vue3-ts-demo",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "name": "vue3-webpack-ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc && vite build",
-    "preview": "vite preview",
-    "prepare": "husky install",
-    "lint": "eslint . --ext .vue,.js,.cjs,.mjs,.ts,.jsx,.tsx --fix",
-    "lint:style": "stylelint \"./**/*.{css,scss,vue,html}\" --fix",
-    "format": "prettier --write \"./**/*.{html,vue,ts,js,css,scss,json,cjs,mjs,md}\""
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reoreo-zyt/vue3-ts-demo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/reoreo-zyt/vue3-ts-demo/issues"
+  },
+  "homepage": "https://github.com/reoreo-zyt/vue3-ts-demo#readme",
+  "devDependencies": {
+    "@babel/core": "^7.22.9",
+    "@babel/preset-env": "^7.22.9",
+    "@babel/preset-typescript": "^7.22.5",
+    "babel-loader": "^9.1.3",
+    "vue-loader": "^17.2.2",
+    "webpack": "^5.88.2"
   },
   "dependencies": {
-    "element-plus": "^2.3.8",
-    "vue": "^3.3.4",
-    "vue-router": "^4.2.4"
-  },
-  "devDependencies": {
-    "@iconify-json/ep": "^1.1.11",
-    "@iconify/vue": "^4.1.1",
-    "@types/node": "^20.4.4",
-    "@typescript-eslint/eslint-plugin": "^6.1.0",
-    "@typescript-eslint/parser": "^6.1.0",
-    "@vitejs/plugin-vue": "^4.2.3",
-    "@vitejs/plugin-vue-jsx": "^3.0.1",
-    "eslint": "^8.45.0",
-    "eslint-config-prettier": "^8.8.0",
-    "eslint-plugin-prettier": "^5.0.0",
-    "eslint-plugin-vue": "^9.15.1",
-    "husky": "^8.0.3",
-    "postcss": "^8.4.27",
-    "postcss-html": "^1.5.0",
-    "postcss-scss": "^4.0.6",
-    "prettier": "^3.0.0",
-    "sass": "^1.64.1",
-    "stylelint": "^15.10.2",
-    "stylelint-config-standard": "^34.0.0",
-    "stylelint-config-standard-scss": "^10.0.0",
-    "stylelint-config-standard-vue": "^1.0.0",
-    "stylelint-order": "^6.0.3",
-    "stylelint-scss": "^5.0.1",
-    "typescript": "^5.1.6",
-    "unplugin-auto-import": "^0.16.6",
-    "unplugin-icons": "^0.16.5",
-    "unplugin-vue-components": "^0.25.1",
-    "vite": "^4.4.6",
-    "vite-plugin-compression": "^0.5.1",
-    "vite-plugin-html": "^3.2.0",
-    "vite-plugin-imagemin": "^0.6.1",
-    "vite-plugin-progress": "^0.0.7",
-    "vite-plugin-restart": "^0.3.1",
-    "vue-tsc": "^1.8.6"
-  },
-  "resolutions": {
-    "bin-wrapper": "npm:bin-wrapper-china"
+    "vue": "^3.3.4"
   }
 }

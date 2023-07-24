@@ -1,6 +1,8 @@
 <template>
-  <app-header></app-header>
-  <router-view></router-view>
+    <h2>webpack5-vue3-ts</h2>
 </template>
+  
+<script setup lang="ts">
+</script>
 
-<script lang="ts" setup></script>
+<style scoped></style>
