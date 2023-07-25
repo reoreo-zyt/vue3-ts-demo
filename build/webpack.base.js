@@ -1,9 +1,14 @@
 /**
  * 公共配置
  */
+
+console.error('NODE_ENV', process.env.NODE_ENV) // production
+console.error('BASE_ENV', process.env.BASE_ENV) // development
+
 const path = require('path')
 const { VueLoaderPlugin } = require('vue-loader')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const webpack = require('webpack')
 
 module.exports = {
     entry: path.join(__dirname, '../src/index.ts'), // 入口文件
@@ -44,6 +49,11 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, '../public/index.html'), // 模板取定义root节点的模板
             inject: true, // 自动注入静态资源
+        }),
+        // 把值注入到业务代码中
+        new webpack.DefinePlugin({
+            'process.env.BASE_ENV': JSON.stringify(process.env.BASE_ENV),
+            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
         })
     ],
     resolve: {

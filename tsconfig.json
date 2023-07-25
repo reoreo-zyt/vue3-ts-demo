@@ -16,7 +16,7 @@
         "paths": {
           "@/*": ["./src/*"]
         },
-        "types": ["element-plus/global"]
+        "types": ["node", "element-plus/global"]
       },
       "include": [
         "src/**/*.ts",
