@@ -10,6 +10,8 @@ const { VueLoaderPlugin } = require('vue-loader')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 
+const pathSrc = path.resolve(__dirname, 'src')
+
 module.exports = {
     entry: path.join(__dirname, '../src/index.ts'), // 入口文件
     // 打包文件出口
@@ -40,7 +42,18 @@ module.exports = {
                         ]
                     }
                 }
-            }
+            },
+            {
+                test: /\.s[ac]ss$/i,
+                use: [
+                  // 将 JS 字符串生成为 style 节点
+                  'style-loader',
+                  // 将 CSS 转化成 CommonJS 模块
+                  'css-loader',
+                  // 将 Sass 编译成 CSS
+                  'sass-loader',
+                ],
+            },
         ]
     },
     plugins: [
@@ -55,8 +68,5 @@ module.exports = {
             'process.env.BASE_ENV': JSON.stringify(process.env.BASE_ENV),
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
         })
-    ],
-    resolve: {
-        extensions: ['.vue', '.ts', '.js', '.json'],
-    }
+    ]
 }
