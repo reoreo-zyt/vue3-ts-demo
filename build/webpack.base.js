@@ -50,6 +50,14 @@ module.exports = {
                   'style-loader',
                   // 将 CSS 转化成 CommonJS 模块
                   'css-loader',
+                  {
+                    loader: 'postcss-loader',
+                    options: {
+                      postcssOptions: {
+                        plugins: ['autoprefixer']
+                      }
+                    }
+                  },
                   // 将 Sass 编译成 CSS
                   'sass-loader',
                 ],
