@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div class="main m-1">
     <div class="app-code-panel-item code-content">
       <div class="code-content app-tree"></div>
       <div class="code-content"></div>

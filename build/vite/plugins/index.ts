@@ -12,6 +12,7 @@ import { ConfigCompressPlugin } from './compress'
 import { ConfigHtmlPlugin } from './html'
 import { ConfigProgressPlugin } from './progress'
 import { ConfigImageminPlugin } from './imagemin'
+import { ConfigUnocssPlugin } from './unocss'
 
 // TODO:
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -22,6 +23,7 @@ export function createVitePlugins(isBuild: boolean) {
     // Jsx支持
     ConfigVueJsx(),
     ConfigRestartPlugin(),
+    ConfigUnocssPlugin(),
   ]
 
   console.log(process.env.VITE_NODE_ENV)

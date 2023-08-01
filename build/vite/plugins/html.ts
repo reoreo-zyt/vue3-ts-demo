@@ -1,5 +1,5 @@
 /**
- * @name createVitePlugins
+ * @name ConfigHtmlPlugin
  * @description 压缩html，提供ejs模板语法
  */
 
