@@ -1,6 +1,6 @@
 <template>
   <nav class="app-header">
-    <div class="app-header-logo">测试功能</div>
+    <div class="app-header-logo">Visual Analysis</div>
     <app-menu
       class="app-header-menu"
       :menu-config="{}"

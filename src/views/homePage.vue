@@ -1,81 +1,41 @@
 <template>
   <div class="main">
-    <div v-for="(item, index) in data.frame" :key="'views-homePage' + index">
-      <div class="main-item">
-        <span class="main-item-icon">
-          <app-icon :icon="item.icon"></app-icon>
-        </span>
-        <span>{{ item.name }}</span>
-        <span>
-          {{ item.pkg }}
-          <app-icon
-            icon="icon-park:click"
-            style="cursor: pointer"
-            @click="locateTo(item.link)"></app-icon>
-        </span>
-      </div>
-      <div>{{ item.params }}</div>
+    <div class="app-code-panel-item code-content">
+      <div class="code-content app-tree"></div>
+      <div class="code-content"></div>
     </div>
+    <div class="app-code-panel-item map-content"></div>
   </div>
 </template>
 
-<script lang="ts" setup>
-import { reactive } from 'vue'
-
-let data = reactive({
-  frame: [
-    {
-      name: '',
-      pkg: '',
-      url: '',
-      icon: '',
-      params: ``,
-      link: '',
-    },
-  ],
-})
-
-fetch('../../package.json')
-  .then((data) => data.json())
-  .then((res) => {
-    console.log(res)
-    const dependencies = res.dependencies
-    data.frame = []
-    for (let i in dependencies) {
-      data.frame.push({
-        name: i,
-        pkg: dependencies[i],
-        url: 'https://element-plus.gitee.io/zh-CN/guide/design.html',
-        icon: 'logos:element',
-        params: ``,
-        link: '',
-      })
-    }
-  })
-
-function locateTo(link: string) {
-  console.log(link)
-}
-</script>
+<script lang="ts" setup></script>
 
 <style scoped lang="scss">
 .main {
-  position: relative;
-  padding: 2rem 25%;
-  font-size: 1.4rem;
-  background: #fff;
-  line-height: 1.6;
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 100%;
+  flex-direction: column;
 
-  &-item {
-    &-icon {
-      margin-right: 8px;
+  .app-code-panel-item {
+    flex: 1;
+    overflow: hidden;
+  }
+
+  .code-content {
+    display: flex;
+    align-items: stretch;
+
+    .code-menu {
+      width: 360px;
     }
   }
-}
 
-@media all and (width <= 400px) {
-  .main {
-    padding: 2rem;
+  .map-content {
+    position: relative;
   }
 }
 </style>

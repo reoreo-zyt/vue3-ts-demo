@@ -39,13 +39,10 @@ const menuConfig = {
 
 // 导航栏数据
 const navigation = [
-  { name: '项目搭建', path: '/home' },
   {
-    name: '组件示例',
-    path: '',
-    children: [{ name: 'element-plus', path: '/api_document' }],
+    name: '练习题目',
+    children: [{ name: 'B 卷题目', path: '/home' }],
   },
-  { name: '我的博客', path: '/application_center' },
 ]
 
 const activeIndex = ref('0')
