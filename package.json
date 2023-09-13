@@ -20,19 +20,19 @@
   "devDependencies": {
     "@iconify-json/ep": "^1.1.12",
     "@iconify/vue": "^4.1.1",
-    "@types/node": "^20.5.9",
-    "@typescript-eslint/eslint-plugin": "^6.6.0",
-    "@typescript-eslint/parser": "^6.6.0",
+    "@types/node": "^20.6.0",
+    "@typescript-eslint/eslint-plugin": "^6.7.0",
+    "@typescript-eslint/parser": "^6.7.0",
     "@vitejs/plugin-vue": "^4.3.4",
     "@vitejs/plugin-vue-jsx": "^3.0.2",
-    "eslint": "^8.48.0",
+    "eslint": "^8.49.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-vue": "^9.17.0",
     "husky": "^8.0.3",
     "postcss": "^8.4.29",
     "postcss-html": "^1.5.0",
-    "postcss-scss": "^4.0.7",
+    "postcss-scss": "^4.0.8",
     "prettier": "^3.0.3",
     "sass": "^1.66.1",
     "stylelint": "^15.10.3",
@@ -51,7 +51,7 @@
     "vite-plugin-imagemin": "^0.6.1",
     "vite-plugin-progress": "^0.0.7",
     "vite-plugin-restart": "^0.3.1",
-    "vue-tsc": "^1.8.10"
+    "vue-tsc": "^1.8.11"
   },
   "resolutions": {
     "bin-wrapper": "npm:bin-wrapper-china"
