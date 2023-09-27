@@ -16,7 +16,7 @@ _迁移到_
 
 _方法库_
 
-- 封装 mapBox Cesium 打包成 js 文件供项目使用
+- 使用 openlayer cesium 开发地图相关
 
 ## 前端效果展示
 
