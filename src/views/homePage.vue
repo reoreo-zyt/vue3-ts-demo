@@ -10,7 +10,10 @@
         <span>{{ item.name }}</span>
         <span>
           {{ item.pkg }}
-          <app-icon icon="icon-park:click" style="cursor: pointer"></app-icon>
+          <app-icon
+            icon="icon-park:click"
+            style="cursor: pointer"
+            @click="locateTo(item.link)"></app-icon>
         </span>
       </div>
       <div>{{ item.params }}</div>
@@ -30,6 +33,7 @@ let reactiveRef = reactive({
       url: '',
       icon: '',
       params: ``,
+      link: '',
     },
   ],
 })
@@ -47,9 +51,14 @@ fetch('../../package.json')
         url: 'https://element-plus.gitee.io/zh-CN/guide/design.html',
         icon: 'logos:element',
         params: ``,
+        link: '',
       })
     }
   })
+
+function locateTo(link: string) {
+  console.log(link)
+}
 </script>
 
 <style scoped lang="scss">
