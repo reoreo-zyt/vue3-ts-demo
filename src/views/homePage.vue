@@ -1,12 +1,9 @@
 <template>
   <div class="main">
-    <div v-for="(item, index) in data.frame" :key="'views-homePage' + index">
+    <div
+      v-for="(item, index) in reactiveRef.dependencies"
+      :key="'views-homePage' + index">
       <div class="main-item">
-        <!-- <i-图标集-标图名/> -->
-        <!-- element-plus -->
-        <!-- <i-ep-Plus /> -->
-        <!-- https://icon-sets.iconify.design/openmoji/anxious-face-with-sweat/ -->
-        <!-- 直接使用图标 -->
         <span class="main-item-icon">
           <app-icon :icon="item.icon"></app-icon>
         </span>
@@ -24,9 +21,9 @@
 <script lang="ts" setup>
 import { reactive } from 'vue'
 
-// 统一为 data 形式
-let data = reactive({
-  frame: [
+// 统一为 reactiveRef 形式
+let reactiveRef = reactive({
+  dependencies: [
     {
       name: '',
       pkg: '',
@@ -40,11 +37,11 @@ let data = reactive({
 fetch('../../package.json')
   .then((data) => data.json())
   .then((res) => {
-    console.log(res)
+    console.error(res)
     const dependencies = res.dependencies
-    data.frame = []
+    reactiveRef.dependencies = []
     for (let i in dependencies) {
-      data.frame.push({
+      reactiveRef.dependencies.push({
         name: i,
         pkg: dependencies[i],
         url: 'https://element-plus.gitee.io/zh-CN/guide/design.html',
