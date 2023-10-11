@@ -1,61 +1,45 @@
 <template>
-  <nav class="app-header">
-    <div class="app-header-logo">测试功能</div>
-    <app-menu
-      class="app-header-menu"
-      :menu-config="{}"
-      :active-index="String(0)"></app-menu>
-    <div class="app-header-avatar">
-      <el-dropdown>
-        <span class="el-dropdown-link">
-          <el-avatar
-            size="default"
-            src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
-        </span>
-        <el-dropdown-menu>
-          <el-dropdown-item icon="el-icon-monitor">退出</el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
-    </div>
-  </nav>
+  <query-tree
+    ref="tree"
+    class="tree"
+    v-loading="treeData.treeLoading"
+    :tree-data="treeData.cateList"
+    :expanded-keys="treeData.expandedKeys"
+    node-key="sfid"
+    :active-content-menu="false"
+    @node-click="clickCateItem"
+    :tree-props="{
+      label: 'name',
+      children: 'children',
+      isLeaf: 'isLeaf',
+    }"></query-tree>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { reactive } from 'vue'
+import { useRouter } from 'vue-router'
 
-<style lang="scss" scoped>
-.app-header {
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  background: #fff;
-  box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
-  user-select: none;
-  border-bottom: solid 1px #e6e6e6;
+const router = useRouter()
 
-  &-menu {
-    width: 500px;
-  }
+const treeData = reactive({
+  treeLoading: false,
+  cateList: [
+    { name: '首页', children: [], path: '/' },
+    {
+      name: '组件',
+      children: [
+        { name: '查询表单', path: '/queryTable' },
+        { name: '查询树', path: '/queryTree' },
+        { name: '搜索表单', path: '/searchTable' },
+      ],
+      path: '/',
+    },
+  ],
+  expandedKeys: [],
+})
 
-  &-logo {
-    display: flex;
-    align-items: center;
-    padding: 0 40px;
-    font-size: 20px;
-    font-weight: 500;
-  }
-
-  &-avatar {
-    display: flex;
-    align-items: center;
-    margin: 0 16px;
-
-    .el-avatar {
-      cursor: pointer;
-      border: 1px solid #eeee;
-    }
-  }
+function clickCateItem({ data }) {
+  // 路由跳转
+  router.push(data.path)
 }
-</style>
+</script>
