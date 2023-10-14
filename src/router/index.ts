@@ -11,12 +11,17 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'homePage',
-    component: () => import('../views/homePage.vue'),
+    component: () => import('../views/element/button/index.vue'),
   },
   {
-    path: '/element/buttonCom',
-    name: 'elementButtonCom',
-    component: () => import('../views/element/buttonCom.vue'),
+    path: '/query-table',
+    name: 'queryTable',
+    component: () => import('../views/cv/queryTable/index.vue'),
+  },
+  {
+    path: '/query-tree',
+    name: 'queryTree',
+    component: () => import('../views/cv/queryTree/index.vue'),
   },
 ]
 
