@@ -242,6 +242,7 @@ function handleCurrentChange(val) {
   width: 100%;
   border-radius: 4px;
 }
+
 .copy-icon {
   cursor: pointer;
   margin: 0 2px;
