@@ -26,6 +26,14 @@ const treeData = reactive({
   cateList: [
     { name: '首页', children: [], path: '/' },
     {
+      name: '错误页面',
+      children: [
+        { name: '401', path: '/401' },
+        { name: '404', path: '/404' },
+      ],
+      path: '/',
+    },
+    {
       name: '组件',
       children: [
         { name: '测试', path: '/test' },

@@ -34,7 +34,6 @@ export default ({ command }: ConfigEnv): UserConfig => {
         // 自动导入 Vue 相关函数，如：ref, reactive, toRef 等
         imports: ['vue'],
         resolvers: [ElementPlusResolver()],
-
         dts: path.resolve(pathSrc, 'auto-imports.d.ts'),
       }),
       Components({
