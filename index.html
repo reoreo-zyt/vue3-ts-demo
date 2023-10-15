@@ -1,14 +1,20 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="base-theme">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" href="public/favicon.ico" />
+    <link rel="stylesheet" href="src/styles/init-loading.css" />
+    <link rel="stylesheet" href="index.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>vue3-ts-demo</title>
-    <link rel="stylesheet" href="./index.css" />
+    <title><%= title %></title>
   </head>
   <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
+    <div id="app">
+      <div class="loader-wrapper">
+        <img src="src/assets/gif/dianchi.gif" class="loading-gif" />
+        <div class="load_title">正在加载系统资源，请耐心等待</div>
+      </div>
+    </div>
+    <script type="module" src="src/main.ts"></script>
   </body>
 </html>
