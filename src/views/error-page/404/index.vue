@@ -249,7 +249,7 @@ const message = computed(() => {
       opacity: 0;
       line-height: 36px;
       cursor: pointer;
-      animation-name: slideUp;
+      animation-name: slide-up;
       animation-duration: 0.5s;
       animation-delay: 0.3s;
       animation-fill-mode: forwards;
