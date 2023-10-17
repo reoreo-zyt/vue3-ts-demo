@@ -34,12 +34,14 @@ const treeData = reactive({
       path: '/',
     },
     {
+      name: 'element-ui',
+      children: [{ name: '按钮', path: '/element-ui' }],
+    },
+    {
       name: '组件',
       children: [
-        { name: '测试', path: '/test' },
         { name: '查询表单', path: '/query-table' },
         { name: '查询树', path: '/query-tree' },
-        { name: '搜索表单', path: '/search-table' },
       ],
       path: '/',
     },

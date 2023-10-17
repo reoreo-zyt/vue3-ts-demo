@@ -11,7 +11,12 @@ const routes: RouterTypes = [
   {
     path: '/',
     name: 'homePage',
-    component: () => import('../views/element/button/index.vue'),
+    component: () => import('@/views/homepage/index.vue'),
+  },
+  {
+    path: '/element-ui',
+    name: 'elementUi',
+    component: () => import('@/views/element/button/index.vue'),
   },
   {
     path: '/404',
@@ -26,12 +31,12 @@ const routes: RouterTypes = [
   {
     path: '/query-table',
     name: 'queryTable',
-    component: () => import('../views/cv/queryTable/index.vue'),
+    component: () => import('@/views/cv/queryTable/index.vue'),
   },
   {
     path: '/query-tree',
     name: 'queryTree',
-    component: () => import('../views/cv/queryTree/index.vue'),
+    component: () => import('@/views/cv/queryTree/index.vue'),
   },
 ]
 
