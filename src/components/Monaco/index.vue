@@ -1,8 +1,11 @@
 <template>
-  <div ref="editContainer" class="code-editor"></div>
+  <div>
+    <div class="datav-tabs"></div>
+    <div ref="editContainer" class="code-editor"></div>
+  </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { getCurrentInstance, onMounted, watch } from 'vue'
 import * as monaco from 'monaco-editor'
 import EditorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker'
@@ -15,7 +18,7 @@ import 'monaco-editor/esm/vs/basic-languages/javascript/javascript.contribution'
 import 'monaco-editor/esm/vs/basic-languages/typescript/typescript.contribution'
 import 'monaco-editor/esm/vs/language/typescript/monaco.contribution'
 
-// 解决vite Monaco提示错误
+// 解决 vite Monaco 提示错误
 self.MonacoEnvironment = {
   getWorker(_: string, label: string) {
     if (label === 'json') {
@@ -28,44 +31,46 @@ self.MonacoEnvironment = {
   },
 }
 
-export default {
-  props: {
-    value: String,
+const props = defineProps({
+  value: {
+    type: String,
+    default: () => '',
   },
-  setup(props, { emit }) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    let monacoEditor: any = null
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const { proxy } = getCurrentInstance() as any
+})
 
-    watch(
-      () => props.value,
-      (value) => {
-        // 防止改变编辑器内容时光标重定向
-        if (value !== monacoEditor?.getValue()) {
-          monacoEditor.setValue(value)
-        }
-      },
-    )
+const emits = defineEmits(['update:value'])
 
-    onMounted(() => {
-      monacoEditor = monaco.editor.create(proxy.$refs.editContainer, {
-        value: props.value,
-        readOnly: false,
-        language: 'typescript',
-        theme: 'vs-dark',
-        selectOnLineNumbers: true,
-        // renderSideBySide: false,
-      })
-      // 监听值变化
-      monacoEditor.onDidChangeModelContent(() => {
-        const currenValue = monacoEditor?.getValue()
-        emit('update:value', currenValue)
-      })
-    })
-    return {}
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let monacoEditor: any = null
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const { proxy } = getCurrentInstance() as any
+
+watch(
+  () => props.value,
+  (value) => {
+    // 防止改变编辑器内容时光标重定向
+    if (value !== monacoEditor?.getValue()) {
+      monacoEditor.setValue(value)
+    }
   },
-}
+  { immediate: false },
+)
+
+onMounted(() => {
+  monacoEditor = monaco.editor.create(proxy.$refs.editContainer, {
+    value: props.value,
+    readOnly: false,
+    language: 'typescript',
+    theme: 'vs-dark',
+    selectOnLineNumbers: true,
+    // renderSideBySide: false,
+  })
+  // 监听值变化
+  monacoEditor.onDidChangeModelContent(() => {
+    const currenValue = monacoEditor?.getValue()
+    emits('update:value', currenValue)
+  })
+})
 </script>
 <style scoped>
 .code-editor {
