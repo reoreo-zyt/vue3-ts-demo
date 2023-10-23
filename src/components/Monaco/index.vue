@@ -18,7 +18,13 @@
 </template>
 
 <script setup lang="ts">
-import { getCurrentInstance, onMounted, watch, reactive } from 'vue'
+import {
+  getCurrentInstance,
+  ComponentInternalInstance,
+  onMounted,
+  watch,
+  reactive,
+} from 'vue'
 import * as monaco from 'monaco-editor'
 import EditorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker'
 // json
@@ -63,8 +69,7 @@ const options = {
   ],
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const { proxy } = getCurrentInstance() as any
+const { proxy } = getCurrentInstance() as ComponentInternalInstance
 
 let monacoEditor: monaco.editor.IStandaloneCodeEditor
 
@@ -72,9 +77,11 @@ function handleChangeLanguage() {
   changeLang(reactiveRef.language)
 }
 
-function changeLang(lang) {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  monaco.editor.setModelLanguage(monacoEditor.getModel() as any, lang)
+function changeLang(lang: string) {
+  monaco.editor.setModelLanguage(
+    monacoEditor.getModel() as monaco.editor.ITextModel,
+    lang,
+  )
 }
 
 watch(
@@ -89,22 +96,25 @@ watch(
 )
 
 onMounted(() => {
-  monacoEditor = monaco.editor.create(proxy.$refs.editContainer, {
-    value: props.value, // 编辑器初始显示文字
-    language: 'typescript', // 语言支持自行查阅demo
-    automaticLayout: true, // 自适应布局
-    theme: 'vs-dark', // 官方自带三种主题vs, hc-black, or vs-dark
-    foldingStrategy: 'indentation',
-    renderLineHighlight: 'all', // 行亮
-    selectOnLineNumbers: true, // 显示行号
-    minimap: {
-      enabled: false,
+  monacoEditor = monaco.editor.create(
+    proxy?.$refs.editContainer as HTMLElement,
+    {
+      value: props.value, // 编辑器初始显示文字
+      language: 'typescript', // 语言支持自行查阅demo
+      automaticLayout: true, // 自适应布局
+      theme: 'vs-dark', // 官方自带三种主题vs, hc-black, or vs-dark
+      foldingStrategy: 'indentation',
+      renderLineHighlight: 'all', // 行亮
+      selectOnLineNumbers: true, // 显示行号
+      minimap: {
+        enabled: false,
+      },
+      readOnly: false, // 只读
+      fontSize: 16, // 字体大小
+      scrollBeyondLastLine: false, // 取消代码后面一大段空白
+      overviewRulerBorder: false, // 不要滚动条的边框
     },
-    readOnly: false, // 只读
-    fontSize: 16, // 字体大小
-    scrollBeyondLastLine: false, // 取消代码后面一大段空白
-    overviewRulerBorder: false, // 不要滚动条的边框
-  })
+  )
   // 监听值变化
   monacoEditor.onDidChangeModelContent(() => {
     const currenValue = monacoEditor?.getValue()
