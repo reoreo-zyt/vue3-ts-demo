@@ -4,7 +4,7 @@
       <el-tabs
         v-model="reactiveRef.language"
         class="demo-tabs"
-        @tab-click="handleChangeLanguage()"
+        @tab-change="handleChangeLanguage()"
         type="border-card">
         <el-tab-pane
           :label="item.label"
@@ -64,18 +64,17 @@ const options = {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-let monacoEditor: any = null
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const { proxy } = getCurrentInstance() as any
+
+let monacoEditor: monaco.editor.IStandaloneCodeEditor
 
 function handleChangeLanguage() {
   changeLang(reactiveRef.language)
 }
 
-// TODO:
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function changeLang(lang) {
-  monaco.editor.setModelLanguage(monacoEditor.getModel(), lang)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  monaco.editor.setModelLanguage(monacoEditor.getModel() as any, lang)
 }
 
 watch(
