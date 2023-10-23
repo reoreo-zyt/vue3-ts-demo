@@ -1,12 +1,24 @@
 <template>
   <div>
-    <div class="datav-tabs"></div>
+    <div class="datav-tabs">
+      <el-tabs
+        v-model="reactiveRef.language"
+        class="demo-tabs"
+        @tab-click="handleChangeLanguage()"
+        type="border-card">
+        <el-tab-pane
+          :label="item.label"
+          :name="item.name"
+          v-for="(item, index) in options.langurgeOptions"
+          :key="'datav_tabs_pane' + index"></el-tab-pane>
+      </el-tabs>
+    </div>
     <div ref="editContainer" class="code-editor"></div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { getCurrentInstance, onMounted, watch } from 'vue'
+import { getCurrentInstance, onMounted, watch, reactive } from 'vue'
 import * as monaco from 'monaco-editor'
 import EditorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker'
 // json
@@ -40,10 +52,31 @@ const props = defineProps({
 
 const emits = defineEmits(['update:value'])
 
+const reactiveRef = reactive({
+  language: 'typescript',
+})
+
+const options = {
+  langurgeOptions: [
+    { label: 'javascript', name: 'javascript' },
+    { label: 'typescript', name: 'typescript' },
+  ],
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let monacoEditor: any = null
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const { proxy } = getCurrentInstance() as any
+
+function handleChangeLanguage() {
+  changeLang(reactiveRef.language)
+}
+
+// TODO:
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function changeLang(lang) {
+  monaco.editor.setModelLanguage(monacoEditor.getModel(), lang)
+}
 
 watch(
   () => props.value,
@@ -58,12 +91,20 @@ watch(
 
 onMounted(() => {
   monacoEditor = monaco.editor.create(proxy.$refs.editContainer, {
-    value: props.value,
-    readOnly: false,
-    language: 'typescript',
-    theme: 'vs-dark',
-    selectOnLineNumbers: true,
-    // renderSideBySide: false,
+    value: props.value, // 编辑器初始显示文字
+    language: 'typescript', // 语言支持自行查阅demo
+    automaticLayout: true, // 自适应布局
+    theme: 'vs-dark', // 官方自带三种主题vs, hc-black, or vs-dark
+    foldingStrategy: 'indentation',
+    renderLineHighlight: 'all', // 行亮
+    selectOnLineNumbers: true, // 显示行号
+    minimap: {
+      enabled: false,
+    },
+    readOnly: false, // 只读
+    fontSize: 16, // 字体大小
+    scrollBeyondLastLine: false, // 取消代码后面一大段空白
+    overviewRulerBorder: false, // 不要滚动条的边框
   })
   // 监听值变化
   monacoEditor.onDidChangeModelContent(() => {

@@ -38,6 +38,7 @@ const routes: RouterTypes = [
     name: 'queryTree',
     component: () => import('@/views/cv/queryTree/index.vue'),
   },
+  // !monoca 打包后很大，10 m多
   {
     path: '/practice',
     name: 'practice',
