@@ -38,6 +38,11 @@ const routes: RouterTypes = [
     name: 'queryTree',
     component: () => import('@/views/cv/queryTree/index.vue'),
   },
+  {
+    path: '/practice',
+    name: 'practice',
+    component: () => import('@/views/practice/index.vue'),
+  },
 ]
 
 const options: RouterOptions = {

@@ -70,5 +70,14 @@ export default ({ command }: ConfigEnv): UserConfig => {
       host: '0.0.0.0', // IP配置，支持从IP启动
       proxy,
     },
+    optimizeDeps: {
+      include: [
+        `monaco-editor/esm/vs/language/json/json.worker`,
+        `monaco-editor/esm/vs/language/css/css.worker`,
+        `monaco-editor/esm/vs/language/html/html.worker`,
+        `monaco-editor/esm/vs/language/typescript/ts.worker`,
+        `monaco-editor/esm/vs/editor/editor.worker`,
+      ],
+    },
   }
 }

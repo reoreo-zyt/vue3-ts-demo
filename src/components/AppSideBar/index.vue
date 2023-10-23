@@ -45,6 +45,11 @@ const treeData = reactive({
       ],
       path: '/',
     },
+    {
+      name: '题目练习',
+      children: [{ name: '两数相加', path: '/practice' }],
+      path: '/practice',
+    },
   ],
   expandedKeys: [],
 })
