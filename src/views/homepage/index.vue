@@ -75,34 +75,41 @@ function locateTo(link: string) {
     font-size: 18px;
     color: #555;
   }
+
   .link-item {
     cursor: pointer;
     margin-bottom: 10px;
+
     .link-item-col {
       color: #fff;
+
       .link-content {
-        border-radius: 4px;
-        background: #99a9bf;
-        padding: 5px 10px;
-        font-size: 18px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        padding: 5px 10px;
+        font-size: 18px;
+        background: #99a9bf;
+        border-radius: 4px;
+
         .icon {
-          font-size: 80px;
           width: 40px;
           height: 40px;
+          font-size: 80px;
         }
+
         .name {
           margin-right: 4px;
         }
+
         .desc {
-          font-size: 12px;
           overflow: hidden;
-          text-overflow: ellipsis;
           width: 150px;
           height: 50px;
+          font-size: 12px;
+          text-overflow: ellipsis;
         }
+
         .link {
           font-size: 24px;
         }
