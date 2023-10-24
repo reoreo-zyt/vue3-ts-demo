@@ -125,6 +125,6 @@ onMounted(() => {
 <style scoped>
 .code-editor {
   width: 100%;
-  min-height: 200px;
+  min-height: 300px;
 }
 </style>
