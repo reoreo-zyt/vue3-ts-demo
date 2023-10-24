@@ -23,6 +23,7 @@ const router = useRouter()
 
 const treeData = reactive({
   treeLoading: false,
+  // TODO: 获取 router 的路由
   cateList: [
     { name: '首页', children: [], path: '/' },
     {
@@ -49,6 +50,11 @@ const treeData = reactive({
       name: '题目练习',
       children: [{ name: '两数相加', path: '/practice' }],
       path: '/practice',
+    },
+    {
+      name: '文档',
+      children: [{ name: '测试', path: '/md/test' }],
+      path: '/md/test',
     },
   ],
   expandedKeys: [],

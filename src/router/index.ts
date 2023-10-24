@@ -44,6 +44,11 @@ const routes: RouterTypes = [
     name: 'practice',
     component: () => import('@/views/practice/index.vue'),
   },
+  {
+    path: '/md/test',
+    name: 'mdTest',
+    component: () => import('@/views/md/test/index.vue'),
+  },
 ]
 
 const options: RouterOptions = {
