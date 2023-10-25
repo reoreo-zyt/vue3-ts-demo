@@ -6,6 +6,10 @@ import {
 } from 'vue-router'
 
 import type { RouterTypes } from '~/basic'
+import MarkdownVue from '@/components/MarkDown/index.vue'
+const md = (string) => h(MarkdownVue, { content: string, key: string })
+import { html as Intro } from '@/md/the-doc.md'
+const IntroDoc = md(Intro)
 
 const routes: RouterTypes = [
   {
@@ -46,8 +50,11 @@ const routes: RouterTypes = [
   },
   {
     path: '/md/test',
-    name: 'mdTest',
-    component: () => import('@/views/md/test/index.vue'),
+    name: 'Doc',
+    children: [{ path: '', component: IntroDoc }],
+    meta: {
+      title: '文档',
+    },
   },
 ]
 
