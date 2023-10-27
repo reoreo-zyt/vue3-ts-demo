@@ -6,12 +6,7 @@ import {
 } from 'vue-router'
 
 import type { RouterTypes } from '~/basic'
-import MarkdownVue from '@/components/MarkDown/index.vue'
-const md = (string) => h(MarkdownVue, { content: string, key: string })
-import { html as project } from '@/md/project/index.md'
-import { html as README } from '../../README.md'
-const projectDoc = md(project)
-const READMEDoc = md(README)
+import mdRoutes from '@/md/index'
 
 const routes: RouterTypes = [
   {
@@ -50,17 +45,7 @@ const routes: RouterTypes = [
     name: 'practice',
     component: () => import('@/views/practice/index.vue'),
   },
-  {
-    path: '/md/',
-    name: 'Doc',
-    children: [
-      { path: 'test', component: READMEDoc },
-      { path: 'project', component: projectDoc },
-    ],
-    meta: {
-      title: '文档',
-    },
-  },
+  ...mdRoutes,
 ]
 
 const options: RouterOptions = {
