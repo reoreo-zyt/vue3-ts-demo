@@ -11,17 +11,25 @@ import mdRoutes from '@/md/index'
 const routes: RouterTypes = [
   {
     path: '/',
-    name: 'homePage',
+    name: '主页',
     component: () => import('@/views/homepage/index.vue'),
   },
   {
-    path: '/element-ui',
-    name: 'elementUi',
-    component: () => import('@/views/element/button/index.vue'),
+    path: '/element-ui/button',
+    name: '组件库使用',
+    redirect: '/element-ui/button',
+    children: [
+      {
+        path: '/element-ui/button',
+        name: '按钮',
+        component: () => import('@/views/element/button/index.vue'),
+      },
+    ],
   },
   {
-    path: '/error-page/',
-    name: 'error-page',
+    path: '/error-page',
+    redirect: '/error-page/404',
+    name: '错误页面',
     children: [
       {
         path: '404',
@@ -36,25 +44,26 @@ const routes: RouterTypes = [
     ],
   },
   {
-    path: '/components/',
-    name: 'components',
+    path: '/components',
+    redirect: '/components/query-table',
+    name: '组件',
     children: [
       {
-        path: '/query-table',
-        name: 'queryTable',
+        path: '/components/query-table',
+        name: '查询表单',
         component: () => import('@/views/cv/queryTable/index.vue'),
       },
       {
-        path: '/query-tree',
-        name: 'queryTree',
+        path: '/components/query-tree',
+        name: '查询树',
         component: () => import('@/views/cv/queryTree/index.vue'),
       },
     ],
   },
   // !monoca 打包后很大，10 m多
   {
-    path: '/practice/',
-    name: 'practice',
+    path: '/practice',
+    name: '题目练习',
     component: () => import('@/views/practice/index.vue'),
   },
   ...mdRoutes,
