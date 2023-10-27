@@ -18,6 +18,7 @@ export interface rawConfig {
   name?: string
   fullPath?: string
   path?: string
+  desc?: string
   meta?: {
     title: string
     icon?: string

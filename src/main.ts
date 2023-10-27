@@ -4,7 +4,7 @@ import './style.css'
 import '@/styles/index.scss'
 // Markdown 样式
 import 'github-markdown-css'
-import router from '@/router'
+import r from '@/router'
 import App from './App.vue'
 
-createApp(App).use(router).mount('#app')
+createApp(App).use(r.router).mount('#app')

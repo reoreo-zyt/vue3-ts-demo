@@ -24,7 +24,7 @@ for (const i in files) {
   // vite 动态导入会报错，需要引入 /* @vite-ignore */
   const { html } = await import(/* @vite-ignore */ path)
   const doc = md(html)
-  routeItem.children.push({ path: name, component: doc })
+  routeItem.children.push({ path: name, component: doc, name: name })
 }
 
 routes.push(routeItem)

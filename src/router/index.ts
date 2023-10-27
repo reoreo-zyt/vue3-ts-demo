@@ -20,28 +20,40 @@ const routes: RouterTypes = [
     component: () => import('@/views/element/button/index.vue'),
   },
   {
-    path: '/404',
-    component: () => import('@/views/error-page/404/index.vue'),
-    hidden: true,
+    path: '/error-page/',
+    name: 'error-page',
+    children: [
+      {
+        path: '404',
+        name: '404',
+        component: () => import('@/views/error-page/404/index.vue'),
+      },
+      {
+        path: '401',
+        name: '401',
+        component: () => import('@/views/error-page/401/index.vue'),
+      },
+    ],
   },
   {
-    path: '/401',
-    component: () => import('@/views/error-page/401/index.vue'),
-    hidden: true,
-  },
-  {
-    path: '/query-table',
-    name: 'queryTable',
-    component: () => import('@/views/cv/queryTable/index.vue'),
-  },
-  {
-    path: '/query-tree',
-    name: 'queryTree',
-    component: () => import('@/views/cv/queryTree/index.vue'),
+    path: '/components/',
+    name: 'components',
+    children: [
+      {
+        path: '/query-table',
+        name: 'queryTable',
+        component: () => import('@/views/cv/queryTable/index.vue'),
+      },
+      {
+        path: '/query-tree',
+        name: 'queryTree',
+        component: () => import('@/views/cv/queryTree/index.vue'),
+      },
+    ],
   },
   // !monoca 打包后很大，10 m多
   {
-    path: '/practice',
+    path: '/practice/',
     name: 'practice',
     component: () => import('@/views/practice/index.vue'),
   },
@@ -55,4 +67,4 @@ const options: RouterOptions = {
 
 const router: Router = createRouter(options)
 
-export default router
+export default { router, routes }
