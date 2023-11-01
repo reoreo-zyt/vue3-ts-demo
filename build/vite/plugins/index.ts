@@ -13,6 +13,7 @@ import { ConfigHtmlPlugin } from './html'
 import { ConfigProgressPlugin } from './progress'
 import { ConfigImageminPlugin } from './imagemin'
 import { ConfigMarkDownPlugin } from './markdown'
+import { TopLevelAwaitPLugin } from './topLevelAwait'
 
 // TODO:
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -35,6 +36,7 @@ export function createVitePlugins(isBuild: boolean) {
     ConfigProgressPlugin(),
     ConfigImageminPlugin(),
     ConfigMarkDownPlugin(),
+    TopLevelAwaitPLugin(),
   ]
 
   vitePlugins.push(...plugins)
