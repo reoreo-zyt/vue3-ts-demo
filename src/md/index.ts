@@ -11,11 +11,9 @@ console.error(files, '==files==')
 const routes: RouterTypes = []
 const routeItem: RouteRawConfig = {
   path: '/md/',
-  name: 'Doc',
+  redirect: '/md/project',
+  name: '文档',
   children: [],
-  meta: {
-    title: '文档',
-  },
 }
 for (const i in files) {
   const copy = JSON.parse(JSON.stringify(i))
@@ -24,7 +22,7 @@ for (const i in files) {
   // vite 动态导入会报错，需要引入 /* @vite-ignore */
   const { html } = await import(/* @vite-ignore */ path)
   const doc = md(html)
-  routeItem.children.push({ path: name, component: doc, name: name })
+  routeItem.children?.push({ path: name, component: doc, name: name })
 }
 
 routes.push(routeItem)
