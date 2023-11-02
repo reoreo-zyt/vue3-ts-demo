@@ -66,6 +66,11 @@ const routes: RouterTypes = [
     name: '题目练习',
     component: () => import('@/views/practice/index.vue'),
   },
+  {
+    path: '/atricle-editor',
+    name: '发布文章',
+    component: () => import('@/views/article-editor/index.vue'),
+  },
   ...mdRoutes,
 ]
 

@@ -13,6 +13,17 @@
     "format": "prettier --write \"./**/*.{html,vue,ts,js,css,scss,json,cjs,mjs,md}\""
   },
   "dependencies": {
+    "@milkdown/core": "^7.3.1",
+    "@milkdown/ctx": "^7.3.1",
+    "@milkdown/plugin-history": "^7.3.1",
+    "@milkdown/plugin-slash": "^7.3.1",
+    "@milkdown/plugin-tooltip": "^7.3.1",
+    "@milkdown/preset-commonmark": "^7.3.1",
+    "@milkdown/prose": "^7.3.1",
+    "@milkdown/theme-nord": "^7.3.1",
+    "@milkdown/transformer": "^7.3.1",
+    "@milkdown/vue": "^7.3.1",
+    "@prosemirror-adapter/vue": "^0.2.6",
     "element-plus": "^2.4.1",
     "monaco-editor": "^0.44.0",
     "vue": "^3.3.7",

@@ -4,6 +4,8 @@ import './style.css'
 import '@/styles/index.scss'
 // Markdown 样式
 import 'github-markdown-css'
+// Markdown 编辑器样式
+import '@milkdown/theme-nord/style.css'
 import r from '@/router'
 import App from './App.vue'
 
