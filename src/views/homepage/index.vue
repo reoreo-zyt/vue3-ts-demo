@@ -60,6 +60,12 @@ const links = [
         desc: 'Vue3 组件库',
         icon: 'ep:element-plus',
       },
+      {
+        name: 'milkdown',
+        to: 'https://milkdown.dev/',
+        desc: 'markdown 编辑器',
+        icon: 'ep:markdown-it',
+      },
     ],
   },
 ]

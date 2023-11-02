@@ -44,7 +44,7 @@ const toggleBold = (e: Event) => {
     <button
       className="text-gray-600 bg-slate-200 px-2 py-1 rounded-lg hover:bg-slate-300 border hover:text-gray-900"
       @mousedown="toggleBold">
-      Bold
+      粗体
     </button>
   </div>
 </template>
