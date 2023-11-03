@@ -11,6 +11,11 @@ import mdRoutes from '@/md/index'
 const routes: RouterTypes = [
   {
     path: '/',
+    name: '登录',
+    component: () => import('@/views/login/index.vue'),
+  },
+  {
+    path: '/homepage',
     name: '主页',
     component: () => import('@/views/homepage/index.vue'),
   },

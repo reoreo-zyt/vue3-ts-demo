@@ -32,5 +32,7 @@
   "[vue]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "editor.codeActionsOnSave": {}
+  "editor.codeActionsOnSave": {},
+  // Tailwind 指令的自定义 CSS 数据集
+  "css.customData": [".vscode/tailwindcss.json"]
 }

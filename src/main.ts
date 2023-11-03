@@ -2,6 +2,8 @@ import { createApp } from 'vue'
 import './style.css'
 // 在 .vue 文件中使用公共类的样式
 import '@/styles/index.scss'
+//
+import '@/styles/tailwind.css'
 // Markdown 样式
 import 'github-markdown-css'
 // Markdown 编辑器样式
