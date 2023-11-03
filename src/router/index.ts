@@ -16,7 +16,7 @@ const routes: RouterTypes = [
   },
   {
     path: '/homepage',
-    name: '主页',
+    name: '快捷链接',
     component: () => import('@/views/homepage/index.vue'),
   },
   {
