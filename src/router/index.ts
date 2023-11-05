@@ -76,6 +76,11 @@ const routes: RouterTypes = [
     name: '发布文章',
     component: () => import('@/views/article-editor/index.vue'),
   },
+  {
+    path: '/veditor',
+    name: '文章编辑器',
+    component: () => import('@/views/veditor/index.vue'),
+  },
   ...mdRoutes,
 ]
 
