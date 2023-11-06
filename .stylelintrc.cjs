@@ -22,6 +22,8 @@ module.exports = {
     '**/*.yaml',
   ],
   rules: {
+    // 取消类名模式匹配
+    'selector-class-pattern': null,
     'at-rule-no-unknown': [
       true,
       {
