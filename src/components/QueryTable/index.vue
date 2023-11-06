@@ -106,7 +106,6 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
 import TableColumn from '@/types/table'
 
 const props = defineProps({

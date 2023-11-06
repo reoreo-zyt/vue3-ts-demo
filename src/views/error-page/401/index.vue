@@ -40,8 +40,6 @@
 
 <script setup lang="ts">
 import errGif from '@/assets/401_images/401.gif'
-import { reactive, toRefs } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
 
 const state = reactive({
   errGif: `${errGif}?${Date.now()}`,

@@ -13,8 +13,6 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive } from 'vue'
-
 const table = reactive({
   loading: false,
   pageData: [{ id: '1233456667' }],

@@ -21,10 +21,8 @@ import {
   ThemeType,
   IconType,
 } from '@/components/Vditor/types'
-import { defineComponent } from 'vue'
 import { ElMessageBox } from 'element-plus'
 import exampleMd from './example.md?raw'
-import { ref, computed, reactive } from 'vue'
 export default defineComponent({
   setup() {
     const editor = ref()

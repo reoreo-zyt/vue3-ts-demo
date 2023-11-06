@@ -7,7 +7,6 @@
 <script lang="ts">
 import Vditor from 'vditor'
 import 'vditor/dist/index.css'
-import { defineComponent, onMounted, ref, watch } from 'vue'
 import type {
   ToolbarItem,
   LangType,

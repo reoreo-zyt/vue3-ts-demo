@@ -18,13 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import {
-  getCurrentInstance,
-  ComponentInternalInstance,
-  onMounted,
-  watch,
-  reactive,
-} from 'vue'
+import { ComponentInternalInstance } from 'vue'
 import * as monaco from 'monaco-editor'
 import EditorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker'
 // json

@@ -6,9 +6,8 @@ import '@/styles/index.scss'
 import '@/styles/tailwind.css'
 // Markdown 样式
 import 'github-markdown-css'
-// Markdown 编辑器样式
-import '@milkdown/theme-nord/style.css'
+import { store } from '@/store'
 import r from '@/router'
 import App from './App.vue'
 
-createApp(App).use(r.router).mount('#app')
+createApp(App).use(r.router).use(store).mount('#app')

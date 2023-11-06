@@ -17,8 +17,6 @@
 
 <script lang="ts" setup>
 import type { RouterTypes } from '~/basic'
-import { reactive, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
 import r from '@/router/index'
 
 const router = useRouter()

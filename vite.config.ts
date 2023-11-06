@@ -8,6 +8,8 @@ import Components from 'unplugin-vue-components/vite'
 import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+// TODO: mock 模拟请求数据
+// import { viteMockServe } from 'vite-plugin-mock'
 
 const pathSrc = path.resolve(__dirname, 'src')
 
@@ -28,14 +30,26 @@ export default ({ command }: ConfigEnv): UserConfig => {
     },
     // plugins
     plugins: [
-      createVitePlugins(isBuild),
       AutoImport({
         // Auto import functions from Vue, e.g. ref, reactive, toRef...
         // 自动导入 Vue 相关函数，如：ref, reactive, toRef 等
-        imports: ['vue'],
+        imports: ['vue', 'vue-router', 'pinia'],
         resolvers: [ElementPlusResolver()],
         dts: path.resolve(pathSrc, 'auto-imports.d.ts'),
+        eslintrc: {
+          enabled: true, // <-- this
+          filepath: './.eslintrc-auto-import.json',
+        },
       }),
+      // TODO:
+      // viteMockServe({
+      //   ignore: /^_/,
+      //   mockPath: 'src/mock',
+      //   watchFiles: true,
+      //   enable: true,
+      //   logger: true,
+      // }),
+      createVitePlugins(isBuild),
       Components({
         resolvers: [
           // Auto register Element Plus components
