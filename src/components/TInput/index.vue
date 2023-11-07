@@ -3,7 +3,7 @@
   <el-input
     v-bind="$attrs"
     ref="myInput"
-    v-model="value"
+    :v-model="value"
     class="t-input"
     @change="(e) => handleEvent('change', e)"
     @input="(e) => handleEvent('input', e)"
