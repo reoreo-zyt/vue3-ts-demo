@@ -4,13 +4,7 @@ module.exports = {
     es2021: true,
     node: true,
   },
-  extends: [
-    'eslint:recommended',
-    'plugin:vue/vue3-essential',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended',
-    './.eslintrc-auto-import.json',
-  ],
+  extends: ['eslint:recommended', 'plugin:vue/vue3-essential', 'plugin:@typescript-eslint/recommended', 'plugin:prettier/recommended', './.eslintrc-auto-import.json', 'plugin:storybook/recommended'],
   parser: 'vue-eslint-parser',
   parserOptions: {
     ecmaVersion: 'latest',
