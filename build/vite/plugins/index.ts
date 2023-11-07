@@ -17,7 +17,7 @@ import { TopLevelAwaitPLugin } from './topLevelAwait'
 
 // TODO:
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export function createVitePlugins(isBuild: boolean) {
+export function createVitePlugins() {
   const vitePlugins: (PluginOption | PluginOption[])[] = [
     // vue支持
     vue(),

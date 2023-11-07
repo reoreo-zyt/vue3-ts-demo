@@ -1,4 +1,4 @@
-import { UserConfig, ConfigEnv } from 'vite'
+import { UserConfig } from 'vite'
 import { createVitePlugins } from './build/vite/plugins'
 import path from 'path'
 import proxy from './build/vite/proxy'
@@ -11,11 +11,57 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 // TODO: mock 模拟请求数据
 // import { viteMockServe } from 'vite-plugin-mock'
 
+// storybook 配置相关
+import vue from '@vitejs/plugin-vue'
+
 const pathSrc = path.resolve(__dirname, 'src')
 
+const autoImport = AutoImport({
+  // Auto import functions from Vue, e.g. ref, reactive, toRef...
+  // 自动导入 Vue 相关函数，如：ref, reactive, toRef 等
+  imports: ['vue', 'vue-router', 'pinia'],
+  resolvers: [ElementPlusResolver()],
+  dts: path.resolve(pathSrc, 'auto-imports.d.ts'),
+  eslintrc: {
+    enabled: true, // <-- this
+    filepath: './.eslintrc-auto-import.json',
+  },
+})
+
+const components = Components({
+  resolvers: [
+    // Auto register Element Plus components
+    // 自动导入 Element Plus 组件
+    ElementPlusResolver(),
+    // 自动按需加载iconify图标库图标
+    IconsResolver(),
+  ],
+
+  dts: path.resolve(pathSrc, 'components.d.ts'),
+})
+
+const icons = Icons({
+  // 自动安装图标
+  autoInstall: true,
+})
+
+const plugins = [
+  autoImport,
+  // TODO:
+  // viteMockServe({
+  //   ignore: /^_/,
+  //   mockPath: 'src/mock',
+  //   watchFiles: true,
+  //   enable: true,
+  //   logger: true,
+  // }),
+  createVitePlugins(),
+  components,
+  icons,
+]
+
 // https://vitejs.dev/config/
-export default ({ command }: ConfigEnv): UserConfig => {
-  const isBuild = command === 'build'
+export default (): UserConfig => {
   let base: string
   return {
     base,
@@ -29,43 +75,7 @@ export default ({ command }: ConfigEnv): UserConfig => {
       dedupe: ['vue'],
     },
     // plugins
-    plugins: [
-      AutoImport({
-        // Auto import functions from Vue, e.g. ref, reactive, toRef...
-        // 自动导入 Vue 相关函数，如：ref, reactive, toRef 等
-        imports: ['vue', 'vue-router', 'pinia'],
-        resolvers: [ElementPlusResolver()],
-        dts: path.resolve(pathSrc, 'auto-imports.d.ts'),
-        eslintrc: {
-          enabled: true, // <-- this
-          filepath: './.eslintrc-auto-import.json',
-        },
-      }),
-      // TODO:
-      // viteMockServe({
-      //   ignore: /^_/,
-      //   mockPath: 'src/mock',
-      //   watchFiles: true,
-      //   enable: true,
-      //   logger: true,
-      // }),
-      createVitePlugins(isBuild),
-      Components({
-        resolvers: [
-          // Auto register Element Plus components
-          // 自动导入 Element Plus 组件
-          ElementPlusResolver(),
-          // 自动按需加载iconify图标库图标
-          IconsResolver(),
-        ],
-
-        dts: path.resolve(pathSrc, 'components.d.ts'),
-      }),
-      Icons({
-        // 自动安装图标
-        autoInstall: true,
-      }),
-    ],
+    plugins: [...plugins],
     // css
     css: {
       preprocessorOptions: {
@@ -95,3 +105,6 @@ export default ({ command }: ConfigEnv): UserConfig => {
     },
   }
 }
+
+// storybook 配置项
+export const sbPlugins = [vue(), autoImport, components, icons]

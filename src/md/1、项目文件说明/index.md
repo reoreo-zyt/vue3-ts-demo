@@ -23,6 +23,8 @@
 - 后端
 - vscode 插件
   - git 提交插件
+- 自动化部署
+  - jekins 自动化部署前端项目
 
 ```js
 TODO:

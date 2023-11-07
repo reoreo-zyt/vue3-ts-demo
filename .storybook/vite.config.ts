@@ -1,7 +1,8 @@
-import vue from '@vitejs/plugin-vue'
+// storybook vite 配置
+import { sbPlugins } from '../vite.config'
 
 const config = {
-  plugins: [vue()],
+  plugins: [...sbPlugins],
 }
 
 export default config
