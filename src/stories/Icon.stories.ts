@@ -1,4 +1,5 @@
 import AppIcon from '../components/AppIcon/index.vue'
+import type { Meta } from '@storybook/vue3'
 
 // TODO: 使用 python 爬取接口所有图标
 // 其中一页的数据
@@ -120,31 +121,26 @@ const icons = [
   ),
 ]
 
-export default {
-  title: 'app-icon（图标组件）',
-  component: { AppIcon },
+// 在这里补充使用的图片资源
+const iconsUse = ['mdi:account', 'mdi:lock']
+
+const meta: Meta<typeof AppIcon> = {
+  title: '组件/app-icon（图标）',
+  component: AppIcon,
+  tags: ['autodocs'],
   argTypes: {
     icon: {
       control: 'select',
-      options: [...icons],
-      description:
-        'iconify图标，从 https://icon-sets.iconify.design/openmoji/anxious-face-with-sweat/ 处获取',
+      options: [...iconsUse, ...icons],
     },
-    color: { control: 'color', description: '图标颜色' },
-    width: {
-      control: 'text',
-      description: '控制图标宽度',
-    },
-    height: {
-      control: 'text',
-      description: '控制图标高度',
-    },
+    color: { control: 'color' },
     fontSize: {
       control: 'number',
-      description: '控制图标大小',
     },
   },
 }
+
+export default meta
 
 const Template = (args) => ({
   // Components used in your story `template` are defined in the `components` object
@@ -156,15 +152,18 @@ const Template = (args) => ({
     }
   },
   // And then the `args` are bound to your component with `v-bind="args"`
-  template: '<AppIcon v-bind="args" />',
+  template: '<app-icon v-bind="args"></app-icon>',
 })
 
-export const MaterialSymbols = Template.bind({})
+export const MdiAccount = Template.bind({})
+export const MdiLock = Template.bind({})
 
-MaterialSymbols.args = {
-  icon: 'material-symbols:123',
-  color: '',
-  fontSize: 32,
-  width: '64',
-  height: '64',
+const tagsArray = [MdiAccount, MdiLock]
+
+for (let i = 0; i < iconsUse.length; i++) {
+  tagsArray[i].args = {
+    icon: iconsUse[i],
+    color: '',
+    fontSize: 16,
+  }
 }
