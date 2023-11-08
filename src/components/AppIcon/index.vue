@@ -1,5 +1,9 @@
 <template>
-  <Icon :icon="iconName" :color="color" :style="style" />
+  <Icon
+    :icon="iconName"
+    :color="color"
+    :fontSize="fontSize + 'px'"
+    :style="style" />
 </template>
 
 <script setup lang="ts">
@@ -22,6 +26,10 @@ const props = defineProps({
   height: {
     type: String,
     default: '',
+  },
+  fontSize: {
+    type: Number,
+    default: 16,
   },
 })
 
