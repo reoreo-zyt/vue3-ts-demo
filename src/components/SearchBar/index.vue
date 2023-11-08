@@ -92,10 +92,11 @@ function resetBtn() {
   overflow: hidden;
   margin-bottom: 10px;
   gap: 10px;
+
   /** 搜索、重置按钮样式 */
   .el-button + .el-button,
   .el-checkbox.is-bordered + .el-checkbox.is-bordered {
-    margin-left: 0px;
+    margin-left: 0;
   }
 }
 </style>
