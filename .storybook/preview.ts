@@ -1,5 +1,5 @@
 import type { Preview } from '@storybook/vue3'
-// import 'element-plus/lib/theme-chalk/index.css'
+import 'tailwindcss/tailwind.css'
 
 const preview: Preview = {
   parameters: {

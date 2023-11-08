@@ -1,17 +1,48 @@
 import SearchBar from '../components/SearchBar/index.vue'
-import type { Meta, StoryObj } from '@storybook/vue3'
+import type { Meta } from '@storybook/vue3'
 
 // eslint-disable-next-line storybook/story-exports
 const meta: Meta<typeof SearchBar> = {
-  title: '组件/search-bar',
+  title: '组件/search-bar（检索）',
   component: SearchBar,
   tags: ['autodocs'],
-  argTypes: {},
 }
 
 export default meta
-type Story = StoryObj<typeof SearchBar>
 
-export const Input: Story = {
-  args: {},
+const div = (args) => ({
+  components: { SearchBar },
+  setup() {
+    return {
+      args,
+    }
+  },
+  template: '<search-bar v-bind="args"></search-bar>',
+})
+
+export const Input = div.bind({})
+export const Input2 = div.bind({})
+
+Input.args = {
+  search: [
+    {
+      label: '输入框',
+      component: 'el-input',
+      placeholder: '请输入',
+      value: '',
+      style: {},
+    },
+  ],
+}
+
+Input2.args = {
+  search: [
+    {
+      label: '输入框',
+      component: 'el-input',
+      placeholder: '请输入',
+      value: '',
+      style: {},
+    },
+  ],
 }

@@ -142,21 +142,18 @@ const meta: Meta<typeof AppIcon> = {
 
 export default meta
 
-const Template = (args) => ({
-  // Components used in your story `template` are defined in the `components` object
+const div = (args) => ({
   components: { AppIcon },
-  // The story's `args` need to be mapped into the template through the `setup()` method
   setup() {
     return {
       args,
     }
   },
-  // And then the `args` are bound to your component with `v-bind="args"`
   template: '<app-icon v-bind="args"></app-icon>',
 })
 
-export const MdiAccount = Template.bind({})
-export const MdiLock = Template.bind({})
+export const MdiAccount = div.bind({})
+export const MdiLock = div.bind({})
 
 const tagsArray = [MdiAccount, MdiLock]
 

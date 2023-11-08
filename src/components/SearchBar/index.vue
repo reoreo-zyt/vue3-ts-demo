@@ -20,6 +20,14 @@
             }"
             @input="inputChange($event, item)"
             @change="selectChange($event, item)"></el-input>
+          <div
+            class="flex_box gap-[10px] flex items-center"
+            v-if="search.length">
+            <el-button type="primary" @click="searchBtn">搜索</el-button>
+            <el-button plain @click="resetBtn">重置</el-button>
+          </div>
+          <!-- TODO: 高级检索功能，弹出时间选择框 -->
+          <div></div>
         </div>
       </div>
     </div>
@@ -39,15 +47,28 @@ const props = defineProps({
   /** 检索组件配置项 */
   search: {
     type: Array<Search>,
+    required: true,
     default: [
       {
         label: '输入框',
         component: 'el-input',
         placeholder: '请输入',
+        value: '',
       },
     ],
   },
 })
+
+const emits = defineEmits([
+  /** 搜索触发事件 */
+  'search-click',
+])
+
+function getParams() {
+  // TODO: 处理下表单逻辑
+  const params = {}
+  return params
+}
 
 function inputChange($event, item) {
   console.error($event, item)
@@ -55,14 +76,26 @@ function inputChange($event, item) {
 function selectChange($event, item) {
   console.error($event, item)
 }
+function searchBtn() {
+  const params = getParams()
+  emits('search-click', params)
+}
+function resetBtn() {
+  props.search.forEach((item) => (item.value = ''))
+}
 </script>
 
 <style lang="scss" scoped>
 .search-bar {
-  gap: 10px;
   display: flex;
-  margin-bottom: 10px;
-  overflow: hidden;
   align-items: flex-start;
+  overflow: hidden;
+  margin-bottom: 10px;
+  gap: 10px;
+  /** 搜索、重置按钮样式 */
+  .el-button + .el-button,
+  .el-checkbox.is-bordered + .el-checkbox.is-bordered {
+    margin-left: 0px;
+  }
 }
 </style>
