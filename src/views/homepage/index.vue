@@ -54,6 +54,13 @@
         <tooltipDetails></tooltipDetails>
       </div>
     </div>
+    <div class="content-item">
+      <div class="text-[18px] mb-[20px] mt-[20px]">按钮组件</div>
+      <div>
+        <div>防抖</div>
+        <amButton></amButton>
+      </div>
+    </div>
   </div>
 </template>
 <script setup lang="ts">
@@ -69,4 +76,5 @@ import verticalDetails from './verticalDetails/index.vue'
 import slotDetails from './slotDetails/index.vue'
 import listInfoDetails from './listInfoDetails/index.vue'
 import tooltipDetails from './tooltipDetails/index.vue'
+import amButton from './amButton/index.vue'
 </script>
