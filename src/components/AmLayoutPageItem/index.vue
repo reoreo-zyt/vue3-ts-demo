@@ -15,13 +15,14 @@ defineProps({
 </script>
 <style lang="scss" scoped>
 .am_layout_page_item {
-  margin: 8px;
   padding: 16px;
+  margin: 8px;
   background: var(--el-bg-color);
   border-radius: 4px;
 }
+
 .page_item_no_margin {
-  margin: 0;
   padding: 0;
+  margin: 0;
 }
 </style>
