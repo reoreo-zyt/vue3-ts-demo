@@ -61,6 +61,13 @@
         <amButton></amButton>
       </div>
     </div>
+    <div class="content-item">
+      <div class="text-[18px] mb-[20px] mt-[20px]">日期组件</div>
+      <div>
+        <div>单个日期输出</div>
+        <singleDatePicker></singleDatePicker>
+      </div>
+    </div>
   </div>
 </template>
 <script setup lang="ts">
@@ -77,4 +84,5 @@ import slotDetails from './slotDetails/index.vue'
 import listInfoDetails from './listInfoDetails/index.vue'
 import tooltipDetails from './tooltipDetails/index.vue'
 import amButton from './amButton/index.vue'
+import singleDatePicker from './singleDatePicker/index.vue'
 </script>
