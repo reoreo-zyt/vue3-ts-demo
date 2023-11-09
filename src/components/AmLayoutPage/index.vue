@@ -31,12 +31,13 @@ onActivated(() => {
 <style lang="scss" scoped>
 .am_layout_page {
   display: flex;
-  flex-direction: column;
+  overflow: auto;
   padding: 10px;
   width: 100%;
   height: 100%;
-  overflow: auto;
+  flex-direction: column;
 }
+
 .layout_page_no_margin {
   padding: 0;
 }

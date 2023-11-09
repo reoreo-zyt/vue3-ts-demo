@@ -29,7 +29,7 @@
             <el-icon
               :size="item.iconSize"
               :color="item.iconColor"
-              style="cursor: pointer; margin-left: 2px; top: 1px">
+              style="top: 1px; margin-left: 2px; cursor: pointer">
               <Warning />
             </el-icon>
           </span>
