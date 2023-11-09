@@ -55,6 +55,7 @@
 import { ElSelect, ElSelectV2 } from 'element-plus'
 
 const props = defineProps({
+  /** select 绑定的值 */
   modelValue: {
     type: [String, Number, Array],
   },

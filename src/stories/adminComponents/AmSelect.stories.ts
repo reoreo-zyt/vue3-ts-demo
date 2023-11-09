@@ -1,31 +1,28 @@
 import AmSelect from '../../components/AmSelect/index.vue'
 import type { Meta } from '@storybook/vue3'
 
-// eslint-disable-next-line storybook/story-exports
 const meta: Meta<typeof AmSelect> = {
   title: '后台管理系统组件/下拉选择组件',
   component: AmSelect,
-  tags: ['autodocs'],
+  // tags: ['autodocs'],
 }
 
 export default meta
 
-const div = (args) => ({
+const template = (args) => ({
   components: { AmSelect },
   setup() {
     return {
       args,
     }
   },
-  template: '<am-select v-bind="args"></am-select>',
+  template: '<am-select v-model="args.modelValue" v-bind="args"></am-select>',
 })
 
-export const Input = div.bind({})
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-// const selectVlaue = ref<any>()
+export const 单选 = template.bind({})
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-Input.args = {
+单选.args = {
   placeholder: '请选择工序',
   optionSource: [
     { label: '开始' },
@@ -39,6 +36,8 @@ Input.args = {
   ],
   valueKey: 'label',
   width: '200px',
-  // 'v-model': selectVlaue,
-  // TODO: v-model @change 事件
+  modelValue: ref(''),
+  onChange: (val) => {
+    console.error(val)
+  },
 }
