@@ -1,3 +1,4 @@
+/* eslint-disable storybook/prefer-pascal-case */
 import AmSelect from '../../components/AmSelect/index.vue'
 import type { Meta } from '@storybook/vue3'
 
