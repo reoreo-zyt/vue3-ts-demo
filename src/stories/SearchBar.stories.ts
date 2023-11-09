@@ -22,7 +22,8 @@ const div = (args) => ({
 
 export const Input = div.bind({})
 export const Input2 = div.bind({})
-
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 Input.args = {
   search: [
     {
@@ -34,7 +35,8 @@ Input.args = {
     },
   ],
 }
-
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 Input2.args = {
   search: [
     {

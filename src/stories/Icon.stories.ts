@@ -158,6 +158,8 @@ export const MdiLock = div.bind({})
 const tagsArray = [MdiAccount, MdiLock]
 
 for (let i = 0; i < iconsUse.length; i++) {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   tagsArray[i].args = {
     icon: iconsUse[i],
     color: '',
