@@ -55,15 +55,17 @@ const change = (event, type, value) => {
 <style lang="scss" scoped>
 .dateRange {
   .am_layout_page_item {
-    margin: 0;
     padding: 0;
+    margin: 0;
+
     .box_content {
       display: flex;
       padding: 10px;
-      border: 1px dashed #ccc;
       margin-top: 10px;
+      border: 1px dashed #ccc;
       flex-wrap: wrap;
     }
+
     .box_flex {
       display: flex;
       flex-direction: column;

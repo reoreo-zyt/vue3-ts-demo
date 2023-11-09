@@ -48,15 +48,17 @@ const change = (event) => {
 <style lang="scss">
 .slotCustomize {
   .t_layout_page_item {
-    margin: 0 !important;
     padding: 0 !important;
+    margin: 0 !important;
+
     .box_content {
       display: flex;
       padding: 10px;
-      border: 1px dashed #ccc;
       margin-top: 10px;
+      border: 1px dashed #ccc;
       flex-wrap: wrap;
     }
+
     .box_flex {
       display: flex;
       flex-direction: column;
@@ -64,34 +66,38 @@ const change = (event) => {
     }
   }
 }
+
 .cell_slot {
-  height: 30px;
   padding: 3px 0;
+  height: 30px;
   box-sizing: border-box;
 }
+
 .cell_slot.current .customize_text {
-  background: #626aef;
   color: #fff;
+  background: #626aef;
 }
+
 .customize_text {
-  width: 24px;
-  height: 24px;
-  display: block;
-  margin: 0 auto;
-  line-height: 24px;
   position: absolute;
   left: 50%;
-  transform: translateX(-50%);
+  display: block;
+  margin: 0 auto;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
+  line-height: 24px;
+  transform: translateX(-50%);
 }
+
 .slot_holiday {
   position: absolute;
+  bottom: 0;
+  left: 50%;
   width: 6px;
   height: 6px;
   background: var(--el-color-danger);
   border-radius: 50%;
-  bottom: 0px;
-  left: 50%;
   transform: translateX(-50%);
 }
 </style>
