@@ -67,6 +67,22 @@
         <div>单个日期输出</div>
         <singleDatePicker></singleDatePicker>
       </div>
+      <div>
+        <div>日期范围选择</div>
+        <rangeDatePicker></rangeDatePicker>
+      </div>
+      <div>
+        <div>月份范围选择</div>
+        <mouthRangeDatePicker></mouthRangeDatePicker>
+      </div>
+      <div>
+        <div>日期&时间范围选择</div>
+        <timeRangeDatePicker></timeRangeDatePicker>
+      </div>
+      <div>
+        <div>插槽使用及自定义日期面板</div>
+        <slotDatePicker></slotDatePicker>
+      </div>
     </div>
   </div>
 </template>
@@ -85,4 +101,8 @@ import listInfoDetails from './listInfoDetails/index.vue'
 import tooltipDetails from './tooltipDetails/index.vue'
 import amButton from './amButton/index.vue'
 import singleDatePicker from './singleDatePicker/index.vue'
+import rangeDatePicker from './rangeDatePicker/index.vue'
+import mouthRangeDatePicker from './mouthRangeDatePicker/index.vue'
+import timeRangeDatePicker from './timeRangeDatePicker/index.vue'
+import slotDatePicker from './slotDatePicker/index.vue'
 </script>
