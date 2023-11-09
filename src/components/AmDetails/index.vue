@@ -106,7 +106,7 @@ const constantEscape = (
 }
 </script>
 <style lang="scss" scoped>
-.t_detail {
+.am_detail {
   :deep(.el-descriptions__label) {
     font-weight: bold;
     min-width: 65px;
