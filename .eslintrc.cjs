@@ -4,6 +4,9 @@ module.exports = {
     es2021: true,
     node: true,
   },
+  globals: {
+    global: 'readonly',
+  },
   extends: [
     'eslint:recommended',
     'plugin:vue/vue3-essential',

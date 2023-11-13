@@ -20,6 +20,11 @@ const routes: RouterTypes = [
     component: () => import('@/views/homepage/index.vue'),
   },
   {
+    path: '/table',
+    name: 'table 组件-使用 tsx 语法',
+    component: () => import('@/views/table/index.vue'),
+  },
+  {
     path: '/element-ui/button',
     name: '组件库使用',
     redirect: '/element-ui/button',

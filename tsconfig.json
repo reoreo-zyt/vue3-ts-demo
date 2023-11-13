@@ -18,6 +18,7 @@
       "~/*": ["./typings/*"]
     },
     "noImplicitAny": false,
+    "allowImportingTsExtensions": true,
     "types": ["element-plus/global"]
   },
   "include": [

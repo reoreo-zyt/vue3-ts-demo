@@ -1,6 +1,44 @@
-import type { PropType as VuePropType } from 'vue'
+import type { TableColumnCtx } from 'element-plus'
+import { PureTableProps, Align } from './index'
+import type { VNode } from 'vue'
 
-export type PropType<T> = VuePropType<T>
+export type TableColumnSortOrders = 'ascending' | 'descending' | null
+export type TableColumnType = 'selection' | 'index' | 'expand'
+export type TableColumnSortable = false | true | 'custom'
+export type TableColumnFixed = true | 'left' | 'right'
+export type TableColumnFilterPlacement =
+  | 'top-start'
+  | 'top-end'
+  | 'top'
+  | 'bottom-start'
+  | 'bottom-end'
+  | 'bottom'
+  | 'left-start'
+  | 'left-end'
+  | 'left'
+  | 'right-start'
+  | 'right-end'
+  | 'right'
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type FilterMethods = (value, row: any, column: TableColumnCtx<any>) => void
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type RH = { column: TableColumnCtx<any>; $index: number }
+
+export interface TableColumnScope {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  row?: any
+  column: TableColumn
+  $index: number
+}
+
+export interface TableColumnRenderer extends TableColumnScope {
+  index: number
+  props: PureTableProps
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  attrs: any
+}
 
 /**
  * @description `element-plus` 的 `table` 中 `Table-column` 属性，未扩展
@@ -43,8 +81,7 @@ export type TableColumn = {
     row: any,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     column: TableColumnCtx<any>,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    cellValue: any,
+    cellValue,
     index: number,
   ) => VNode | string
   /** 当内容过长被隐藏时显示 `tooltip`，默认值为 `false` */
@@ -63,10 +100,7 @@ export type TableColumn = {
   /** 仅对 `type=selection` 的列有效，请注意，需指定 `row-key` 来让这个功能生效，默认值为 `false` */
   reserveSelection?: boolean
   /** 数据过滤的选项，数组格式，数组中的元素需要有 `text` 和 `value` 属性。数组中的每个元素都需要有 `text` 和 `value` 属性 */
-  filters?: Array<{
-    text: string
-    value: string
-  }>
+  filters?: Array<{ text: string; value: string }>
   /** 过滤弹出框的定位 */
   filterPlacement?: TableColumnFilterPlacement
   /** 数据过滤的选项是否多选，默认值为 `true` */
@@ -96,9 +130,3 @@ export interface TableColumns extends TableColumn {
   /** 自定义头部渲染器（`jsx`语法） */
   headerRenderer?: (data: TableColumnRenderer) => VNode
 }
-
-/**
- * TODO: TableColumnList 多处用到
- *  继承 `TableColumns` ，方便全局直接调用
- */
-interface TableColumnList extends Array<TableColumns> {}

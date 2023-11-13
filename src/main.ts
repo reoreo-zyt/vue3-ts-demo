@@ -6,6 +6,8 @@ import '@/styles/index.scss'
 import '@/styles/tailwind.css'
 // Markdown 样式
 import 'github-markdown-css'
+// element-plus 样式
+import 'element-plus/theme-chalk/index.css'
 import { store } from '@/store'
 import r from '@/router'
 import App from './App.vue'

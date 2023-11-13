@@ -122,7 +122,7 @@ const icons = [
 ]
 
 // 在这里补充使用的图片资源
-const iconsUse = ['mdi:account', 'mdi:lock']
+const iconsUse = ['mdi:account', 'mdi:lock', 'fluent-mdl2:date-time']
 
 const meta: Meta<typeof AppIcon> = {
   title: '组件/app-icon（图标）',
@@ -157,7 +157,7 @@ export const MdiLock = div.bind({})
 
 const tagsArray = [MdiAccount, MdiLock]
 
-for (let i = 0; i < iconsUse.length; i++) {
+for (let i = 0; i < 2; i++) {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   tagsArray[i].args = {
