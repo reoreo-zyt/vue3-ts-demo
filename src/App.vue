@@ -7,6 +7,8 @@
 
 <script lang="ts" setup></script>
 <style lang="scss" scoped>
+$sidebar-color: #f5f7f9;
+
 .app {
   display: flex;
   width: 100%;
@@ -18,6 +20,11 @@
 
   .app-header {
     width: 15%;
+    background: $sidebar-color;
+
+    ::v-deep .el-tree {
+      background: $sidebar-color;
+    }
   }
 
   .app-content {
