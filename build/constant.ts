@@ -14,4 +14,4 @@ export const COMPRESSION = true
 
 // serve
 export const API_BASE_URL = '/api'
-export const API_TARGET_URL = 'http://localhost:3000'
+export const API_TARGET_URL = 'http://localhost:8080'

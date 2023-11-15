@@ -81,6 +81,11 @@ const routes: RouterTypes = [
     name: '文章编辑器',
     component: () => import('@/views/veditor/index.vue'),
   },
+  {
+    path: '/openLayer',
+    name: '地图-openLayer',
+    component: () => import('@/views/openLayers/index.vue'),
+  },
   ...mdRoutes,
 ]
 
