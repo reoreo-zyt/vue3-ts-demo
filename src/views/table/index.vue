@@ -31,6 +31,14 @@ import sortTable from './sortTable/index.vue'
 import filterTable from './filterTable/index.vue'
 import ColoumTemplate from './coloumTemplate/index.vue'
 import HeaderRenderer from './headerRenderer/index.vue'
+import expend from './expend/index.vue'
+import tree from './tree/index.vue'
+import totalRow from './totalRow/index.vue'
+import merge from './merge/index.vue'
+import customIndex from './customIndex/index.vue'
+import layout from './layout/index.vue'
+import nestPro from './nestPro/index.vue'
+import imgPreview from './imgPreview/index.vue'
 
 const reactiveRef = reactive({
   selected: 0,
@@ -50,6 +58,14 @@ const reactiveRef = reactive({
     { title: '筛选', content: '', component: filterTable },
     { title: '自定义列模板', content: '', component: ColoumTemplate },
     { title: '自定义表头', content: '', component: HeaderRenderer },
+    { title: '展示行', content: '', component: expend },
+    { title: '树形数据与懒加载', content: '', component: tree },
+    { title: '表尾合计行', content: '', component: totalRow },
+    { title: '合并行或列', content: '', component: merge },
+    { title: '自定义索引', content: '', component: customIndex },
+    { title: '表格布局', content: '', component: layout },
+    { title: '各种数据格式（深层结构）', content: '', component: nestPro },
+    { title: '图像预览', content: '', component: imgPreview },
   ],
 })
 

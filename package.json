@@ -26,6 +26,7 @@
     "vditor": "^3.9.6",
     "vite-plugin-mock": "^3.0.0",
     "vue": "^3.3.8",
+    "vue-i18n": "^9.6.5",
     "vue-router": "^4.2.5"
   },
   "devDependencies": {
