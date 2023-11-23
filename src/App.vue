@@ -36,9 +36,8 @@ $sidebar-color: #f5f7f9;
   }
 
   .app-content {
+    overflow: hidden scroll;
     width: 85%;
-    overflow-y: scroll;
-    overflow-x: hidden;
   }
 }
 </style>
