@@ -1,6 +1,14 @@
 <template>
   <div class="app">
-    <app-side-bar class="app-header"></app-side-bar>
+    <div class="app-header">
+      <div class="flex justify-between items-center m-2">
+        <span class="text-[18px]">vue3-ts-demo</span>
+        <app-icon
+          icon="ant-design:menu-fold-outlined"
+          class="cursor-pointer"></app-icon>
+      </div>
+      <app-side-bar></app-side-bar>
+    </div>
     <router-view class="app-content"></router-view>
   </div>
 </template>
@@ -22,13 +30,15 @@ $sidebar-color: #f5f7f9;
     width: 15%;
     background: $sidebar-color;
 
-    ::v-deep .el-tree {
+    :deep(.el-tree) {
       background: $sidebar-color;
     }
   }
 
   .app-content {
     width: 85%;
+    overflow-y: scroll;
+    overflow-x: hidden;
   }
 }
 </style>

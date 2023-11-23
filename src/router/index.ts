@@ -82,9 +82,9 @@ const routes: RouterTypes = [
     component: () => import('@/views/veditor/index.vue'),
   },
   {
-    path: '/openLayer',
-    name: '地图-openLayer',
-    component: () => import('@/views/openLayers/index.vue'),
+    path: '/leaflet',
+    name: '地图-leaflet',
+    component: () => import('@/views/leaflet/index.vue'),
   },
   ...mdRoutes,
 ]

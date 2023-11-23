@@ -1,6 +1,7 @@
 import { Map, View } from 'ol'
-import { Vector } from 'ol/layer'
+import { Vector, Tile } from 'ol/layer'
 import VectorSource from 'ol/source/Vector'
+import XYZ from 'ol/source/XYZ'
 import { fromLonLat, transformExtent } from 'ol/proj'
 import GeoJSON from 'ol/format/GeoJSON'
 import { Style, Stroke, Fill } from 'ol/style'
@@ -8,9 +9,9 @@ import { Style, Stroke, Fill } from 'ol/style'
 export default () => {
   const MAP_DEFAULT_OPTIONS = {
     center: [120.1552, 30.2741],
-    zoom: 4,
-    minZoom: 1,
-    maxZoom: 10,
+    zoom: 0,
+    minZoom: 0,
+    maxZoom: 8,
     extent: [70, -11, 150, 60],
   }
   const EPSG4326 = 'EPSG:4326'
@@ -20,8 +21,8 @@ export default () => {
       const MAP_DEFAULT_OPTIONS = {
         center: [120.1552, 30.2741],
         zoom: 4,
-        minZoom: 1,
-        maxZoom: 10,
+        minZoom: 2,
+        maxZoom: 7,
         extent: [70, -11, 150, 60],
       }
 
@@ -78,10 +79,20 @@ export default () => {
       resolve(map)
     })
   }
+  /** 添加离线瓦片地图 */
+  const addLayerOffline = (map, ip) => {
+    const tile = new Tile({
+      source: new XYZ({
+        url: ip + '/{z}/{x}/{y}.png', // 设置本地离线瓦片所在路径
+      }),
+    })
+    map.addLayer(tile)
+  }
   return {
     MAP_DEFAULT_OPTIONS,
     EPSG4326,
     initMap,
     addLayerGeojson,
+    addLayerOffline,
   }
 }
