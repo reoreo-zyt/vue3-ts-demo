@@ -25,6 +25,7 @@
     "ol": "^8.2.0",
     "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^3.2.0",
+    "typeit": "^8.8.0",
     "vditor": "^3.9.6",
     "vite-plugin-mock": "^3.0.0",
     "vue": "^3.3.8",

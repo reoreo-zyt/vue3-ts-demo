@@ -1,251 +1,239 @@
 <template>
-  <div class="w-full p-4 custom-login">
-    <!-- 右上角扫码部分，若不需要，可直接注销 -->
-    <div class="flex items-center justify-end">
-      <div class="px-3 py-2 rounded-md mr-2 flex items-center bg-[#ECFAF3]">
-        <span class="we inline-block pr-2 bg-contain"></span>
-        <span class="text-sm text-[#07C160]">微信扫码登录</span>
-      </div>
-      <router-link to="/login/scan">
-        <img class="relative cursor-pointer" src="@/assets/login/qr.png" />
-      </router-link>
-    </div>
-    <!-- 登陆表单主体部分，可按需进行修改 -->
-    <div class="my-10 mx-auto max-w-96">
-      <div class="text-3xl pb-6">博客文章管理后台</div>
-      <el-tabs v-model="activeName" class="pt-5" @tab-click="handleClick">
-        <!-- 密码登陆 -->
-        <el-tab-pane label="密码登录" name="pwd">
-          <basis-form :schemas="loginForm" label-width="0" class="pt-4">
-            <template #action="{ validate, model }">
-              <el-button
-                type="primary"
-                size="large"
-                class="w-full mb-2"
-                @click="handleLogin(validate, model, 'pwd')">
-                登录
-              </el-button>
-            </template>
-          </basis-form>
-        </el-tab-pane>
-        <!-- 验证码登陆 -->
-        <el-tab-pane label="验证码登录" name="code">
-          <basis-form
-            ref="form"
-            :schemas="codeLoginForm"
-            label-width="0"
-            class="pt-4"
-            @change="handleChange">
-            <template #suffix>
-              <el-link
-                v-if="!state.sending"
-                type="primary"
-                :underline="false"
-                class="mr-2"
-                href="javascript:;"
-                @click="onSendCode">
-                获取验证码
-              </el-link>
-              <span
-                v-else
-                class="text-sm text-gray-400 w-[70px] text-center flex items-center">
-                重发{{ leftCount }}秒
+  <div class="select-none">
+    <img :src="bg" class="wave" />
+    <div class="flex-c absolute right-5 top-3">
+      <!-- 主题 -->
+      <el-switch v-model="dataTheme" inline-prompt @change="dataThemeChange" />
+      <!-- TODO: 国际化 -->
+      <el-dropdown trigger="click">
+        <!-- <globalization
+          class="hover:text-primary hover:!bg-[transparent] w-[20px] h-[20px] ml-1.5 cursor-pointer outline-none duration-300" /> -->
+        <template #dropdown>
+          <el-dropdown-menu class="translation">
+            <el-dropdown-item
+              :class="['dark:!text-white']"
+              @click="translationCh">
+              <app-icon
+                class="check-zh"
+                v-show="locale === 'zh'"
+                icon="i-ep-user" />
+              简体中文
+            </el-dropdown-item>
+            <el-dropdown-item
+              :style="getDropdownItemStyle(locale, 'en')"
+              :class="['dark:!text-white', getDropdownItemClass(locale, 'en')]"
+              @click="translationEn">
+              <span class="check-en" v-show="locale === 'en'">
+                <app-icon icon="i-ep-user" />
               </span>
-            </template>
-            <template #action="{ validate, model }">
-              <el-button
-                type="primary"
-                size="large"
-                class="w-full mb-2"
-                @click="handleLogin(validate, model, 'code')">
-                登录
-              </el-button>
-            </template>
-          </basis-form>
-        </el-tab-pane>
-      </el-tabs>
-      <div class="flex justify-between text-sm text-gray-400">
-        <router-link class="text-blue-400" to="/login/forget">
-          忘记密码？
-        </router-link>
-        <div>
-          还没有账号？
-          <router-link class="text-blue-400" to="/login/reg">
-            立即注册>
-          </router-link>
+              English
+            </el-dropdown-item>
+          </el-dropdown-menu>
+        </template>
+      </el-dropdown>
+    </div>
+    <div class="login-container">
+      <div class="img">
+        <component :is="toRaw(illustration)" />
+      </div>
+      <div class="login-box">
+        <div class="login-form">
+          <avatar class="avatar" />
+          <Motion>
+            <h2 class="outline-none">
+              <TypeIt :values="[title]" :cursor="false" :speed="150" />
+            </h2>
+          </Motion>
+
+          <el-form
+            v-if="currentPage === 0"
+            ref="ruleFormRef"
+            :model="ruleForm"
+            :rules="loginRules"
+            size="large">
+            <Motion :delay="100">
+              <el-form-item
+                :rules="[
+                  {
+                    required: true,
+                    trigger: 'blur',
+                  },
+                ]"
+                prop="username">
+                <el-input clearable v-model="ruleForm.username" />
+              </el-form-item>
+            </Motion>
+
+            <Motion :delay="150">
+              <el-form-item prop="password">
+                <el-input clearable show-password v-model="ruleForm.password" />
+              </el-form-item>
+            </Motion>
+
+            <Motion :delay="200">
+              <el-form-item prop="verifyCode">
+                <el-input clearable v-model="ruleForm.verifyCode">
+                  <template v-slot:append>
+                    <!-- TODO: 验证码 -->
+                    <!-- <ReImageVerify v-model:code="imgCode" /> -->
+                  </template>
+                </el-input>
+              </el-form-item>
+            </Motion>
+
+            <Motion :delay="250">
+              <el-form-item>
+                <div class="w-full h-[20px] flex justify-between items-center">
+                  <el-checkbox v-model="checked">
+                    <span class="flex">
+                      <select
+                        v-model="loginDay"
+                        :style="{
+                          width: loginDay < 10 ? '10px' : '16px',
+                          outline: 'none',
+                          background: 'none',
+                          appearance: 'none',
+                        }">
+                        <option value="1">1</option>
+                        <option value="7">7</option>
+                        <option value="30">30</option>
+                      </select>
+                      <!-- {{ t('login.remember') }} -->
+                      <el-tooltip effect="dark" placement="top">
+                        <IconifyIconOffline icon="i-ep-user" class="ml-1" />
+                      </el-tooltip>
+                    </span>
+                  </el-checkbox>
+                  <el-button link type="primary">忘记密码</el-button>
+                </div>
+                <el-button
+                  class="w-full mt-4"
+                  size="default"
+                  type="primary"
+                  :loading="loading"
+                  @click="onLogin()">
+                  登录
+                </el-button>
+              </el-form-item>
+            </Motion>
+
+            <Motion :delay="300">
+              <el-form-item>
+                <div class="w-full h-[20px] flex justify-between items-center">
+                  <el-button
+                    v-for="(item, index) in operates"
+                    :key="index"
+                    class="w-full mt-4"
+                    size="default">
+                    {{ item.title }}
+                  </el-button>
+                </div>
+              </el-form-item>
+            </Motion>
+          </el-form>
+
+          <Motion v-if="currentPage === 0" :delay="350">
+            <el-form-item>
+              <el-divider>
+                <p class="text-gray-500 text-xs">第三方登录</p>
+              </el-divider>
+              <div class="w-full flex justify-evenly">
+                <span
+                  v-for="(item, index) in thirdParty"
+                  :key="index"
+                  :title="item.title">
+                  <app-icon
+                    :icon="`ri:${item.icon}-fill`"
+                    width="20"
+                    class="cursor-pointer text-gray-500 hover:text-blue-400" />
+                </span>
+              </div>
+            </el-form-item>
+          </Motion>
+          <!-- 手机号登录 -->
+          <phone v-if="currentPage === 1" />
+          <!-- 二维码登录 -->
+          <qrCode v-if="currentPage === 2" />
+          <!-- 注册 -->
+          <regist v-if="currentPage === 3" />
+          <!-- 忘记密码 -->
+          <update v-if="currentPage === 4" />
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import { FormSchema } from '@/types/form'
-import { ElMessage, TabsPaneContext } from 'element-plus'
-import sendUtils from '@/utils/sendCode'
-import { phoneReg } from '@/utils/domUtils'
-import { loginPwd, loginSMS } from '@/api/page/login'
-import { useUserStore } from '@/store/modules/user'
-import { HttpResponse } from '@/api/sys/model/http'
+<style scoped>
+@import url('@/style/login.css');
+</style>
 
-export type LoginType = 'pwd' | 'code'
-
-export default defineComponent({
-  setup() {
-    const { replace } = useRouter()
-    const userStore = useUserStore()
-    // 默认为密码登陆，将pwd改成code，将默认为验证码登陆
-    const activeName = ref('pwd')
-    const codeLogin = ref()
-    const mobilePhone = ref()
-
-    const { state, handleSendCode, leftCount } = sendUtils()
-
-    // switch login type
-    const handleClick = (tab: TabsPaneContext, event: Event) => {
-      console.log(tab, event)
-    }
-    const form = ref()
-
-    // 登陆表单配置，作为配置参数传递给basic-form组件
-    const loginForm = reactive([
-      {
-        component: 'input',
-        class: 'py-1',
-        prop: 'username',
-        attrs: {
-          placeholder: '请输入手机号/账号',
-          size: 'large',
-          prefixIcon: 'Avatar',
-        },
-        value: 'admin',
-        rules: [
-          { required: true, message: '请输入手机号/账号', trigger: 'blur' },
-          {
-            min: 4,
-            max: 32,
-            message: '长度在 4 到 32 个字符',
-            trigger: 'blur',
-          },
-        ],
-      },
-      {
-        component: 'input',
-        class: 'py-1',
-        prop: 'password',
-        attrs: {
-          placeholder: '请输入密码',
-          type: 'password',
-          size: 'large',
-          prefixIcon: 'Lock',
-        },
-        value: '123456',
-        rules: [
-          { required: true, message: '密码不能为空', trigger: 'blur' },
-          {
-            min: 6,
-            max: 18,
-            message: '长度在 6 到 18 个字符',
-            trigger: 'blur',
-          },
-        ],
-      },
-    ]) as FormSchema[]
-
-    // 验证码登陆配置，作为配置参数传递给basic-form组件
-    const codeLoginForm = reactive([
-      {
-        component: 'input',
-        class: 'py-1',
-        prop: 'phone',
-        attrs: {
-          placeholder: '请输入手机号',
-          size: 'large',
-          prefixIcon: 'Avatar',
-        },
-        rules: [
-          { required: true, message: '请输入手机号', trigger: 'blur' },
-          { pattern: phoneReg, message: '请输入正确的手机号', trigger: 'blur' },
-        ],
-      },
-      {
-        component: 'input',
-        class: 'py-1',
-        prop: 'code',
-        attrs: {
-          placeholder: '请输入验证码',
-          size: 'large',
-          prefixIcon: 'Lock',
-        },
-        itemSlot: { suffix: 'suffix' },
-        rules: [{ required: true, message: '请输入验证码', trigger: 'blur' }],
-      },
-    ]) as FormSchema[]
-
-    // 验证码处理，state 为状态，sendCode为处理发送的函数，leftCount为重发时间
-    const handleLogin = async (validate, model, type: LoginType) => {
-      if (!validate) return
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      let res: any
-      // 账号登录
-      if (type === 'pwd') {
-        res = (await loginPwd(model)) as HttpResponse
-      } else {
-        // 验证码登录
-        res = (await loginSMS(model)) as HttpResponse
-      }
-      if (res.code !== 0) {
-        ElMessage.error(res.message)
-        return
-      }
-      const data = res.data
-      // 存储用户信息
-      userStore.setUserInfo(data)
-      console.log('res:', res)
-      // 登陆成功后的跳转
-      replace('/home')
-      // go(-1)
-    }
-
-    const onSendCode = () => {
-      form.value.validateField('phone').then(() => {
-        console.log('validateField')
-        handleSendCode(mobilePhone.value)
-      })
-    }
-
-    const handleChange = (event) => {
-      mobilePhone.value = event.phone
-    }
-
-    return {
-      form,
-      activeName,
-      handleClick,
-      loginForm,
-      codeLoginForm,
-      codeLogin,
-      handleLogin,
-      state,
-      leftCount,
-      handleSendCode,
-      handleChange,
-      onSendCode,
-    }
-  },
-})
-</script>
-
-<style scoped lang="scss">
-.we {
-  width: 19px;
-  height: 19px;
-  background: url('@/assets/login/security.png') no-repeat center center;
+<style lang="scss" scoped>
+:deep(.el-input-group__append, .el-input-group__prepend) {
+  padding: 0;
 }
 
-.custom-login {
-  :deep(.el-tabs__nav-wrap::after) {
-    height: unset;
+.translation {
+  ::v-deep(.el-dropdown-menu__item) {
+    padding: 5px 40px;
+  }
+
+  .check-zh {
+    position: absolute;
+    left: 20px;
+  }
+
+  .check-en {
+    position: absolute;
+    left: 20px;
   }
 }
 </style>
+
+<script setup lang="ts">
+import { bg } from './utils/static'
+// TODO: 加载 svg 图片
+// import dayIcon from '@/assets/svg/day.svg?component'
+// import darkIcon from '@/assets/svg/dark.svg?component'
+// import globalization from '@/assets/svg/globalization.svg?component'
+import TypeIt from '@/components/ReTypeit'
+
+const dataTheme = '#1b2a47'
+let locale = 'zh'
+const illustration = ''
+const title = ''
+let currentPage = 0
+const ruleForm = {
+  username: '',
+  password: '',
+  verifyCode: '',
+}
+const loginRules = {}
+const checked = ''
+const loginDay = 1
+const loading = false
+const operates = [{ title: '' }]
+const thirdParty = [{ title: '', icon: 'i-ep-user' }]
+// TODO: 主题更改
+function dataThemeChange() {}
+
+// TODO: 国际化
+function translationCh() {}
+
+function getDropdownItemStyle(current, translate) {
+  console.log(current, translate)
+}
+
+function getDropdownItemClass(current, translate) {
+  console.log(current, translate)
+}
+
+function translationEn() {}
+
+function toRaw(comp) {
+  console.log(comp)
+}
+
+// 提交校验
+function onLogin() {}
+</script>
