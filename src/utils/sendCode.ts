@@ -1,5 +1,3 @@
-import { receiveCode } from '@/api/page/login'
-import { HttpResponse } from '@/api/sys/model/http'
 import { ElMessage, ElNotification } from 'element-plus'
 import _ from 'lodash-es'
 
