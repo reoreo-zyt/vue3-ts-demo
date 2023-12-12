@@ -1,14 +1,5 @@
 <template>
   <div class="app">
-    <div class="app-header">
-      <div class="flex justify-between items-center m-2">
-        <span class="text-[18px]">vue3-ts-demo</span>
-        <app-icon
-          icon="ant-design:menu-fold-outlined"
-          class="cursor-pointer"></app-icon>
-      </div>
-      <app-side-bar></app-side-bar>
-    </div>
     <router-view class="app-content"></router-view>
   </div>
 </template>
@@ -37,7 +28,7 @@ $sidebar-color: #f5f7f9;
 
   .app-content {
     overflow: hidden scroll;
-    width: 85%;
+    width: 100%;
   }
 }
 </style>
