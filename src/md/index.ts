@@ -9,7 +9,6 @@ const README = md(html)
 
 // 获取当前文件下的所有 md 文件，导入渲染自动生成路由
 const files = import.meta.glob('./**/*.md') // 自定义规则
-console.error(files, '==files==')
 const routes: RouterTypes = []
 const routeItem: RouteRawConfig = {
   path: '/md/',

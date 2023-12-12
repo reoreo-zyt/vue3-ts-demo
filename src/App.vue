@@ -27,7 +27,6 @@ $sidebar-color: #f5f7f9;
   }
 
   .app-content {
-    overflow: hidden scroll;
     width: 100%;
   }
 }
