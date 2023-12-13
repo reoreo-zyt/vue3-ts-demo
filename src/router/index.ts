@@ -10,7 +10,7 @@ import mdRoutes from '@/md/index'
 
 const routes: RouterTypes = [
   {
-    path: '/',
+    path: '/:pathMatch(.*)*',
     name: '地图-leaflet',
     component: () => import('@/views/leaflet/index.vue'),
   },

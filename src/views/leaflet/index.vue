@@ -6,6 +6,7 @@
 
 <script lang="ts" setup>
 import L from 'leaflet'
+import './leaflet.hash'
 import 'leaflet/dist/leaflet.css'
 
 const tileSize = 256,
@@ -22,7 +23,9 @@ const overlays = new Object(),
   groupedOverlays = new Object()
 
 function setView() {
-  L.CRS.Zelda = L.extend({}, L.CRS.Simple, {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  const Zelda = L.extend({}, L.CRS.Simple, {
     projection: L.Projection.LonLat,
     transformation: new L.Transformation(factorx, 70.31, -factory, 58.59),
   })
@@ -30,9 +33,9 @@ function setView() {
   const zeldaMap = L.map('map', {
     minZoom: 0,
     maxZoom: 10,
-    tileSize: 256,
+    // tileSize: 256,
     attributionControl: false,
-    crs: L.CRS.Zelda,
+    crs: Zelda,
     renderer: L.canvas(),
   })
 
@@ -48,17 +51,14 @@ function setView() {
   var sky = L.tileLayer(tile_url + 'sky_complete/{z}/{x}/{y}.png', {
       maxNativeZoom: 8,
       bounds: bounds,
-      name: 'Sky',
     }),
     surface = L.tileLayer(tile_url + 'ground/{z}/{x}/{y}.png', {
       maxNativeZoom: 8,
       bounds: bounds,
-      name: 'Surface',
     }),
     depths = L.tileLayer(tile_url + 'underground/{z}/{x}/{y}.png', {
       maxNativeZoom: 8,
       bounds: bounds,
-      name: 'Depths',
     }),
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     baseLayers = {
@@ -68,6 +68,8 @@ function setView() {
     }
 
   sky.addTo(zeldaMap)
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   new L.Hash(zeldaMap)
 }
 
