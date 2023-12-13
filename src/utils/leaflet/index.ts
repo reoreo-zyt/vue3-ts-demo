@@ -1,5 +1,6 @@
 import L from 'leaflet'
 import './leaflet.hash'
+import './leaflet.CanvasMarker'
 import './leaflet.groupedlayercontrol'
 import axios from 'axios'
 
@@ -77,8 +78,12 @@ export function setView(dom) {
 }
 
 export function setControl(map, baseLayers) {
-  axios.get('/data.json').then((data) => {
+  axios.get('public/data.json').then(({ data }) => {
     console.error(data)
+    L.geoJSON(data, {
+      pointToLayer: pointToLayer,
+      onEachFeature: onEachFeature,
+    })
     const menu_options = {
       groupCheckboxes: true,
       collapsed: false,
@@ -94,4 +99,58 @@ export function setControl(map, baseLayers) {
       menu_options,
     ).addTo(map)
   })
+}
+
+function pointToLayer(feature, latlng) {
+  addToOverlays(
+    feature.properties.map,
+    feature.properties.category,
+    feature.properties.subcat,
+  )
+
+  const markerOptions = {
+    icon: feature.properties.icon,
+    color: feature.properties.color,
+  }
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  return L.canvasMarker(latlng, markerOptions)
+}
+
+function addToOverlays(map, category, subcat) {
+  if (!(map in groupedOverlays)) {
+    groupedOverlays[map] = {}
+  }
+  if (!(category in groupedOverlays[map])) {
+    groupedOverlays[map][category] = {}
+  }
+  if (!(subcat in groupedOverlays[map][category])) {
+    groupedOverlays[map][category][subcat] = new L.LayerGroup()
+  }
+}
+
+function onEachFeature(feature, layer) {
+  if (feature.properties.title && feature.properties.category != 'Labels') {
+    layer
+      .bindPopup(
+        '<div>' +
+          feature.properties.title +
+          (feature.properties.description != ''
+            ? '<br />' + feature.properties.description
+            : '') +
+          '<br />' +
+          feature.properties.position +
+          '<br /><span class="status">' +
+          (feature.properties.completed ? 'Complete' : 'Incomplete') +
+          '</span>' +
+          '</div>',
+      )
+      .bindTooltip(feature.properties.title)
+  }
+
+  layer.addTo(
+    groupedOverlays[feature.properties.map][feature.properties.category][
+      feature.properties.subcat
+    ],
+  )
 }

@@ -487,7 +487,8 @@ L.Control.GroupedLayers = L.Control.extend({
   _expand: function () {
     L.DomUtil.addClass(this._container, 'leaflet-control-layers-expanded')
     this._form.style.height = null
-    console.error(this._map)
+    console.error(this, '==this==')
+    console.error(this._map, '==this._map==')
     var acceptableHeight =
       this._map.getSize().y - (this._container.offsetTop + 50)
     if (acceptableHeight < this._form.clientHeight) {
