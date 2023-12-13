@@ -1,5 +1,7 @@
 import L from 'leaflet'
 import './leaflet.hash'
+import './leaflet.groupedlayercontrol'
+import axios from 'axios'
 
 const tileSize = 256,
   factorx = 1 / (tileSize / 3), // 3 image pixels per game unit
@@ -64,11 +66,32 @@ export function setView(dom) {
     sky.addTo(map)
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    new L.Hash(zeldaMap)
+    // TODO: 路由后缀 map
+    new L.Hash(map)
     resolve(baseLayers)
     return {
       map,
       baseLayers,
     }
+  })
+}
+
+export function setControl(map, baseLayers) {
+  axios.get('/data.json').then((data) => {
+    console.error(data)
+    const menu_options = {
+      groupCheckboxes: true,
+      collapsed: false,
+      groupsCollapsable: true,
+      groupsExpandedClass: 'bi bi-caret-down-square-fill',
+      groupsCollapsedClass: 'bi bi-caret-right-square-fill',
+    }
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    L.Control.groupedLayers(
+      baseLayers,
+      groupedOverlays['Sky'],
+      menu_options,
+    ).addTo(map)
   })
 }

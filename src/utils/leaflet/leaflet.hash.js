@@ -41,9 +41,11 @@
 
     return (
       '#' +
-      [zoom, center.lat.toFixed(precision), center.lng.toFixed(precision)].join(
-        '/',
-      )
+      [
+        '/map/' + zoom,
+        center.lat.toFixed(precision),
+        center.lng.toFixed(precision),
+      ].join('/')
     )
   }),
     (L.Hash.prototype = {

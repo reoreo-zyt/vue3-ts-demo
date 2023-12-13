@@ -7,10 +7,13 @@
 <script lang="ts" setup>
 import 'leaflet/dist/leaflet.css'
 import '@/utils/leaflet/css/index.css'
-import { setView } from '@/utils/leaflet'
+import { setView, setControl } from '@/utils/leaflet'
 
 onMounted(() => {
-  setView('map')
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  setView('map').then((opt: any) => {
+    setControl(opt.map, opt.baseLayer)
+  })
 })
 </script>
 
