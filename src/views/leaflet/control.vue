@@ -61,7 +61,9 @@
         show-checkbox
         node-key="id"
         default-expand-all
-        :expand-on-click-node="false" />
+        :expand-on-click-node="false"
+        :default-checked-keys="['Surface']"
+        @check-change="selectMap" />
     </el-popover>
   </div>
 </template>
@@ -69,7 +71,12 @@
 <script lang="ts" setup>
 import { Tree } from 'element-plus/es/components/tree-v2/src/types'
 import type Node from 'element-plus/es/components/tree/src/model/node'
+import { storeToRefs } from 'pinia'
+import { useMapStore } from '@/store/modules/map' //路径别名，引入store
 
+const mapStore = useMapStore()
+//storeToRefs 会跳过所有的 action 属性
+const { map, baseLayer } = storeToRefs(mapStore)
 const reactiveRef = reactive({
   showDebounce: false,
   selectTab: 'layer',
@@ -137,29 +144,13 @@ const reactiveRef = reactive({
     )
   },
   isOpenLayer: false,
-  layerData: [
-    {
-      id: 1,
-      label: '塞尔达旷野之息地图',
-      children: [{ id: 11, label: '默认' }],
-    },
-    {
-      id: 2,
-      label: '塞尔达王国之泪地图',
-      children: [
-        { id: 21, label: '天空' },
-        { id: 22, label: '地面' },
-        { id: 23, label: '地底' },
-      ],
-    },
-  ],
+  layerData: [],
 })
 const icons = [
   { icon: 'uim:layer-group', title: '图层服务', click: handleMapLayer },
   { icon: 'ant-design:clear-outlined' },
   { icon: 'ri:screenshot-2-line' },
 ]
-
 const layerIcon = computed(() =>
   reactiveRef.isOpenLayer ? 'eva:arrow-up-outline' : 'eva:arrow-down-outline',
 )
@@ -170,6 +161,28 @@ function handleMapLayer() {
 
 function layerSelect() {
   reactiveRef.isOpenLayer = !reactiveRef.isOpenLayer
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const layerData: any = []
+  const nameMap = {
+    Sky: '天空',
+    Surface: '地面',
+    Depths: '地底',
+  }
+  for (let key in baseLayer.value) {
+    layerData.push({ id: key, label: nameMap[key] })
+  }
+  reactiveRef.layerData = layerData
+}
+
+function selectMap(data, isSelect) {
+  const selectMap = baseLayer.value[data.id]
+  if (isSelect) {
+    // 添加图层
+    selectMap.addTo(map.value)
+  } else {
+    // 移除图层
+    selectMap.remove(map.value)
+  }
 }
 </script>
 

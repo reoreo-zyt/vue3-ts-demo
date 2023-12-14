@@ -3,6 +3,12 @@ import './leaflet.hash'
 import './leaflet.CanvasMarker'
 import './leaflet.groupedlayercontrol'
 import axios from 'axios'
+import { useMapStore } from '@/store/modules/map' //路径别名，引入store
+
+const mapStore = useMapStore()
+
+//action 属性直接解构
+const { updateMap, updateBaseLayer } = mapStore
 
 const tileSize = 256,
   factorx = 1 / (tileSize / 3), // 3 image pixels per game unit
@@ -67,9 +73,10 @@ export function setView(dom) {
     surface.addTo(map)
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    // TODO: 路由后缀 map
     new L.Hash(map)
     // 存储到 store 中
+    updateMap(map)
+    updateBaseLayer(baseLayers)
     resolve(baseLayers)
     return {
       map,
