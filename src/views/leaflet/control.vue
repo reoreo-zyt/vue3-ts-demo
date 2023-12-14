@@ -1,5 +1,6 @@
 <template>
   <div class="map_container">
+    <!-- 地图工具 -->
     <div
       class="map_tool"
       :style="{ right: reactiveRef.showDebounce ? '420px' : '20px' }">
@@ -12,7 +13,8 @@
         :icon="item.icon"
         @click="item.click"></app-icon>
     </div>
-    <div class="map_debounce" v-if="reactiveRef.showDebounce">
+    <!-- 图层服务 -->
+    <div class="map_debounce" v-show="reactiveRef.showDebounce">
       <div class="debounce_tabs">
         <el-tabs v-model="reactiveRef.selectTab" class="el_tabs">
           <el-tab-pane
@@ -22,18 +24,134 @@
             :name="item.name"></el-tab-pane>
         </el-tabs>
       </div>
-      <div class="block"></div>
+      <div class="block">
+        <el-tree
+          class="block_tree"
+          :data="reactiveRef.treeData"
+          show-checkbox
+          node-key="id"
+          default-expand-all
+          :expand-on-click-node="false"
+          :render-content="reactiveRef.renderContent" />
+      </div>
     </div>
+    <!-- 底图及三维切换 -->
+    <el-popover placement="top-start" :width="200" trigger="click">
+      <template #reference>
+        <div
+          class="layer_select"
+          :style="{ right: reactiveRef.showDebounce ? '420px' : '20px' }"
+          @click="layerSelect">
+          <div class="layer_select_item cursor-pointer">
+            <app-icon icon="lets-icons:map-duotone" :font-size="16"></app-icon>
+            <div class="flex items-center justify-center">
+              <span>底图切换</span>
+              <app-icon
+                class="ml-1 mr-1"
+                :icon="layerIcon"
+                :font-size="10"></app-icon>
+            </div>
+          </div>
+        </div>
+      </template>
+      <!-- 切换底图 -->
+      <el-tree
+        class="layer_tree"
+        :data="reactiveRef.layerData"
+        show-checkbox
+        node-key="id"
+        default-expand-all
+        :expand-on-click-node="false" />
+    </el-popover>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { Tree } from 'element-plus/es/components/tree-v2/src/types'
+import type Node from 'element-plus/es/components/tree/src/model/node'
+
 const reactiveRef = reactive({
   showDebounce: false,
   selectTab: 'layer',
   tabs: [
     { label: '图层', name: 'layer' },
     { label: '收藏夹', name: 'save' },
+  ],
+  treeData: [
+    {
+      id: 1,
+      label: '食物',
+      children: [
+        { id: 11, label: '苹果' },
+        { id: 12, label: '金苹果' },
+      ],
+    },
+    {
+      id: 2,
+      label: '野怪',
+      children: [
+        { id: 21, label: '猪猪' },
+        { id: 22, label: '人马' },
+      ],
+    },
+  ],
+  renderContent: (
+    h,
+    {
+      node,
+    }: {
+      node: Node
+      data: Tree
+    },
+  ) => {
+    return h(
+      'span',
+      {
+        class: 'custom-tree-node',
+        style: {
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'space-between',
+        },
+      },
+      h('span', null, node.label),
+      h(
+        'div',
+        null,
+        h(
+          'app-icon',
+          {
+            onClick: () => {},
+          },
+          '收藏',
+        ),
+        h(
+          'app-icon',
+          {
+            style: 'margin-left: 8px',
+            onClick: () => {},
+          },
+          '其他',
+        ),
+      ),
+    )
+  },
+  isOpenLayer: false,
+  layerData: [
+    {
+      id: 1,
+      label: '塞尔达旷野之息地图',
+      children: [{ id: 11, label: '默认' }],
+    },
+    {
+      id: 2,
+      label: '塞尔达王国之泪地图',
+      children: [
+        { id: 21, label: '天空' },
+        { id: 22, label: '地面' },
+        { id: 23, label: '地底' },
+      ],
+    },
   ],
 })
 const icons = [
@@ -42,8 +160,16 @@ const icons = [
   { icon: 'ri:screenshot-2-line' },
 ]
 
+const layerIcon = computed(() =>
+  reactiveRef.isOpenLayer ? 'eva:arrow-up-outline' : 'eva:arrow-down-outline',
+)
+
 function handleMapLayer() {
   reactiveRef.showDebounce = !reactiveRef.showDebounce
+}
+
+function layerSelect() {
+  reactiveRef.isOpenLayer = !reactiveRef.isOpenLayer
 }
 </script>
 
@@ -87,11 +213,38 @@ function handleMapLayer() {
       height: calc(100% - 100px);
       background: #fff;
       border-radius: 8px;
+      .block_tree {
+        padding: 15px 10px;
+      }
+    }
+  }
+  .layer_select {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 140px;
+    height: 36px;
+    text-align: center;
+    z-index: 95;
+    border: none;
+    border-radius: 8px;
+    padding: 0;
+    background: hsla(0, 0%, 100%, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .layer_select_item {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      width: 100%;
+      font-size: 16px;
+      color: #8e94ad;
     }
   }
 }
 
-::v-deep .el_tabs .el-tabs__nav-wrap::after {
+:deep(.el_tabs .el-tabs__nav-wrap::after) {
   background-color: transparent;
 }
 </style>

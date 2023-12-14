@@ -16,7 +16,6 @@ import Control from './control.vue'
 onMounted(() => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
   const opt: any = setView('map')
-
   // 设置控件
   // setControl(opt.map, opt.baseLayer)
 })

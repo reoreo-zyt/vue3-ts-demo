@@ -64,11 +64,12 @@ export function setView(dom) {
         Depths: depths,
       }
 
-    sky.addTo(map)
+    surface.addTo(map)
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     // TODO: 路由后缀 map
     new L.Hash(map)
+    // 存储到 store 中
     resolve(baseLayers)
     return {
       map,
