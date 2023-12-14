@@ -107,7 +107,6 @@ canvas {
 .leaflet-tooltip,
 .leaflet-control {
   color: rgb(200 195 188) !important;
-  background-color: rgb(24 26 27) !important;
   border: 0 !important;
 }
 
