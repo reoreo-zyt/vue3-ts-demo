@@ -91,13 +91,11 @@ export function setControl(map, baseLayers) {
       groupsExpandedClass: 'bi bi-caret-down-square-fill',
       groupsCollapsedClass: 'bi bi-caret-right-square-fill',
     }
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    L.Control.groupedLayers(
-      baseLayers,
-      groupedOverlays['Sky'],
-      menu_options,
-    ).addTo(map)
+    L.control
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      .groupedLayers(baseLayers, groupedOverlays['Sky'], menu_options)
+      .addTo(map)
   })
 }
 

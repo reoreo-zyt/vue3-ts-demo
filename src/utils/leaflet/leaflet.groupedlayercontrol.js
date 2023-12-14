@@ -525,6 +525,6 @@ L.Control.GroupedLayers = L.Control.extend({
   },
 })
 
-L.Control.groupedLayers = function (baseLayers, groupedOverlays, options) {
+L.control.groupedLayers = function (baseLayers, groupedOverlays, options) {
   return new L.Control.GroupedLayers(baseLayers, groupedOverlays, options)
 }
