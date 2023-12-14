@@ -12,13 +12,29 @@
         :icon="item.icon"
         @click="item.click"></app-icon>
     </div>
-    <div class="map_debounce" v-if="reactiveRef.showDebounce"></div>
+    <div class="map_debounce" v-if="reactiveRef.showDebounce">
+      <div class="debounce_tabs">
+        <el-tabs v-model="reactiveRef.selectTab" class="el_tabs">
+          <el-tab-pane
+            v-for="(item, index) in reactiveRef.tabs"
+            :key="'debounce_tabs' + index"
+            :label="item.label"
+            :name="item.name"></el-tab-pane>
+        </el-tabs>
+      </div>
+      <div class="block"></div>
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 const reactiveRef = reactive({
   showDebounce: false,
+  selectTab: 'layer',
+  tabs: [
+    { label: '图层', name: 'layer' },
+    { label: '收藏夹', name: 'save' },
+  ],
 })
 const icons = [
   { icon: 'uim:layer-group', title: '图层服务', click: handleMapLayer },
@@ -60,6 +76,22 @@ function handleMapLayer() {
     right: 0;
     z-index: 999;
     background-color: #f3f5fa;
+    .debounce_tabs {
+      background: rgb(255, 255, 255);
+      border-radius: 0px 0px 8px 8px;
+      height: 58px;
+      padding: 0 10px;
+    }
+    .block {
+      margin: 15px 10px;
+      height: calc(100% - 100px);
+      background: #fff;
+      border-radius: 8px;
+    }
   }
+}
+
+::v-deep .el_tabs .el-tabs__nav-wrap::after {
+  background-color: transparent;
 }
 </style>
