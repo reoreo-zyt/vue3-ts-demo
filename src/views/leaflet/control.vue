@@ -8,14 +8,11 @@
         :font-size="16"
         v-for="(item, index) in icons"
         :key="'map_tools_icon' + index"
+        :title="item.title"
         :icon="item.icon"
         @click="item.click"></app-icon>
     </div>
-    <div class="map_debounce" v-if="reactiveRef.showDebounce">
-      <div class="datav_menu">
-        <div class="menu_base_panel"></div>
-      </div>
-    </div>
+    <div class="map_debounce" v-if="reactiveRef.showDebounce"></div>
   </div>
 </template>
 
@@ -24,7 +21,7 @@ const reactiveRef = reactive({
   showDebounce: false,
 })
 const icons = [
-  { icon: 'uim:layer-group', click: handleMapLayer },
+  { icon: 'uim:layer-group', title: '图层服务', click: handleMapLayer },
   { icon: 'ant-design:clear-outlined' },
   { icon: 'ri:screenshot-2-line' },
 ]
@@ -63,17 +60,6 @@ function handleMapLayer() {
     right: 0;
     z-index: 999;
     background-color: #f3f5fa;
-    .datav_menu {
-      width: 100%;
-      box-shadow: rgba(192, 192, 192, 0.66) 1px 0px 5px;
-      .menu_base_panel {
-        height: 100%;
-        width: 100%;
-        transition: all 0.3s ease;
-        background-color: #f3f5fa;
-        box-shadow: 1px 0 5px hsla(0, 0%, 75.3%, 0.66);
-      }
-    }
   }
 }
 </style>
