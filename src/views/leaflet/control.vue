@@ -11,7 +11,7 @@
         :key="'map_tools_icon' + index"
         :title="item.title"
         :icon="item.icon"
-        @click="item.click"></app-icon>
+        @click="handleSideControl(item.prop)"></app-icon>
     </div>
     <!-- 图层服务 -->
     <div class="map_debounce" v-show="reactiveRef.showDebounce">
@@ -43,7 +43,7 @@
           :style="{ right: reactiveRef.showDebounce ? '420px' : '20px' }"
           @click="layerSelect">
           <div class="layer_select_item cursor-pointer">
-            <app-icon icon="lets-icons:map-duotone" :font-size="16"></app-icon>
+            <app-icon icon="uim:scenery" :font-size="16"></app-icon>
             <div class="flex items-center justify-center">
               <span>底图切换</span>
               <app-icon
@@ -82,7 +82,8 @@ const reactiveRef = reactive({
   selectTab: 'layer',
   tabs: [
     { label: '图层', name: 'layer' },
-    { label: '收藏夹', name: 'save' },
+    { label: '收藏夹', name: 'likes' },
+    { label: '物体查询', name: 'search' },
   ],
   treeData: [
     {
@@ -147,16 +148,39 @@ const reactiveRef = reactive({
   layerData: [],
 })
 const icons = [
-  { icon: 'uim:layer-group', title: '图层服务', click: handleMapLayer },
-  { icon: 'ant-design:clear-outlined' },
-  { icon: 'ri:screenshot-2-line' },
+  {
+    icon: 'uim:layer-group',
+    title: '图层服务',
+    prop: 'layer',
+  },
+  { icon: 'uim:bag', title: '收藏夹', prop: 'likes' },
+  { icon: 'uim:object-group', title: '物体查询', prop: 'search' },
+  { icon: 'uim:github-alt', title: 'github', prop: 'github' },
 ]
 const layerIcon = computed(() =>
   reactiveRef.isOpenLayer ? 'eva:arrow-up-outline' : 'eva:arrow-down-outline',
 )
 
-function handleMapLayer() {
+function handleSideControl(select) {
+  const mapControl = {
+    layer: handleTabSelect,
+    likes: handleTabSelect,
+    search: handleTabSelect,
+    github: openLink,
+  }
+  mapControl[select](select)
+}
+
+function handleTabSelect(select) {
   reactiveRef.showDebounce = !reactiveRef.showDebounce
+  reactiveRef.selectTab = select
+}
+
+function openLink() {
+  window.open(
+    'https://github.com/reoreo-zyt/vue3-ts-demo/tree/totk-map',
+    '_blank',
+  )
 }
 
 function layerSelect() {
