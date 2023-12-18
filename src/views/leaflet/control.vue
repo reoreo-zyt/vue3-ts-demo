@@ -6,12 +6,15 @@
       :style="{ right: reactiveRef.showDebounce ? '420px' : '20px' }">
       <app-icon
         class="map_tool_icon"
+        :style="{
+          color: reactiveRef.selectIcon === index ? '#8ea2ef' : '#8e94ad',
+        }"
         :font-size="16"
         v-for="(item, index) in icons"
         :key="'map_tools_icon' + index"
         :title="item.title"
         :icon="item.icon"
-        @click="handleSideControl(item.prop)"></app-icon>
+        @click="handleSideControl(item.prop, index)"></app-icon>
     </div>
     <!-- 图层服务 -->
     <div class="map_debounce" v-show="reactiveRef.showDebounce">
@@ -59,6 +62,7 @@
         class="layer_tree"
         :data="reactiveRef.layerData"
         show-checkbox
+        :check-strictly="true"
         node-key="id"
         default-expand-all
         :expand-on-click-node="false"
@@ -80,6 +84,7 @@ const { map, baseLayer } = storeToRefs(mapStore)
 const reactiveRef = reactive({
   showDebounce: false,
   selectTab: 'layer',
+  selectIcon: -1,
   tabs: [
     { label: '图层', name: 'layer' },
     { label: '收藏夹', name: 'likes' },
@@ -161,18 +166,23 @@ const layerIcon = computed(() =>
   reactiveRef.isOpenLayer ? 'eva:arrow-up-outline' : 'eva:arrow-down-outline',
 )
 
-function handleSideControl(select) {
+function handleSideControl(select, index) {
   const mapControl = {
     layer: handleTabSelect,
     likes: handleTabSelect,
     search: handleTabSelect,
     github: openLink,
   }
-  mapControl[select](select)
+  mapControl[select](select, index)
 }
 
-function handleTabSelect(select) {
+function handleTabSelect(select, index) {
   reactiveRef.showDebounce = !reactiveRef.showDebounce
+  if (reactiveRef.showDebounce) {
+    reactiveRef.selectIcon = index
+  } else {
+    reactiveRef.selectIcon = -1
+  }
   reactiveRef.selectTab = select
 }
 
@@ -227,7 +237,6 @@ function selectMap(data, isSelect) {
     flex-wrap: wrap;
     padding: 5px;
     .map_tool_icon {
-      color: #8e94ad;
       cursor: pointer;
       margin-bottom: 4px;
     }
