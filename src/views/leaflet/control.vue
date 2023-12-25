@@ -35,7 +35,7 @@
           node-key="id"
           default-expand-all
           :expand-on-click-node="false"
-          :render-content="reactiveRef.renderContent" />
+          :render-content="renderContent" />
       </div>
     </div>
     <!-- 底图及三维切换 -->
@@ -74,9 +74,10 @@
 
 <script lang="ts" setup>
 import { Tree } from 'element-plus/es/components/tree-v2/src/types'
-import type Node from 'element-plus/es/components/tree/src/model/node'
+import type Node from 'element-plus/es/components/tree/src/model/node' // TODO: 扩展类型
 import { storeToRefs } from 'pinia'
 import { useMapStore } from '@/store/modules/map' //路径别名，引入store
+import AppIcon from '@/components/AppIcon/index.vue'
 
 const mapStore = useMapStore()
 //storeToRefs 会跳过所有的 action 属性
@@ -94,61 +95,22 @@ const reactiveRef = reactive({
     {
       id: 1,
       label: '食物',
+      isFav: false,
       children: [
-        { id: 11, label: '苹果' },
-        { id: 12, label: '金苹果' },
+        { id: 11, label: '苹果', isFav: false },
+        { id: 12, label: '金苹果', isFav: false },
       ],
     },
     {
       id: 2,
       label: '野怪',
+      isFav: false,
       children: [
-        { id: 21, label: '猪猪' },
-        { id: 22, label: '人马' },
+        { id: 21, label: '猪猪', isFav: true },
+        { id: 22, label: '人马', isFav: true },
       ],
     },
   ],
-  renderContent: (
-    h,
-    {
-      node,
-    }: {
-      node: Node
-      data: Tree
-    },
-  ) => {
-    return h(
-      'span',
-      {
-        class: 'custom-tree-node',
-        style: {
-          width: '100%',
-          display: 'flex',
-          justifyContent: 'space-between',
-        },
-      },
-      h('span', null, node.label),
-      h(
-        'div',
-        null,
-        h(
-          'app-icon',
-          {
-            onClick: () => {},
-          },
-          '收藏',
-        ),
-        h(
-          'app-icon',
-          {
-            style: 'margin-left: 8px',
-            onClick: () => {},
-          },
-          '其他',
-        ),
-      ),
-    )
-  },
   isOpenLayer: false,
   layerData: [],
 })
@@ -217,6 +179,58 @@ function selectMap(data, isSelect) {
     // 移除图层
     selectMap.remove(map.value)
   }
+}
+
+function renderContent(
+  h,
+  {
+    node,
+  }: {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    node: Node
+    data: Tree
+  },
+) {
+  return h(
+    'span',
+    {
+      class: 'custom-tree-node',
+      style: {
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'space-between',
+      },
+    },
+    h('span', null, node.label),
+    h(
+      'div',
+      null,
+      // 收藏
+      h(
+        // TODO: 自动引入组件在jsx中不生效，需要手动引入下
+        AppIcon,
+        {
+          icon: node.isFav ? 'mdi:favorite-box-outline' : 'mdi:favorite-box',
+          fontSize: 8,
+          onClick: () => {
+            node.isFav = false
+          },
+        },
+        null,
+      ),
+      // 其他
+      h(
+        AppIcon,
+        {
+          icon: 'icon-park-twotone:more-app',
+          fontSize: 8,
+          style: 'margin-left: 8px',
+          onClick: () => {},
+        },
+        null,
+      ),
+    ),
+  )
 }
 </script>
 
