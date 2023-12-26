@@ -95,7 +95,7 @@ const reactiveRef = reactive({
     {
       id: 1,
       label: '食物',
-      isFav: false,
+      isFav: true,
       children: [
         { id: 11, label: '苹果', isFav: false },
         { id: 12, label: '金苹果', isFav: false },
@@ -106,8 +106,8 @@ const reactiveRef = reactive({
       label: '野怪',
       isFav: false,
       children: [
-        { id: 21, label: '猪猪', isFav: true },
-        { id: 22, label: '人马', isFav: true },
+        { id: 21, label: '猪猪', isFav: false },
+        { id: 22, label: '人马', isFav: false },
       ],
     },
   ],
@@ -201,7 +201,7 @@ function renderContent(
         justifyContent: 'space-between',
       },
     },
-    h('span', null, node.label),
+    h('span', null, node.data.label),
     h(
       'div',
       null,
@@ -210,10 +210,12 @@ function renderContent(
         // TODO: 自动引入组件在jsx中不生效，需要手动引入下
         AppIcon,
         {
-          icon: node.isFav ? 'mdi:favorite-box-outline' : 'mdi:favorite-box',
+          icon: node.data.isFav
+            ? 'mdi:favorite-box'
+            : 'mdi:favorite-box-outline',
           fontSize: 8,
           onClick: () => {
-            node.isFav = false
+            node.data.isFav = !node.data.isFav
           },
         },
         null,
