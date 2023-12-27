@@ -8,7 +8,7 @@ import { useMapStore } from '@/store/modules/map' //路径别名，引入store
 const mapStore = useMapStore()
 
 //action 属性直接解构
-const { updateMap, updateBaseLayer } = mapStore
+const { updateMap, updateMapName, updateBaseLayer } = mapStore
 
 const tileSize = 256,
   factorx = 1 / (tileSize / 3), // 3 image pixels per game unit
@@ -76,6 +76,7 @@ export function setView(dom) {
     new L.Hash(map)
     // 存储到 store 中
     updateMap(map)
+    updateMapName('Surface')
     updateBaseLayer(baseLayers)
     resolve(baseLayers)
     return {

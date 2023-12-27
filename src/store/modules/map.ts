@@ -7,11 +7,14 @@ export const useMapStore = defineStore({
       map: {},
       // leaflet 图层
       baseLayer: {},
+      // 底图（唯一）
+      mapName: '',
     }
   },
   getters: {
     getMap: (state) => state.map,
     getBaseLayer: (state) => state.baseLayer,
+    getMapName: (state) => state.mapName,
   },
   actions: {
     //更新整个对象
@@ -20,6 +23,9 @@ export const useMapStore = defineStore({
     },
     updateBaseLayer(baseLayer) {
       this.baseLayer = baseLayer
+    },
+    updateMapName(mapName) {
+      this.mapName = mapName
     },
   },
   persist: {},

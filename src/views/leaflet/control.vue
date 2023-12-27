@@ -58,16 +58,14 @@
         </div>
       </template>
       <!-- 切换底图 -->
-      <el-tree
-        class="layer_tree"
-        :data="reactiveRef.layerData"
-        show-checkbox
-        :check-strictly="true"
-        node-key="id"
-        default-expand-all
-        :expand-on-click-node="false"
-        :default-checked-keys="['Surface']"
-        @check-change="selectMap" />
+      <el-radio
+        v-for="(item, index) in reactiveRef.layerData"
+        :key="'layerData_radio' + index"
+        v-model="reactiveRef.selectLayer"
+        :label="item.id"
+        @change="changeMap(item)">
+        {{ item.label }}
+      </el-radio>
     </el-popover>
   </div>
 </template>
@@ -112,7 +110,12 @@ const reactiveRef = reactive({
     },
   ],
   isOpenLayer: false,
-  layerData: [],
+  layerData: [
+    { id: 'Sky', label: '天空' },
+    { id: 'Surface', label: '地面' },
+    { id: 'Depths', label: '地底' },
+  ],
+  selectLayer: 'Surface',
 })
 const icons = [
   {
@@ -170,15 +173,14 @@ function layerSelect() {
   reactiveRef.layerData = layerData
 }
 
-function selectMap(data, isSelect) {
-  const selectMap = baseLayer.value[data.id]
-  if (isSelect) {
-    // 添加图层
-    selectMap.addTo(map.value)
-  } else {
-    // 移除图层
-    selectMap.remove(map.value)
+function changeMap(item) {
+  const selectMap = baseLayer.value[item.id]
+  // 清空所有图层
+  for (let i in baseLayer.value) {
+    selectMap.remove(i)
   }
+  // 添加图层
+  selectMap.addTo(map.value)
 }
 
 function renderContent(
@@ -186,7 +188,6 @@ function renderContent(
   {
     node,
   }: {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     node: Node
     data: Tree
   },
