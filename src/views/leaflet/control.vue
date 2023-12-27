@@ -27,7 +27,11 @@
             :name="item.name"></el-tab-pane>
         </el-tabs>
       </div>
-      <div class="block">
+      <div
+        class="block"
+        v-if="
+          reactiveRef.selectTab === 'layer' || reactiveRef.selectTab === 'likes'
+        ">
         <el-tree
           class="block_tree"
           :data="reactiveRef.treeData"
@@ -92,20 +96,16 @@ const reactiveRef = reactive({
   treeData: [
     {
       id: 1,
-      label: '食物',
+      label: '鸟望台',
       isFav: true,
       children: [
-        { id: 11, label: '苹果', isFav: false },
-        { id: 12, label: '金苹果', isFav: false },
-      ],
-    },
-    {
-      id: 2,
-      label: '野怪',
-      isFav: false,
-      children: [
-        { id: 21, label: '猪猪', isFav: false },
-        { id: 22, label: '人马', isFav: false },
+        {
+          id: 11,
+          label: '茨茨齐齐雪原鸟望台',
+          isFav: false,
+          area: '卡尔加玲地区',
+        },
+        { id: 12, label: '卡尔加玲鸟望台', isFav: false, area: '卡尔加玲地区' },
       ],
     },
   ],
