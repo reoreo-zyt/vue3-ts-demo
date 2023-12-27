@@ -27,6 +27,7 @@
             :name="item.name"></el-tab-pane>
         </el-tabs>
       </div>
+      <!-- 图层、收藏夹 -->
       <div
         class="block"
         v-if="
@@ -40,6 +41,9 @@
           default-expand-all
           :expand-on-click-node="false"
           :render-content="renderContent" />
+      </div>
+      <div class="block" v-if="reactiveRef.selectTab === 'search'">
+        <div class="block_search"></div>
       </div>
     </div>
     <!-- 底图及三维切换 -->

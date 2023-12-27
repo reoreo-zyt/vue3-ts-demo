@@ -8,6 +8,17 @@
 }
 
 .load-title {
+  position: absolute;
+  top: 50%;
   margin-top: 30px;
   font-size: 16px;
+}
+
+.loading-gif {
+  position: absolute;
+  z-index: 999;
+}
+
+.loading-png {
+  position: absolute;
 }
