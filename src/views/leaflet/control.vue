@@ -43,7 +43,24 @@
           :render-content="renderContent" />
       </div>
       <div class="block" v-if="reactiveRef.selectTab === 'search'">
-        <div class="block_search"></div>
+        <div class="block_search">
+          <div class="search_buttons">
+            <app-icon
+              class="search_buttons——icon"
+              :style="{
+                color:
+                  reactiveRef.selectSearchIcon === index
+                    ? '#8ea2ef'
+                    : '#8e94ad',
+              }"
+              :font-size="16"
+              v-for="(item, index) in reactiveRef.searchButtons"
+              :key="'map_tools_icon' + index"
+              :title="item.title"
+              :icon="item.icon"
+              @click="handleSearchControl(index)"></app-icon>
+          </div>
+        </div>
       </div>
     </div>
     <!-- 底图及三维切换 -->
@@ -120,6 +137,24 @@ const reactiveRef = reactive({
     { id: 'Depths', label: '地底' },
   ],
   selectLayer: 'Surface',
+  searchButtons: [
+    {
+      icon: 'icon-park-outline:horse-zodiac',
+      title: '马',
+      prop: 'horse',
+    },
+    {
+      icon: 'game-icons:fish-monster',
+      title: '野怪',
+      prop: 'monster',
+    },
+    {
+      icon: 'uil:food',
+      title: '食物',
+      prop: 'monster',
+    },
+  ],
+  selectSearchIcon: 0,
 })
 const icons = [
   {
@@ -143,6 +178,10 @@ function handleSideControl(select, index) {
     github: openLink,
   }
   mapControl[select](select, index)
+}
+
+function handleSearchControl(index) {
+  reactiveRef.selectSearchIcon = index
 }
 
 function handleTabSelect(select, index) {
