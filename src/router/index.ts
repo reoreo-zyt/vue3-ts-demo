@@ -10,16 +10,14 @@ import mdRoutes from '@/md/index'
 
 const routes: RouterTypes = [
   {
-    path: '/', // :pathMatch(.*)*
-    redirect: '/map',
-    name: '地图-leaflet',
-    children: [
-      {
-        path: '/map:pathMatch(.*)*',
-        name: '塞尔达地图',
-        component: () => import('@/views/leaflet/index.vue'),
-      },
-    ],
+    path: '/',
+    name: '登录',
+    component: () => import('@/views/login/index.vue'),
+  },
+  {
+    path: '/map:pathMatch(.*)*',
+    name: '塞尔达地图',
+    component: () => import('@/views/leaflet/index.vue'),
   },
   ...mdRoutes,
 ]
