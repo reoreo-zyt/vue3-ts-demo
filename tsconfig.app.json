@@ -4,6 +4,7 @@
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
 
     /* Linting */
+    // ? 与 tsconfig.node.json 定义的重复了
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,

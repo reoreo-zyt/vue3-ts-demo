@@ -91,3 +91,11 @@ yarn build
 ```
 
 ### 1.2 集成配置
+
+*安装 nodejs 的类型定义文件*
+
+```bash
+yarn add @types/node -D
+```
+
+*修改 tsconfig.node.json*
