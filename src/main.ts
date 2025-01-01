@@ -1,5 +1,8 @@
 import { createApp } from 'vue';
-import './style.css';
 import App from './App.vue';
+import store from './store'; // 创建vue实例
 
-createApp(App).mount('#app');
+const app = createApp(App); // 挂载pinia
+
+app.use(store); // 挂载实例
+app.mount('#app');
