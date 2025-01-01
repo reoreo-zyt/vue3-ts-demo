@@ -27,6 +27,20 @@ yarn config set registry https://registry.npm.taobao.org
 yarn config set strict-ssl false
 ```
 
+### 通过 @ 导入的文件找不到 .vue 模块
+
+_找不到 .vue 模块_
+
+可以在 src 下创建 `env.d.ts`
+
+```ts
+declare module '*.vue' {
+  import type { DefineComponent } from 'vue';
+  const component: ComponentOptions | ComponentOptions['setup'];
+  export default component;
+}
+```
+
 ## 一些工具
 
 - `tree-cli`
