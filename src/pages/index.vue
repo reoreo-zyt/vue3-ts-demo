@@ -1,15 +1,24 @@
 <template>
-  <div class="page-main">
-    <div class="page-main-item">index.vue</div>
+  <div class="app-container">
+    <Map class="map"></Map>
+    <SelectHero class="select-hero"></SelectHero>
   </div>
 </template>
 
-<style lang="scss" scoped>
-$red: red;
+<script lang="ts" setup>
+import SelectHero from './selectHero.vue';
+import Map from './map.vue';
+</script>
 
-.page-main {
-  .page-main-item {
-    color: $red;
+<style lang="scss" scoped>
+.app-container {
+  height: 100%;
+  width: 100%;
+  .select-hero {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
   }
 }
 </style>

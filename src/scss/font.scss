@@ -1,0 +1,16 @@
+// title 字体大小
+$font-size-title: 24px;
+$font-size-subtitle: 14px;
+$font-size-content: 12px;
+
+.font-size-title {
+  font-size: $font-size-title !important;
+}
+
+.font-size-subtitle {
+  font-size: $font-size-subtitle !important;
+}
+
+.font-size-content {
+  font-size: $font-size-content !important;
+}

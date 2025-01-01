@@ -1,7 +1,5 @@
 <template>
-  <template>
-    <RouterView />
-  </template>
+  <div><RouterView /></div>
 </template>
 
 <style scoped>

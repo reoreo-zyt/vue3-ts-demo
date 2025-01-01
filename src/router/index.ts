@@ -6,14 +6,14 @@ import {
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/login',
-    name: 'Login',
+    path: '/map',
+    name: 'Map',
     meta: {
-      title: '登录',
+      title: '地图',
       keepAlive: true,
       requireAuth: false,
     },
-    component: () => import('@/pages/login.vue'),
+    component: () => import('@/pages/map.vue'),
   },
   {
     path: '/',
