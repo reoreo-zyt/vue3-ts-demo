@@ -353,3 +353,53 @@ AutoImport({
   dts: './src/types/auto-imports.d.ts',
 }),
 ```
+
+### 1.7 图片打包优化
+
+在 package.json 中添加以下配置：
+
+```json
+"resolutions": {
+    "bin-wrapper": "npm:bin-wrapper-china"
+}
+```
+
+配置插件
+
+```ts
+import viteImagemin from 'vite-plugin-imagemin'
+
+export default () => {
+  return {
+    plugins: [
+      viteImagemin({
+        gifsicle: {
+          optimizationLevel: 7,
+          interlaced: false,
+        },
+        optipng: {
+          optimizationLevel: 7,
+        },
+        mozjpeg: {
+          quality: 20,
+        },
+        pngquant: {
+          quality: [0.8, 0.9],
+          speed: 4,
+        },
+        svgo: {
+          plugins: [
+            {
+              name: 'removeViewBox',
+            },
+            {
+              name: 'removeEmptyAttrs',
+              active: false,
+            },
+          ],
+        },
+      }),
+    ],
+  }
+}
+```
