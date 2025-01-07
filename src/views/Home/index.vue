@@ -41,6 +41,7 @@ import viteImage from '@/assets/images/vite.png';
 import elementImage from '@/assets/images/element.png';
 import piniaImage from '@/assets/images/pinia.svg';
 import tsImage from '@/assets/images/ts.png';
+import scssImage from '@/assets/images/scss.ico';
 import { type FrameWork } from './types/framework';
 
 const framework = ref<FrameWork[]>([
@@ -87,6 +88,14 @@ const framework = ref<FrameWork[]>([
       window.open('https://www.tslang.cn/');
     },
   },
+  {
+    imgUrl: scssImage,
+    content: "世界上最成熟、最稳定、最强大的专业级CSS扩展语言！",
+    color: "#533c78",
+    clickFn: () => {
+      window.open('https://www.sass.hk/');
+    }
+  }
 ]);
 </script>
 
