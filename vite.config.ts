@@ -16,9 +16,20 @@ export default defineConfig({
   plugins: [
     AutoImport({
       include: [/\.[tj]sx?$/, /\.vue$/, /\.vue\?vue/, /\.md$/],
-      imports: ['vue', 'vue-router', 'pinia', '@vueuse/core'],
+      imports: [
+        // 直接使用预设
+        'vue',
+        'vue-router',
+        'pinia'
+        // TODO： 自定义预设
+        // {
+        //   from: 'vue',
+        //   imports: ['ref', 'reactive'],
+        //   type: true
+        // }
+      ],
       //注意这个配置和src同级
-      dts: './auto-imports.d.ts',
+      dts: './src/types/auto-imports.d.ts',
     }),
     Components({
       resolvers: [ElementPlusResolver()],

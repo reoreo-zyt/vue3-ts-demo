@@ -36,7 +36,6 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
 import vueImage from '@/assets/images/vue.png';
 import viteImage from '@/assets/images/vite.png';
 import elementImage from '@/assets/images/element.png';
