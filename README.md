@@ -43,6 +43,10 @@ declare module '*.vue' {
 
 ## 一些工具
 
+- `nvm`
+  - 管理 node 版本
+- `ncu`
+  - 更新 npm 包依赖
 - `tree-cli`
   - npm 包，可以生成文件目录树结构
 
@@ -304,4 +308,24 @@ extends: [
   'prettier', // 继承 Prettier 的规则
   'plugin:prettier/recommended', // 继承 Prettier 的推荐规则
 ],
+```
+
+### 1.5 按需引入 UI 库
+
+通过 unplugin-vue-components 按需引入组件
+
+```ts
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
+import Components from 'unplugin-vue-components/vite';
+
+......
+
+  plugins: [
+    Components({
+      resolvers: [ElementPlusResolver()],
+    }),
+    ......
+  ],
+
+......
 ```
