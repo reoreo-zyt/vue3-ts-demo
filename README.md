@@ -329,3 +329,27 @@ import Components from 'unplugin-vue-components/vite';
 
 ......
 ```
+
+### 1.6 自动引入 vue、vue-router、pinia
+
+注意将类型导出配置导出到 src 同级
+
+```ts
+AutoImport({
+  include: [/\.[tj]sx?$/, /\.vue$/, /\.vue\?vue/, /\.md$/],
+  imports: [
+    // 直接使用预设
+    'vue',
+    'vue-router',
+    'pinia',
+    // TODO： 自定义预设
+    // {
+    //   from: 'vue',
+    //   imports: ['ref', 'reactive'],
+    //   type: true
+    // }
+  ],
+  //注意这个配置和src同级
+  dts: './src/types/auto-imports.d.ts',
+}),
+```
