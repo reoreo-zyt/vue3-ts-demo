@@ -367,7 +367,7 @@ AutoImport({
 配置插件
 
 ```ts
-import viteImagemin from 'vite-plugin-imagemin'
+import viteImagemin from 'vite-plugin-imagemin';
 
 export default () => {
   return {
@@ -400,6 +400,6 @@ export default () => {
         },
       }),
     ],
-  }
-}
+  };
+};
 ```
