@@ -8,7 +8,7 @@
             <el-col
               :xs="24"
               :md="12"
-              :lg="8"
+              :lg="6"
               v-for="(item, index) in framework"
               :key="'framework' + index"
             >
@@ -42,6 +42,7 @@ import elementImage from '@/assets/images/element.png';
 import piniaImage from '@/assets/images/pinia.svg';
 import tsImage from '@/assets/images/ts.png';
 import scssImage from '@/assets/images/scss.ico';
+import vueuseImage from '@/assets/images/vueuse.svg';
 import { type FrameWork } from './types/framework';
 
 const framework = ref<FrameWork[]>([
@@ -90,12 +91,20 @@ const framework = ref<FrameWork[]>([
   },
   {
     imgUrl: scssImage,
-    content: "世界上最成熟、最稳定、最强大的专业级CSS扩展语言！",
-    color: "#533c78",
+    content: '世界上最成熟、最稳定、最强大的专业级CSS扩展语言！',
+    color: '#533c78',
     clickFn: () => {
       window.open('https://www.sass.hk/');
-    }
-  }
+    },
+  },
+  {
+    imgUrl: vueuseImage,
+    content: 'Vue 组合式工具集，基础 Vue 组合式工具的集合',
+    color: '#41b883',
+    clickFn: () => {
+      window.open('https://vueuse.nodejs.cn/');
+    },
+  },
 ]);
 </script>
 

@@ -22,6 +22,7 @@ export default defineConfig({
         'vue',
         'vue-router',
         'pinia',
+        '@vueuse/core',
         // TODO： 自定义预设
         // {
         //   from: 'vue',
