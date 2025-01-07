@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 src/types/auto-imports.d.ts
 stats.html
+
+*storybook.log
