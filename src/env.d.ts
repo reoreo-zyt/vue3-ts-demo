@@ -3,4 +3,7 @@ declare module '*.vue' {
   const component: ComponentOptions | ComponentOptions['setup'];
   export default component;
 }
-declare var window: Window;
+declare var window: Window
+declare interface Window {
+  open: any
+}
