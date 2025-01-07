@@ -4,6 +4,7 @@ import * as path from 'path';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import Components from 'unplugin-vue-components/vite';
 import AutoImport from 'unplugin-auto-import/vite';
+import viteCompression from 'vite-plugin-compression';
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -20,7 +21,7 @@ export default defineConfig({
         // 直接使用预设
         'vue',
         'vue-router',
-        'pinia'
+        'pinia',
         // TODO： 自定义预设
         // {
         //   from: 'vue',
@@ -33,6 +34,9 @@ export default defineConfig({
     }),
     Components({
       resolvers: [ElementPlusResolver()],
+    }),
+    viteCompression({
+      threshold: 10240, // 对大于 10kb 的文件进行压缩
     }),
     vue(),
   ],

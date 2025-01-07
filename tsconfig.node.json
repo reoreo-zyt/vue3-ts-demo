@@ -17,7 +17,7 @@
     "skipLibCheck": true,
     "typeRoots": [
       "node_modules/@types", // 默认值
-      "src/types",
+      "src/types"
     ], // 指定类型声明文件（.d.ts文件）的根目录
 
     /* Bundler mode */
