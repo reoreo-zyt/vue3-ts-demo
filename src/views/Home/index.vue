@@ -144,17 +144,18 @@ const framework = ref<FrameWork[]>([
     clickFn: () => {
       window.open('https://vueuse.nodejs.cn/');
     },
-  }
+  },
 ]);
 
 const pluginLibrary = ref<FrameWork[]>([
   {
     imgUrl: githubImage,
-    content:
-      'vite-plugin-compression 把文件打包成 gzip',
+    content: 'vite-plugin-compression 把文件打包成 gzip',
     color: '#24292E',
     clickFn: () => {
-      window.open('https://github.com/vbenjs/vite-plugin-compression/blob/main/README.zh_CN.md');
+      window.open(
+        'https://github.com/vbenjs/vite-plugin-compression/blob/main/README.zh_CN.md',
+      );
     },
   },
   {
@@ -162,13 +163,14 @@ const pluginLibrary = ref<FrameWork[]>([
     content: 'vite-plugin-imagemin 压缩图片资源',
     color: '#24292E',
     clickFn: () => {
-      window.open('https://github.com/vbenjs/vite-plugin-imagemin/blob/main/README.zh_CN.md')
-    }
+      window.open(
+        'https://github.com/vbenjs/vite-plugin-imagemin/blob/main/README.zh_CN.md',
+      );
+    },
   },
   {
     imgUrl: githubImage,
-    content:
-      'unplugin-auto-import 自动导入 vue vue-router pinia vueuse 等',
+    content: 'unplugin-auto-import 自动导入 vue vue-router pinia vueuse 等',
     color: '#24292E',
     clickFn: () => {
       window.open('https://github.com/unplugin/unplugin-auto-import');
@@ -179,10 +181,23 @@ const pluginLibrary = ref<FrameWork[]>([
     content: 'unplugin-vue-components 按需引入组件库组件和页面',
     color: '#24292E',
     clickFn: () => {
-      window.open('https://github.com/vbenjs/vite-plugin-imagemin/blob/main/README.zh_CN.md')
-    }
-  }
-])
+      window.open(
+        'https://github.com/vbenjs/vite-plugin-imagemin/blob/main/README.zh_CN.md',
+      );
+    },
+  },
+  {
+    imgUrl: githubImage,
+    content:
+      '‌vite-plugin-style-import 按需引入组件库样式，搭配 unplugin-vue-components 食用',
+    color: '#24292E',
+    clickFn: () => {
+      window.open(
+        'https://github.com/vbenjs/vite-plugin-style-import/blob/main/README.zh_CN.md',
+      );
+    },
+  },
+]);
 </script>
 
 <style lang="scss" scoped>

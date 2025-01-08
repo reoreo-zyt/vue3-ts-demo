@@ -7,6 +7,11 @@ import AutoImport from 'unplugin-auto-import/vite';
 import viteCompression from 'vite-plugin-compression';
 import viteImagemin from 'vite-plugin-imagemin';
 import { visualizer } from 'rollup-plugin-visualizer';
+import ViteRestart from 'vite-plugin-restart';
+import {
+  createStyleImportPlugin,
+  ElementPlusResolve,
+} from 'vite-plugin-style-import';
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -18,6 +23,12 @@ export default defineConfig({
   },
   plugins: [
     visualizer({ open: false }), // 查看打包构建的包大小
+    ViteRestart({
+      restart: ['vite.config.[jt]s'],
+    }),
+    createStyleImportPlugin({
+      resolves: [ElementPlusResolve()],
+    }),
     viteImagemin({
       gifsicle: {
         optimizationLevel: 7,

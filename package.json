@@ -36,6 +36,7 @@
     "@typescript-eslint/parser": "^8.19.0",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vue/tsconfig": "^0.7.0",
+    "consola": "^3.3.3",
     "eslint": "^9.17.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
@@ -51,6 +52,8 @@
     "vite": "^6.0.5",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-imagemin": "^0.6.1",
+    "vite-plugin-restart": "^0.4.2",
+    "vite-plugin-style-import": "^2.0.0",
     "vue-tsc": "^2.2.0"
   },
   "eslintConfig": {
