@@ -15,16 +15,16 @@ const routes: Array<RouteRecordRaw> = [
     },
     component: () => import('@/pages/login.vue'),
   },
-  {
-    path: '/user',
-    name: 'User',
-    meta: {
-      title: '用户管理',
-      keepAlive: true,
-      requireAuth: false,
-    },
-    component: () => import('@/views/ProTable/user/index.vue'),
-  },
+  // {
+  //   path: '/user',
+  //   name: 'User',
+  //   meta: {
+  //     title: '用户管理',
+  //     keepAlive: true,
+  //     requireAuth: false,
+  //   },
+  //   component: () => import('@/views/ProTable/user/index.vue'),
+  // },
   {
     path: '/',
     name: 'Index',
