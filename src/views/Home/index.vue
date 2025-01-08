@@ -88,6 +88,14 @@ const framework = ref<FrameWork[]>([
     },
   },
   {
+    imgUrl: vueImage,
+    content: "为 Vue.js 提供富有表现力、可配置的、方便的路由",
+    color: '#41b883',
+    clickFn: () => {
+      window.open('https://router.vuejs.org/zh/')
+    }
+  },
+  {
     imgUrl: viteImage,
     content: 'Vite 下一代的前端工具链 为开发提供极速响应',
     color: '#9c5cfe',
