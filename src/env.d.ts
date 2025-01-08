@@ -7,3 +7,4 @@ declare var window: Window;
 declare interface Window {
   open: any;
 }
+declare module 'postcss-px-to-viewport';
