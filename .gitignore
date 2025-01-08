@@ -26,3 +26,4 @@ src/types/auto-imports.d.ts
 stats.html
 
 *storybook.log
+components.d.ts
