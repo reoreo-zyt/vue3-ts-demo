@@ -31,6 +31,36 @@
           </el-row>
         </div>
       </el-card>
+      <el-card>
+        <div class="tit">vite 插件</div>
+        <div class="store-content">
+          <el-row gutter="8">
+            <el-col
+              :xs="24"
+              :md="12"
+              :lg="6"
+              v-for="(item, index) in pluginLibrary"
+              :key="'pluginLibrary' + index"
+            >
+              <div class="store-item">
+                <div class="logo">
+                  <img :src="item.imgUrl" alt="" />
+                  <el-button
+                    @click="item.clickFn"
+                    size="small"
+                    :style="{ backgroundColor: item.color }"
+                  >
+                    Go
+                  </el-button>
+                </div>
+                <div class="content">
+                  {{ item.content }}
+                </div>
+              </div>
+            </el-col>
+          </el-row>
+        </div>
+      </el-card>
     </div>
   </div>
 </template>
@@ -43,6 +73,8 @@ import piniaImage from '@/assets/images/pinia.svg';
 import tsImage from '@/assets/images/ts.png';
 import scssImage from '@/assets/images/scss.ico';
 import vueuseImage from '@/assets/images/vueuse.svg';
+import storybookImage from '@/assets/images/storybook.svg';
+import githubImage from '@/assets/images/github.svg';
 import { type FrameWork } from './types/framework';
 
 const framework = ref<FrameWork[]>([
@@ -105,7 +137,52 @@ const framework = ref<FrameWork[]>([
       window.open('https://vueuse.nodejs.cn/');
     },
   },
+  {
+    imgUrl: storybookImage,
+    content: '无需繁重的工作即可构建组件库文档',
+    color: '#FF4785',
+    clickFn: () => {
+      window.open('https://vueuse.nodejs.cn/');
+    },
+  }
 ]);
+
+const pluginLibrary = ref<FrameWork[]>([
+  {
+    imgUrl: githubImage,
+    content:
+      'vite-plugin-compression 把文件打包成 gzip',
+    color: '#24292E',
+    clickFn: () => {
+      window.open('https://github.com/vbenjs/vite-plugin-compression/blob/main/README.zh_CN.md');
+    },
+  },
+  {
+    imgUrl: githubImage,
+    content: 'vite-plugin-imagemin 压缩图片资源',
+    color: '#24292E',
+    clickFn: () => {
+      window.open('https://github.com/vbenjs/vite-plugin-imagemin/blob/main/README.zh_CN.md')
+    }
+  },
+  {
+    imgUrl: githubImage,
+    content:
+      'unplugin-auto-import 自动导入 vue vue-router pinia vueuse 等',
+    color: '#24292E',
+    clickFn: () => {
+      window.open('https://github.com/unplugin/unplugin-auto-import');
+    },
+  },
+  {
+    imgUrl: githubImage,
+    content: 'unplugin-vue-components 按需引入组件库组件和页面',
+    color: '#24292E',
+    clickFn: () => {
+      window.open('https://github.com/vbenjs/vite-plugin-imagemin/blob/main/README.zh_CN.md')
+    }
+  }
+])
 </script>
 
 <style lang="scss" scoped>
