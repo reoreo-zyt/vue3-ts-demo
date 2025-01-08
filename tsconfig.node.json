@@ -3,15 +3,16 @@
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo", // 指定增量编译信息的存储位置
     "target": "ES2022", // 编译生成的目标版本代码
     "useDefineForClassFields": true, // * 这个编译条件只会在 ES2021 之前的版本生效，用于需要精确控制字段属性的场景。当启用该选项时，class中的字段声明会从使用赋值操作符（如foo = 100）的方式转变为使用 Object.defineProperty 方法进行定义。
-    "lib": ["ES2023"], // 指定我们需要用到的库，也可以不配置，直接根据 target 来获取
+    "lib": ["DOM", "ES2023"], // 指定我们需要用到的库，也可以不配置，直接根据 target 来获取
     "jsx": "preserve", // jsx 的处理方式(保留原有的jsx格式)
+    "jsxImportSource": "@vue/runtime-dom",
     "sourceMap": true, // 是否生成 sourceMap 文件
     "resolveJsonModule": true, // 允许导入 JSON 文件
     "esModuleInterop": true, // 允许从没有设置默认导出的模块中默认导入
-    "baseUrl": ".", // 解析非相对模块名称的基准目录
+    "baseUrl": "./", // 解析非相对模块名称的基准目录
     "paths": {
       "@": ["src"],
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
     }, // 设置模块名称到基于 baseUrl 的路径映射
     "module": "ESNext", // 生成代码使用的模块化
     "skipLibCheck": true,

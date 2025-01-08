@@ -9,6 +9,8 @@ import viteImagemin from 'vite-plugin-imagemin';
 import { visualizer } from 'rollup-plugin-visualizer';
 import postcssPxToViewport from 'postcss-px-to-viewport';
 import ViteRestart from 'vite-plugin-restart';
+import vueJsx from '@vitejs/plugin-vue-jsx';
+
 import {
   createStyleImportPlugin,
   ElementPlusResolve,
@@ -23,6 +25,7 @@ export default defineConfig({
     },
   },
   plugins: [
+    vueJsx({}),
     visualizer({ open: false }), // 查看打包构建的包大小
     ViteRestart({
       restart: ['vite.config.[jt]s'],

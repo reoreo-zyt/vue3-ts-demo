@@ -75,6 +75,7 @@ import scssImage from '@/assets/images/scss.ico';
 import vueuseImage from '@/assets/images/vueuse.svg';
 import storybookImage from '@/assets/images/storybook.svg';
 import githubImage from '@/assets/images/github.svg';
+import sortableImage from '@/assets/images/sortable.png';
 import { type FrameWork } from './types/framework';
 
 const framework = ref<FrameWork[]>([
@@ -151,6 +152,16 @@ const framework = ref<FrameWork[]>([
     color: '#FF4785',
     clickFn: () => {
       window.open('https://vueuse.nodejs.cn/');
+    },
+  },
+  {
+    imgUrl: sortableImage,
+    content: '为现代浏览器和触摸设备重新排序拖放列表。不需要 jQuery 或框架。',
+    color: '#72b8ff',
+    clickFn: () => {
+      window.open(
+        'https://github.com/SortableJS/Sortable',
+      );
     },
   },
 ]);
