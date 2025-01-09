@@ -19,6 +19,7 @@ import {
 // https://vite.dev/config/
 export default defineConfig({
   resolve: {
+    // extensions: ['.js', '.ts', '.json', '.tsx'],
     //设置别名
     alias: {
       '@': path.resolve(__dirname, 'src'),

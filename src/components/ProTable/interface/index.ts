@@ -1,5 +1,5 @@
 import { type TableColumnCtx } from "element-plus/es/components/table/src/table-column/defaults";
-import { type BreakPoint, type Responsive } from "../../Grid/interface";
+import { type BreakPoint, type Responsive } from "@/components/Grid/interface";
 import ProTable from "@/components/ProTable/index.vue";
 
 export interface EnumProps {

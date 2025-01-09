@@ -1,13 +1,13 @@
 import axios, { type AxiosInstance, AxiosError, type AxiosRequestConfig, type InternalAxiosRequestConfig, type AxiosResponse } from "axios";
-import { showFullScreenLoading, tryHideFullScreenLoading } from "../components/Loading/fullScreen";
-import { LOGIN_URL } from "../config";
+import { showFullScreenLoading, tryHideFullScreenLoading } from "@/components/Loading/fullScreen";
+import { LOGIN_URL } from "@/config";
 import { ElMessage } from "element-plus";
-import { type ResultData } from "../api/interface";
-import { ResultEnum } from "../enums/httpEnum";
-import { checkStatus } from "./helper/checkStatus";
-import { AxiosCanceler } from "./helper/axiosCancel";
-import { useUserStore } from "../stores/modules/user";
-import router from "../routers";
+import { type ResultData } from "@/api/interface";
+import { ResultEnum } from "@/enums/httpEnum";
+import { checkStatus } from "@/api/helper/checkStatus";
+import { AxiosCanceler } from "@/api/helper/axiosCancel";
+import { useUserStore } from "@/stores/modules/user";
+import router from "@/routers";
 
 export interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
   loading?: boolean;

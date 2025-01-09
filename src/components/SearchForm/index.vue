@@ -36,7 +36,7 @@
 	</div>
 </template>
 <script setup lang="ts" name="SearchForm">
-import { type ProTableProps } from "../ProTable/interface";
+import { type ProTableProps } from "@/components/ProTable/interface";
 import { Search, Refresh } from "@element-plus/icons-vue";
 
 interface LinkItem {

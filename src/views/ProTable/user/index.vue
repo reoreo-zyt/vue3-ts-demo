@@ -48,15 +48,15 @@
 </template>
 
 <script setup lang="tsx" name="useProTable">
-import { type User } from "../../../api/interface";
-import { useHandleData } from "../../../hooks/useHandleData";
-import { useDownload } from "../../../hooks/useDownload";
-import { useAuthButtons } from "../../../hooks/useAuthButtons";
+import { type User } from "@/api/interface";
+import { useHandleData } from "@/hooks/useHandleData";
+import { useDownload } from "@/hooks/useDownload";
+import { useAuthButtons } from "@/hooks/useAuthButtons";
 import { ElMessage, ElMessageBox } from "element-plus";
 import ProTable from "@/components/ProTable/index.vue";
 import ImportExcel from "@/components/ImportExcel/index.vue";
-import UserDrawer from "@/views/proTable/components/UserDrawer.vue";
-import { type ProTableInstance, type ColumnProps, type HeaderRenderScope } from "../../../components/ProTable/interface";
+import UserDrawer from "@/views/ProTable/components/UserDrawer.vue";
+import { type ProTableInstance, type ColumnProps, type HeaderRenderScope } from "@/components/ProTable/interface";
 import { CirclePlus, Delete, EditPen, Download, Upload, View, Refresh } from "@element-plus/icons-vue";
 import {
   getUserList,
@@ -69,7 +69,7 @@ import {
   BatchAddUser,
   getUserStatus,
   getUserGender
-} from "../../../api/modules/user";
+} from "@/api/modules/user";
 
 const router = useRouter();
 

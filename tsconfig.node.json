@@ -9,11 +9,11 @@
     "sourceMap": true, // 是否生成 sourceMap 文件
     "resolveJsonModule": true, // 允许导入 JSON 文件
     "esModuleInterop": true, // 允许从没有设置默认导出的模块中默认导入
-    "baseUrl": "./", // 解析非相对模块名称的基准目录
-    "paths": {
-      "@": ["src"],
-      "@/*": ["src/*"],
-    }, // 设置模块名称到基于 baseUrl 的路径映射
+    // "baseUrl": "./", // 解析非相对模块名称的基准目录
+    // "paths": {
+    //   "@": ["src"],
+    //   "@/*": ["src/*"],
+    // }, // 设置模块名称到基于 baseUrl 的路径映射
     "module": "ESNext", // 生成代码使用的模块化
     "skipLibCheck": true,
     "typeRoots": [

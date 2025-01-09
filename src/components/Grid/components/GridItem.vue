@@ -5,7 +5,7 @@
 </template>
 <script setup lang="ts" name="GridItem">
 import { type Ref } from "vue";
-import { type BreakPoint, type Responsive } from "../interface/index";
+import { type BreakPoint, type Responsive } from "@/components/Grid/interface/index";
 
 type Props = {
 	offset?: number;

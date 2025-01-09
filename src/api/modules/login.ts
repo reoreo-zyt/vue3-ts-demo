@@ -1,8 +1,8 @@
-import { type Login } from "../interface/index";
-import { PORT1 } from "../../api/config/servicePort";
-import authMenuList from "../../assets/json/authMenuList.json";
-import authButtonList from "../../assets/json/authButtonList.json";
-import http from "../../api";
+import { type Login } from "@/api/interface/index";
+import { PORT1 } from "@/api/config/servicePort";
+import authMenuList from "@/assets/json/authMenuList.json";
+import authButtonList from "@/assets/json/authButtonList.json";
+import http from "@/api";
 
 /**
  * @name 登录模块

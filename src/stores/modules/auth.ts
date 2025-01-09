@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
-import { type AuthState } from "../interface";
-import { getAuthButtonListApi, getAuthMenuListApi } from "../../api/modules/login";
-import { getFlatMenuList, getShowMenuList, getAllBreadcrumbList } from "../../utils";
+import { type AuthState } from "@/stores/interface";
+import { getAuthButtonListApi, getAuthMenuListApi } from "@/api/modules/login";
+import { getFlatMenuList, getShowMenuList, getAllBreadcrumbList } from "@/utils";
 
 export const useAuthStore = defineStore({
   id: "vue3-auth",

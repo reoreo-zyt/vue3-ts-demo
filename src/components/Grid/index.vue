@@ -9,7 +9,7 @@ import {
 	type VNodeArrayChildren,
 	type VNode
 } from "vue";
-import type { BreakPoint } from "./interface/index";
+import type { BreakPoint } from "@/components/Grid/interface/index";
 
 type Props = {
 	cols?: number | Record<BreakPoint, number>;

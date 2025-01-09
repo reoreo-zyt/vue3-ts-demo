@@ -1,6 +1,6 @@
-import { type ResPage, type User } from "../interface/index";
-import { PORT1 } from "../../api/config/servicePort";
-import http from "../../api";
+import { type ResPage, type User } from "@/api/interface/index";
+import { PORT1 } from "@/api/config/servicePort";
+import http from "@/api";
 
 /**
  * @name 用户管理模块

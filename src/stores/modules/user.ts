@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
-import { type UserState } from "../../stores/interface";
-import piniaPersistConfig from "../../stores/helper/persist";
+import { type UserState } from "@/stores/interface";
+import piniaPersistConfig from "@/stores/helper/persist";
 
 export const useUserStore = defineStore({
   id: "vue3-user",

@@ -76,7 +76,7 @@ import vueuseImage from '@/assets/images/vueuse.svg';
 import storybookImage from '@/assets/images/storybook.svg';
 import githubImage from '@/assets/images/github.svg';
 import sortableImage from '@/assets/images/sortable.png';
-import { type FrameWork } from './types/framework';
+import { type FrameWork } from '@/views/Home/types/framework';
 
 const framework = ref<FrameWork[]>([
   {

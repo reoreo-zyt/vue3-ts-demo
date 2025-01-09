@@ -70,7 +70,7 @@
         </el-table-column>
         <!-- other -->
         <TableColumn v-if="!item.type && item.prop && item.isShow" :column="item">
-          <template v-for="slot in Object.keys($slots)" #[slot]="scope">
+          <template v-for="slot in Object.keys(slots)" #[slot]="scope">
             <slot :name="slot" v-bind="scope" />
           </template>
         </TableColumn>
@@ -159,6 +159,8 @@ const { tableData, pageable, searchParam, searchInitParam, getTableList, search,
 
 // 清空选中数据列表
 const clearSelection = () => tableRef.value!.clearSelection();
+
+const slots: any = useSlots();
 
 // 初始化表格数据 && 拖拽排序
 onMounted(() => {

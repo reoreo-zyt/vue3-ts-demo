@@ -23,7 +23,7 @@
 
 <script setup lang="ts" name="ColSetting">
 import { ref } from "vue";
-import { type ColumnProps } from "../../ProTable/interface";
+import { type ColumnProps } from "@/components/ProTable/interface";
 
 defineProps<{ colSetting: ColumnProps[] }>();
 

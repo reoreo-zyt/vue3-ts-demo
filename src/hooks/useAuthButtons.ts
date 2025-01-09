@@ -1,4 +1,4 @@
-import { useAuthStore } from "../stores/modules/auth";
+import { useAuthStore } from "@/stores/modules/auth";
 
 /**
  * @description 页面按钮权限

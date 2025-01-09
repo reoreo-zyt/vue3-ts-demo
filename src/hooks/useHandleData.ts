@@ -1,5 +1,5 @@
 import { ElMessageBox, ElMessage } from "element-plus";
-import { type HandleData } from "./interface";
+import { type HandleData } from "@/hooks/interface";
 
 /**
  * @description 操作单条数据信息 (二次确认【删除、禁用、启用、重置密码】)

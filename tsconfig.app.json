@@ -9,7 +9,14 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+
+    // ? 在这里定义完才生效
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"],
+      "@com/*": ["src/components/*"]
+    }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"]
 }
