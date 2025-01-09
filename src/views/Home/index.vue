@@ -2,7 +2,7 @@
   <div class="home">
     <div class="store">
       <el-card>
-        <div class="tit">技术栈</div>
+        <div class="tit">前端技术栈</div>
         <div class="store-content">
           <el-row gutter="8">
             <el-col
@@ -11,6 +11,36 @@
               :lg="6"
               v-for="(item, index) in framework"
               :key="'framework' + index"
+            >
+              <div class="store-item">
+                <div class="logo">
+                  <img :src="item.imgUrl" alt="" />
+                  <el-button
+                    @click="item.clickFn"
+                    size="small"
+                    :style="{ backgroundColor: item.color }"
+                  >
+                    Go
+                  </el-button>
+                </div>
+                <div class="content">
+                  {{ item.content }}
+                </div>
+              </div>
+            </el-col>
+          </el-row>
+        </div>
+      </el-card>
+      <el-card>
+        <div class="tit">后端技术栈</div>
+        <div class="store-content">
+          <el-row gutter="8">
+            <el-col
+              :xs="24"
+              :md="12"
+              :lg="6"
+              v-for="(item, index) in backendFramework"
+              :key="'backendFramework' + index"
             >
               <div class="store-item">
                 <div class="logo">
@@ -70,12 +100,15 @@ import vueImage from '@/assets/images/vue.png';
 import viteImage from '@/assets/images/vite.png';
 import elementImage from '@/assets/images/element.png';
 import piniaImage from '@/assets/images/pinia.svg';
+import piniaPPImage from '@/assets/images/pinia-plugin-persistedstate.svg';
 import tsImage from '@/assets/images/ts.png';
 import scssImage from '@/assets/images/scss.ico';
 import vueuseImage from '@/assets/images/vueuse.svg';
 import storybookImage from '@/assets/images/storybook.svg';
 import githubImage from '@/assets/images/github.svg';
 import sortableImage from '@/assets/images/sortable.png';
+import axiosImage from '@/assets/images/axios.svg';
+import nestImage from '@/assets/images/nest.svg';
 import { type FrameWork } from '@/views/Home/types/framework';
 
 const framework = ref<FrameWork[]>([
@@ -122,6 +155,14 @@ const framework = ref<FrameWork[]>([
     },
   },
   {
+    imgUrl: piniaPPImage,
+    content: 'pinia-plugin-persistedstate，Pinia插件，用于持久化 Pinia store 的状态到本地存储',
+    color: '#8839ef',
+    clickFn: () => {
+      window.open('https://prazdevs.github.io/pinia-plugin-persistedstate/');
+    },
+  },
+  {
     imgUrl: tsImage,
     content:
       'TypeScript具有类型系统，且是JavaScript的超集。它可以编译成普通的JavaScript代码。',
@@ -151,7 +192,7 @@ const framework = ref<FrameWork[]>([
     content: '无需繁重的工作即可构建组件库文档',
     color: '#FF4785',
     clickFn: () => {
-      window.open('https://vueuse.nodejs.cn/');
+      window.open('https://storybook.js.org/');
     },
   },
   {
@@ -162,6 +203,38 @@ const framework = ref<FrameWork[]>([
       window.open(
         'https://github.com/SortableJS/Sortable',
       );
+    },
+  },
+  {
+    imgUrl: axiosImage,
+    content: 'Axios 是一个基于 Promise 的 HTTP 库，可以用在浏览器和 node.js 中',
+    color: '#5A29E4',
+    clickFn: () => {
+      window.open(
+        'https://axios-http.com/',
+      );
+    }
+  },
+  {
+    imgUrl: githubImage,
+    content: 'qs 是一个 node.js 和浏览器中的 url 查询字符串解析和序列化库。它可以将 JavaScript 对象转换为 url 查询字符串，也可以将 url 查询字符串解析为 JavaScript 对象。',
+    color: '#24292E',
+    clickFn: () => {
+      window.open(
+        'https://github.com/ljharb/qs',
+      );
+    }
+  }
+]);
+
+const backendFramework = ref<FrameWork[]>([
+  {
+    imgUrl: nestImage,
+    content:
+      'Nest (NestJS) 是一个用于构建高效、可扩展的 Node.js 服务器端应用的框架。',
+    color: '#FF4785',
+    clickFn: () => {
+      window.open('https://nest.nodejs.cn/');
     },
   },
 ]);

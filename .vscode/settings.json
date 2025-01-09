@@ -1,7 +1,11 @@
 {
     "cSpell.words": [
+        "axios",
+        "persistedstate",
+        "pinia",
         "sortablejs",
         "unplugin",
+        "vite",
         "vueuse"
     ]
 }
