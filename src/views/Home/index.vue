@@ -109,6 +109,7 @@ import githubImage from '@/assets/images/github.svg';
 import sortableImage from '@/assets/images/sortable.png';
 import axiosImage from '@/assets/images/axios.svg';
 import nestImage from '@/assets/images/nest.svg';
+import rxjsImage from '@/assets/images/rxjs.png';
 import { type FrameWork } from '@/views/Home/types/framework';
 
 const framework = ref<FrameWork[]>([
@@ -237,6 +238,33 @@ const backendFramework = ref<FrameWork[]>([
       window.open('https://nest.nodejs.cn/');
     },
   },
+  {
+    imgUrl: rxjsImage,
+    content:
+      'RxJS 是一个库，它通过使用 observable 序列来编写异步和基于事件的程序。可以把 RxJS 当做是用来处理事件的 Lodash。',
+    color: '#FF4785',
+    clickFn: () => {
+      window.open('https://cn.rx.js.org/manual/overview.html');
+    },
+  },
+  {
+    imgUrl: githubImage,
+    content:
+      'Argon2 是一种新兴的密码哈希函数，旨在提供比以往任何时候都更强的安全性',
+    color: '#24292E',
+    clickFn: () => {
+      window.open('https://github.com/ranisalt/node-argon2');
+    },
+  },
+  {
+    imgUrl: githubImage,
+    content:
+      '在 TypeScript 生态系统中，reflect-metadata 库是一种强大的工具，它允许我们在运行时获取更多的类型信息，从而实现一些高级功能。',
+    color: '#24292E',
+    clickFn: () => {
+      window.open('https://rbuckton.github.io/reflect-metadata/');
+    },
+  }
 ]);
 
 const pluginLibrary = ref<FrameWork[]>([
