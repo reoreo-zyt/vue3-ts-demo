@@ -1,4 +1,4 @@
-export const useTagsViewStore = defineStore("tagsView", () => {
+export const useTagsViewStore = defineStore('tagsView', () => {
   const visitedViews = ref<TagView[]>([]);
   const cachedViews = ref<string[]>([]);
   const router = useRouter();
@@ -124,7 +124,9 @@ export const useTagsViewStore = defineStore("tagsView", () => {
 
   function delLeftViews(view: TagView) {
     return new Promise((resolve) => {
-      const currIndex = visitedViews.value.findIndex((v) => v.path === view.path);
+      const currIndex = visitedViews.value.findIndex(
+        (v) => v.path === view.path,
+      );
       if (currIndex === -1) {
         return;
       }
@@ -147,7 +149,9 @@ export const useTagsViewStore = defineStore("tagsView", () => {
 
   function delRightViews(view: TagView) {
     return new Promise((resolve) => {
-      const currIndex = visitedViews.value.findIndex((v) => v.path === view.path);
+      const currIndex = visitedViews.value.findIndex(
+        (v) => v.path === view.path,
+      );
       if (currIndex === -1) {
         return;
       }
@@ -220,11 +224,11 @@ export const useTagsViewStore = defineStore("tagsView", () => {
     } else {
       // now the default is to redirect to the home page if there is no tags-view,
       // you can adjust it according to your needs.
-      if (view?.name === "Dashboard") {
+      if (view?.name === 'Dashboard') {
         // to reload home page
-        router.replace("/redirect" + view.fullPath);
+        router.replace('/redirect' + view.fullPath);
       } else {
-        router.push("/");
+        router.push('/');
       }
     }
   }

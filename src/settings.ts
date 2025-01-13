@@ -1,12 +1,12 @@
-import { SizeEnum } from "@/enums/SizeEnum";
-import { LayoutEnum } from "@/enums/LayoutEnum";
-import { ThemeEnum } from "@/enums/ThemeEnum";
-import { LanguageEnum } from "@/enums/LanguageEnum";
+import { SizeEnum } from '@/enums/SizeEnum';
+import { LayoutEnum } from '@/enums/LayoutEnum';
+import { ThemeEnum } from '@/enums/ThemeEnum';
+import { LanguageEnum } from '@/enums/LanguageEnum';
 
 const { pkg } = __APP_INFO__;
 
 // 检查用户的操作系统是否使用深色模式
-const mediaQueryList = window.matchMedia("(prefers-color-scheme: dark)");
+const mediaQueryList = window.matchMedia('(prefers-color-scheme: dark)');
 
 const defaultSettings: AppSettings = {
   // 系统Title
@@ -28,7 +28,7 @@ const defaultSettings: AppSettings = {
   // 语言
   language: LanguageEnum.ZH_CN,
   // 主题颜色
-  themeColor: "#4080FF",
+  themeColor: '#4080FF',
   // 是否开启水印
   watermarkEnabled: false,
   // 水印内容

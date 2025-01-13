@@ -5,10 +5,10 @@ export const enum SidebarStatusEnum {
   /**
    * 展开
    */
-  OPENED = "opened",
+  OPENED = 'opened',
 
   /**
    * 关闭
    */
-  CLOSED = "closed",
+  CLOSED = 'closed',
 }

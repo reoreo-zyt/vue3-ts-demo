@@ -13,7 +13,7 @@ function rgbToHex(r: number, g: number, b: number): string {
 function adjustBrightness(hex: string, factor: number): string {
   const rgb = hexToRgb(hex);
   const newRgb = rgb.map((val) =>
-    Math.max(0, Math.min(255, Math.round(val + (255 - val) * factor)))
+    Math.max(0, Math.min(255, Math.round(val + (255 - val) * factor))),
   ) as [number, number, number];
   return rgbToHex(...newRgb);
 }
@@ -30,7 +30,7 @@ export function generateThemeColors(primary: string) {
   }
 
   // 生成深色变体
-  colors["primary-dark-2"] = adjustBrightness(primary, -0.2);
+  colors['primary-dark-2'] = adjustBrightness(primary, -0.2);
 
   return colors;
 }
@@ -45,8 +45,8 @@ export function applyTheme(colors: Record<string, string>) {
 
 export function toggleDarkMode(isDark: boolean) {
   if (isDark) {
-    document.documentElement.classList.add("dark");
+    document.documentElement.classList.add('dark');
   } else {
-    document.documentElement.classList.remove("dark");
+    document.documentElement.classList.remove('dark');
   }
 }

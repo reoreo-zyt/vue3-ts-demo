@@ -13,13 +13,14 @@
     "baseUrl": "./", // 解析非相对模块名称的基准目录
     "paths": {
       "@": ["src"],
-      "@/*": ["src/*"],
+      "@/*": ["src/*"]
     }, // 设置模块名称到基于 baseUrl 的路径映射
     "module": "ESNext", // 生成代码使用的模块化
     "skipLibCheck": true,
     "typeRoots": [
       "node_modules/@types", // 默认值
-      "src/types"
+      "src/types",
+      "element-plus/global"
     ], // 指定类型声明文件（.d.ts文件）的根目录
 
     /* Bundler mode */

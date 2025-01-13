@@ -5,14 +5,14 @@ export const enum ThemeEnum {
   /**
    * 明亮主题
    */
-  LIGHT = "light",
+  LIGHT = 'light',
   /**
    * 暗黑主题
    */
-  DARK = "dark",
+  DARK = 'dark',
 
   /**
    * 系统自动
    */
-  AUTO = "auto",
+  AUTO = 'auto',
 }

@@ -1,12 +1,15 @@
 {
-    "cSpell.words": [
-        "Attributify",
-        "axios",
-        "persistedstate",
-        "pinia",
-        "sortablejs",
-        "unplugin",
-        "vite",
-        "vueuse"
-    ]
+  "cSpell.words": [
+    "Attributify",
+    "axios",
+    "browserify",
+    "exceljs",
+    "persistedstate",
+    "pinia",
+    "sortablejs",
+    "stompjs",
+    "unplugin",
+    "vite",
+    "vueuse"
+  ]
 }

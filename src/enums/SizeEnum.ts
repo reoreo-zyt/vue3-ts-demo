@@ -5,15 +5,15 @@ export const enum SizeEnum {
   /**
    * 默认
    */
-  DEFAULT = "default",
+  DEFAULT = 'default',
 
   /**
    * 大型
    */
-  LARGE = "large",
+  LARGE = 'large',
 
   /**
    * 小型
    */
-  SMALL = "small",
+  SMALL = 'small',
 }

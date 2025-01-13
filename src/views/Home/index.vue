@@ -124,11 +124,11 @@ const framework = ref<FrameWork[]>([
   },
   {
     imgUrl: vueImage,
-    content: "为 Vue.js 提供富有表现力、可配置的、方便的路由",
+    content: '为 Vue.js 提供富有表现力、可配置的、方便的路由',
     color: '#41b883',
     clickFn: () => {
-      window.open('https://router.vuejs.org/zh/')
-    }
+      window.open('https://router.vuejs.org/zh/');
+    },
   },
   {
     imgUrl: viteImage,
@@ -157,7 +157,8 @@ const framework = ref<FrameWork[]>([
   },
   {
     imgUrl: piniaPPImage,
-    content: 'pinia-plugin-persistedstate，Pinia插件，用于持久化 Pinia store 的状态到本地存储',
+    content:
+      'pinia-plugin-persistedstate，Pinia插件，用于持久化 Pinia store 的状态到本地存储',
     color: '#8839ef',
     clickFn: () => {
       window.open('https://prazdevs.github.io/pinia-plugin-persistedstate/');
@@ -201,9 +202,7 @@ const framework = ref<FrameWork[]>([
     content: '为现代浏览器和触摸设备重新排序拖放列表。不需要 jQuery 或框架。',
     color: '#72b8ff',
     clickFn: () => {
-      window.open(
-        'https://github.com/SortableJS/Sortable',
-      );
+      window.open('https://github.com/SortableJS/Sortable');
     },
   },
   {
@@ -211,21 +210,18 @@ const framework = ref<FrameWork[]>([
     content: 'Axios 是一个基于 Promise 的 HTTP 库，可以用在浏览器和 node.js 中',
     color: '#5A29E4',
     clickFn: () => {
-      window.open(
-        'https://axios-http.com/',
-      );
-    }
+      window.open('https://axios-http.com/');
+    },
   },
   {
     imgUrl: githubImage,
-    content: 'qs 是一个 node.js 和浏览器中的 url 查询字符串解析和序列化库。它可以将 JavaScript 对象转换为 url 查询字符串，也可以将 url 查询字符串解析为 JavaScript 对象。',
+    content:
+      'qs 是一个 node.js 和浏览器中的 url 查询字符串解析和序列化库。它可以将 JavaScript 对象转换为 url 查询字符串，也可以将 url 查询字符串解析为 JavaScript 对象。',
     color: '#24292E',
     clickFn: () => {
-      window.open(
-        'https://github.com/ljharb/qs',
-      );
-    }
-  }
+      window.open('https://github.com/ljharb/qs');
+    },
+  },
 ]);
 
 const backendFramework = ref<FrameWork[]>([
@@ -264,7 +260,7 @@ const backendFramework = ref<FrameWork[]>([
     clickFn: () => {
       window.open('https://rbuckton.github.io/reflect-metadata/');
     },
-  }
+  },
 ]);
 
 const pluginLibrary = ref<FrameWork[]>([

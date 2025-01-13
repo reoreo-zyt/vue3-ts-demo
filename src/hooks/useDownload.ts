@@ -1,4 +1,4 @@
-import { ElNotification } from "element-plus";
+import { ElNotification } from 'element-plus';
 
 /**
  * @description 接收数据流生成 blob，创建链接，下载文件
@@ -13,14 +13,14 @@ export const useDownload = async (
   tempName: string,
   params: any = {},
   isNotify: boolean = true,
-  fileType: string = ".xlsx"
+  fileType: string = '.xlsx',
 ) => {
   if (isNotify) {
     ElNotification({
-      title: "温馨提示",
-      message: "如果数据庞大会导致下载缓慢哦，请您耐心等待！",
-      type: "info",
-      duration: 3000
+      title: '温馨提示',
+      message: '如果数据庞大会导致下载缓慢哦，请您耐心等待！',
+      type: 'info',
+      duration: 3000,
     });
   }
   try {
@@ -28,10 +28,11 @@ export const useDownload = async (
     const blob = new Blob([res]);
     // 兼容 edge 不支持 createObjectURL 方法
     // @ts-ignore
-    if ("msSaveOrOpenBlob" in navigator) return window.navigator.msSaveOrOpenBlob(blob, tempName + fileType);
+    if ('msSaveOrOpenBlob' in navigator)
+      return window.navigator.msSaveOrOpenBlob(blob, tempName + fileType);
     const blobUrl = window.URL.createObjectURL(blob);
-    const exportFile = document.createElement("a");
-    exportFile.style.display = "none";
+    const exportFile = document.createElement('a');
+    exportFile.style.display = 'none';
     exportFile.download = `${tempName}${fileType}`;
     exportFile.href = blobUrl;
     document.body.appendChild(exportFile);

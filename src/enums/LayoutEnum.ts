@@ -5,14 +5,14 @@ export const enum LayoutEnum {
   /**
    * 左侧菜单布局
    */
-  LEFT = "left",
+  LEFT = 'left',
   /**
    * 顶部菜单布局
    */
-  TOP = "top",
+  TOP = 'top',
 
   /**
    * 混合菜单布局
    */
-  MIX = "mix",
+  MIX = 'mix',
 }
