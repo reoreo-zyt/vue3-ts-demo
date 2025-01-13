@@ -10,11 +10,19 @@ import { visualizer } from 'rollup-plugin-visualizer';
 import postcssPxToViewport from 'postcss-px-to-viewport';
 import ViteRestart from 'vite-plugin-restart';
 import vueJsx from '@vitejs/plugin-vue-jsx';
+import UnoCSS from "unocss/vite";
+import { name, version, engines, dependencies, devDependencies } from "./package.json";
 
 import {
   createStyleImportPlugin,
   ElementPlusResolve,
 } from 'vite-plugin-style-import';
+
+// 平台的名称、版本、运行所需的 node 版本、依赖、构建时间的类型提示
+const __APP_INFO__ = {
+  pkg: { name, version, engines, dependencies, devDependencies },
+  buildTimestamp: Date.now(),
+};
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -26,6 +34,9 @@ export default defineConfig({
     },
   },
   plugins: [
+    UnoCSS({
+      hmrTopLevelAwait: false,
+    }),
     vueJsx({}),
     visualizer({ open: false }), // 查看打包构建的包大小
     ViteRestart({
@@ -133,5 +144,8 @@ export default defineConfig({
             drop_debugger: true,
        },
     }, // 传递给 minify: "terser" 的更多 minify 选项
+  },
+  define: {
+    __APP_INFO__: JSON.stringify(__APP_INFO__),
   },
 });

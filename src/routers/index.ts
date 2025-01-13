@@ -13,7 +13,7 @@ const routes: Array<RouteRecordRaw> = [
       keepAlive: true,
       requireAuth: false,
     },
-    component: () => import('@/pages/login.vue'),
+    component: () => import('@/views/Login/index.vue'),
   },
   // {
   //   path: '/user',
