@@ -16,7 +16,7 @@ export class CaptchaController {
   /**
    * 生成验证码
    */
-  @UseGuards(AuthGuard)
+  // @UseGuards(AuthGuard)
   @Get()
   @ApiOperation({
     summary: '获取验证码',

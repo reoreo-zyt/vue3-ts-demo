@@ -43,7 +43,7 @@ const AuthAPI = {
   /** 获取验证码接口*/
   getCaptcha() {
     return request<any, CaptchaResult>({
-      url: `${AUTH_BASE_URL}/captcha`,
+      url: `api/v1/captchaImage`,
       method: 'get',
     });
   },
