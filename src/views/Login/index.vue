@@ -173,7 +173,6 @@ import defaultSettings from '@/settings';
 import { ThemeEnum } from '@/enums/ThemeEnum';
 
 import { useSettingsStore, useUserStore, useDictStore } from '@/stores';
-import LangSelect from '@/components/LangSelect/index.vue';
 
 const userStore = useUserStore();
 const settingsStore = useSettingsStore();

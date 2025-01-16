@@ -12,6 +12,9 @@ import 'element-plus/theme-chalk/dark/css-vars.css';
 import '@/styles/dark/css-vars.css';
 import '@/styles/index.scss';
 import 'uno.css';
+/** svg */
+// @ts-ignore
+import 'virtual:svg-icons-register';
 
 // 注册插件
 app.use(setupPlugins);

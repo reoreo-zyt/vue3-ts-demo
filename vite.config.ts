@@ -128,7 +128,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
         'axios',
         '@vueuse/core',
         'sortablejs',
-        'echarts',
+        // 'echarts',
         'vue-i18n',
         'path-browserify',
         'path-to-regexp',
