@@ -64,4 +64,10 @@ export class AuthService {
       mag: '注册成功',
     };
   }
+  // 校验 Token
+  verifyToken(token) {
+    if (!token) return '';
+
+    return this.jwtService.verify(token);
+  }
 }
