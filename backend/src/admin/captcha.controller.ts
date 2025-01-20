@@ -54,7 +54,11 @@ export class CaptchaController {
       //   captchaInfo.text.toLowerCase(),
       //   Config.captcha.expiresIn,
       // );
-      return data;
+      return {
+        code: "00000",
+        data,
+        msg: "生成验证码成功"
+      };
     } catch (err) {
       return Result.Error('生成验证码错误，请重试');
     }

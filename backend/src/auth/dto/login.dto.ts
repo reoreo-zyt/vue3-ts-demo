@@ -1,11 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { useProperty } from '../../hooks/useProperty';
 
-const { getAuthPhoneProperty, getAuthPasswordProperty } = useProperty();
+const { getAuthUsernameProperty, getAuthPasswordProperty } = useProperty();
 
 export class LoginDto {
-  @ApiProperty({ ...getAuthPhoneProperty() })
-  phone: string;
+  @ApiProperty({ ...getAuthUsernameProperty() })
+  username: string;
   @ApiProperty({ ...getAuthPasswordProperty() })
   password: string;
 }

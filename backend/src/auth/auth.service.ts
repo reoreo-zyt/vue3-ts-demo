@@ -15,7 +15,7 @@ export class AuthService {
   async login(loginDto: LoginDto) {
     const user = await this.prisma.user.findFirst({
       where: {
-        phone: loginDto.phone,
+        username: loginDto.username,
       },
     });
     if (user) {
@@ -23,7 +23,7 @@ export class AuthService {
       if (isPasswordCorrect) {
         const token = await this.jwtService.signAsync({
           id: user.id,
-          phone: user.phone,
+          username: user.username,
         });
         return {
           code: 200,
@@ -42,7 +42,7 @@ export class AuthService {
     // 验证用户是否存在
     const user = await this.prisma.user.findFirst({
       where: {
-        phone: registerDto.phone,
+        username: registerDto.username,
       },
     }); // 存在则抛出异常
     if (user) {
@@ -50,13 +50,13 @@ export class AuthService {
     } // 不存在则创建用户
     const newUser = await this.prisma.user.create({
       data: {
-        phone: registerDto.phone,
+        username: registerDto.username,
         password: await hash(registerDto.password),
       },
     });
     const token = await this.jwtService.signAsync({
       id: newUser.id,
-      phone: newUser.phone,
+      username: newUser.username,
     });
     return {
       code: 200,

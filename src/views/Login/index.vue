@@ -105,12 +105,7 @@
               :placeholder="$t('login.captchaCode')"
               @keyup.enter="handleLoginSubmit"
             />
-
-            <el-image
-              :src="captchaBase64"
-              class="captcha-img"
-              @click="getCaptcha"
-            />
+            <div v-html="captchaSvg" class="captcha-img" @click="getCaptcha"></div>
           </div>
         </el-form-item>
 
@@ -185,7 +180,7 @@ const loginFormRef = ref<FormInstance>();
 const isDark = ref(settingsStore.theme === ThemeEnum.DARK); // 是否暗黑模式
 const loading = ref(false); // 按钮 loading 状态
 const isCapslock = ref(false); // 是否大写锁定
-const captchaBase64 = ref(); // 验证码图片Base64字符串
+const captchaSvg = ref(); // 验证码图片 svg 字符串
 
 const loginData = ref<LoginData>({
   username: 'admin',
@@ -227,9 +222,9 @@ const loginRules = computed(() => {
 
 // 获取验证码
 function getCaptcha() {
-  AuthAPI.getCaptcha().then((data) => {
-    loginData.value.captchaKey = data.captchaKey;
-    captchaBase64.value = data.captchaBase64;
+  AuthAPI.getCaptcha().then((data: any) => {
+    loginData.value.captchaKey = data.uuid;
+    captchaSvg.value = data.img;
   });
 }
 
@@ -371,10 +366,8 @@ onMounted(() => {
     }
 
     .captcha-img {
-      height: 48px;
+      height: 50px;
       cursor: pointer;
-      border-top-right-radius: 6px;
-      border-bottom-right-radius: 6px;
     }
 
     .third-party-login {

@@ -1,6 +1,15 @@
+## 导入 sql
+
+```sql
+use 数据库名字;
+source E:/projects/vue3-ts-demo/backend/carole.sql;
+```
+
+
+
 ## 使用 NestJs 做后端接口
 
-## 1、新建 Next 程序
+### 1、新建 Next 程序
 
 ```bash
 yarn global add @nestjs/cli
@@ -10,7 +19,7 @@ yarn global add @nestjs/cli
 nest new mock
 ```
 
-## 2、使用 prisma 连接数据库
+### 2、使用 prisma 连接数据库
 
 - `mysql` 8.4.3
 
@@ -18,7 +27,7 @@ nest new mock
 npx prisma init --datasource-provider mysql
 ```
 
-## 3、通过 prisma 创建表
+### 3、通过 prisma 创建表
 
 定义 `User` 表
 
@@ -40,9 +49,9 @@ model User {
 ```
 
 ```bash
-npx prisma migrate dev --name creat_user
+npx prisma migrate dev --name creat
 ```
 
-## 4、prisma 相关资料
+### 4、prisma 相关资料
 
 [JWT 注册登录](https://juejin.cn/post/7386264336513646655)

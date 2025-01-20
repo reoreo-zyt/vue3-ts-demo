@@ -41,6 +41,7 @@ service.interceptors.response.use(
     }
 
     const { code, data, msg } = response.data;
+    // console.error(response.data);
     if (code === ResultEnum.SUCCESS) {
       return data;
     }

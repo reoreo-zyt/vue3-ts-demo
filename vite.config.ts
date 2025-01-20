@@ -8,7 +8,7 @@ import AutoImport from 'unplugin-auto-import/vite';
 import viteCompression from 'vite-plugin-compression';
 import viteImagemin from 'vite-plugin-imagemin';
 import { visualizer } from 'rollup-plugin-visualizer';
-import postcssPxToViewport from 'postcss-px-to-viewport';
+// import postcssPxToViewport from 'postcss-px-to-viewport';
 import ViteRestart from 'vite-plugin-restart';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import UnoCSS from 'unocss/vite';
@@ -209,7 +209,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
         port: 8080,
       },
       // 设置 https 代理
-      open: true,
+      open: false,
       proxy: {
         // 代理 /dev-api 的请求
         [env.VITE_APP_BASE_API]: {
@@ -222,13 +222,13 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
       },
     },
     css: {
-      postcss: {
-        plugins: [
-          postcssPxToViewport({
-            viewportWidth: 1920, //---基于1920宽度为100vw
-          }),
-        ],
-      },
+      // postcss: {
+      //   plugins: [
+      //     postcssPxToViewport({
+      //       viewportWidth: 1920, //---基于1920宽度为100vw
+      //     }),
+      //   ],
+      // },
       preprocessorOptions: {
         // 定义全局 SCSS 变量
         scss: {

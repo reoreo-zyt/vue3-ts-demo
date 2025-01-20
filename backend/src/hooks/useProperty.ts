@@ -1,7 +1,7 @@
 export const useProperty = () => {
-  const authPhone = {
+  const authUsername = {
     type: String,
-    description: '电话号码',
+    description: '用户名',
     required: false,
     default: '19927458531',
   };
@@ -12,11 +12,11 @@ export const useProperty = () => {
     default: '123456',
   };
 
-  const getAuthPhoneProperty = () => authPhone;
+  const getAuthUsernameProperty = () => authUsername;
   const getAuthPasswordProperty = () => authPassword;
 
   return {
-    getAuthPhoneProperty,
+    getAuthUsernameProperty,
     getAuthPasswordProperty,
   };
 };
