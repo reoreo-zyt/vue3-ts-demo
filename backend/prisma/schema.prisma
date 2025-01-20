@@ -13,7 +13,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-/**
+/*
  * 主键 用户id
  * username 用户账号
  * nickname 用户昵称

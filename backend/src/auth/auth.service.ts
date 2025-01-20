@@ -26,7 +26,7 @@ export class AuthService {
           username: user.username,
         });
         return {
-          code: 200,
+          code: "00000",
           data: token,
           mag: '登录成功',
         };
@@ -65,7 +65,7 @@ export class AuthService {
     };
   }
   // 校验 Token
-  verifyToken(token) {
+  verifyToken(token: string) {
     if (!token) return '';
 
     return this.jwtService.verify(token);

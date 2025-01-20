@@ -1,12 +1,22 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { NestExpressApplication } from '@nestjs/platform-express';
-// api文档插件
+import { Config } from "@/config";
+// api 文档插件
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+// session 中间件
+import * as session from 'express-session';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   app.setGlobalPrefix('api/v1');
+
+  app.use(session({
+    secret: Config.sessionSecret,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 3600000 }
+  }));
 
   const options = new DocumentBuilder()
     .setTitle('接口文档')

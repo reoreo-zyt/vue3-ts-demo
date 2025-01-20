@@ -16,4 +16,5 @@ export const Config = {
     //密码
     //password:""
   },
+  sessionSecret: "123456"
 }

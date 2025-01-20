@@ -5,18 +5,22 @@ const AUTH_BASE_URL = '/api/v1/auth';
 const AuthAPI = {
   /** 登录接口*/
   login(data: LoginData) {
-    const formData = new FormData();
-    formData.append('username', data.username);
-    formData.append('password', data.password);
-    formData.append('captchaKey', data.captchaKey);
-    formData.append('captchaCode', data.captchaCode);
+    // const formData = new FormData();
+    // formData.append('username', data.username);
+    // formData.append('password', data.password);
+    // formData.append('captchaKey', data.captchaKey);
+    // formData.append('captchaCode', data.captchaKey);
+
+    const formData = {
+      username: data.username,
+      password: data.password,
+      captchaCode: data.captchaCode
+    }
+
     return request<any, LoginResult>({
       url: `${AUTH_BASE_URL}/login`,
       method: 'post',
       data: formData,
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
     });
   },
 
@@ -58,7 +62,7 @@ export interface LoginData {
   /** 密码 */
   password: string;
   /** 验证码缓存key */
-  captchaKey: string;
+  // captchaKey: string;
   /** 验证码 */
   captchaCode: string;
 }
@@ -78,7 +82,7 @@ export interface LoginResult {
 /** 验证码响应 */
 export interface CaptchaResult {
   /** 验证码缓存key */
-  captchaKey: string;
+  // captchaKey: string;
   /** 验证码图片Base64字符串 */
   captchaBase64: string;
 }

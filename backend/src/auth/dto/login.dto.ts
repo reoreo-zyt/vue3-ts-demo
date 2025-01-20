@@ -8,4 +8,5 @@ export class LoginDto {
   username: string;
   @ApiProperty({ ...getAuthPasswordProperty() })
   password: string;
+  captchaCode: string;
 }

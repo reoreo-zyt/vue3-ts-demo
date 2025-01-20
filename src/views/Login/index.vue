@@ -185,7 +185,7 @@ const captchaSvg = ref(); // 验证码图片 svg 字符串
 const loginData = ref<LoginData>({
   username: 'admin',
   password: '123456',
-  captchaKey: '',
+  // captchaKey: '',
   captchaCode: '',
 });
 
@@ -223,7 +223,7 @@ const loginRules = computed(() => {
 // 获取验证码
 function getCaptcha() {
   AuthAPI.getCaptcha().then((data: any) => {
-    loginData.value.captchaKey = data.uuid;
+    // loginData.value.captchaKey = data.uuid;
     captchaSvg.value = data.img;
   });
 }
