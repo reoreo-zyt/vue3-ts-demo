@@ -14,7 +14,7 @@ datasource db {
 }
 
 /*
- * 主键 用户id
+ * 用户信息表：主键 用户id
  * username 用户账号
  * nickname 用户昵称
  * gender 性别((1-男 2-女 0-保密)

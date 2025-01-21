@@ -22,9 +22,9 @@ export class AuthController {
     const isEqual = session.captcha === loginDto.captchaCode ? true : false;
     if(!isEqual) {
       return {
-        code: "00000",
+        code: "B0001",
         data: null,
-        msg: "验证码校验失败！"
+        msg: "验证码校验失败！已重新刷新验证码！"
       }
     } else {
       return this.authService.login(loginDto);

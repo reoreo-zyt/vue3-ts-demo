@@ -28,12 +28,22 @@ export class AuthService {
         return {
           code: "00000",
           data: token,
-          mag: '登录成功',
+          msg: '登录成功',
         };
       } else {
+        return {
+          code: "B0001",
+          data: null,
+          msg: '密码错误',
+        };
         throw new HttpException('密码错误', 200);
       }
     } else {
+      return {
+        code: "B0001",
+        data: null,
+        msg: '用户不存在',
+      };
       throw new HttpException('用户不存在', 200);
     }
     // return loginDto;
@@ -46,6 +56,11 @@ export class AuthService {
       },
     }); // 存在则抛出异常
     if (user) {
+      return {
+        code: "B0001",
+        data: null,
+        msg: "该用户名已被注册，请修改用户名"
+      }
       throw new HttpException('用户已存在', 200);
     } // 不存在则创建用户
     const newUser = await this.prisma.user.create({
@@ -59,9 +74,9 @@ export class AuthService {
       username: newUser.username,
     });
     return {
-      code: 200,
+      code: "00000",
       data: token,
-      mag: '注册成功',
+      msg: '注册成功',
     };
   }
   // 校验 Token
