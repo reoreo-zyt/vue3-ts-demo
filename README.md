@@ -712,3 +712,89 @@ extends: [
 ##### 1.4.5 样式格式
 
 TODO： stylelint
+
+#### 1.5 常用前端库和通用封装
+
+##### 1.5.1 自定义指令
+
+利用 app.use 和 install 函数：
+
+添加可以在不使用 el-form 的时候校验输入的自定义指令
+
+新建 src/directive/index.ts
+
+```ts
+import { type App } from 'vue';
+import validate from './modules/validate';
+
+// 自定义指令
+const directivesList: any = {
+  // Custom directives
+  validate,
+};
+
+const directives = {
+  install: function (app: App<Element>) {
+    Object.keys(directivesList).forEach((key) => {
+      // 注册所有自定义指令
+      app.directive(key, directivesList[key]);
+    });
+  },
+};
+
+export default directives;
+```
+
+新建 src/directive/modules/validate.ts
+
+```ts
+/**
+ * 在不使用 el-form 的时候增加校验
+ */
+import type { Directive, DirectiveBinding } from 'vue';
+
+interface ElType extends HTMLElement {
+  __handleClick__: () => any;
+  disabled: boolean;
+}
+
+const validate: Directive = {
+  mounted(el: ElType, binding: DirectiveBinding) {
+    if (typeof binding.value !== 'function') {
+      throw 'callback must be a function';
+    }
+    const inputElement = el.querySelector('input');
+    if (!inputElement) return;
+
+    inputElement.addEventListener('blur', () => {
+      const value = inputElement.value;
+      if (binding.value(value)) {
+        // 这里调用传递的校验函数
+        inputElement.classList.add('is-valid'); // 添加有效的样式
+        inputElement.classList.remove('is-invalid'); // 移除无效的样式
+      } else {
+        inputElement.classList.add('is-invalid'); // 添加无效的样式
+        inputElement.classList.remove('is-valid'); // 移除有效的样式
+      }
+    });
+  },
+};
+
+export default validate;
+```
+
+使用：
+
+```vue
+<el-input placeholder="" v-model="value" v-validate="validateInput"></el-input>
+```
+
+```ts
+const value = ref('');
+
+const validateInput = (val: any) => {
+  if (!val) {
+    ElMessage.error('数据不能为空');
+  }
+};
+```
