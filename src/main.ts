@@ -1,5 +1,8 @@
 import { createApp } from 'vue';
 import './style.css';
 import App from './App.vue';
+import directives from '@/directive/index';
 
-createApp(App).mount('#app');
+const app = createApp(App);
+
+app.use(directives).mount('#app');

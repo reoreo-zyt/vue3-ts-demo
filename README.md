@@ -708,3 +708,7 @@ extends: [
 参考：
 
 [【vue3-element-admin】Husky + Lint-staged + Commitlint + Commitizen + cz-git 配置 Git 提交规范](https://blog.csdn.net/u013737132/article/details/130191363)
+
+##### 1.4.5 样式格式
+
+TODO： stylelint
