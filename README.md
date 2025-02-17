@@ -798,3 +798,121 @@ const validateInput = (val: any) => {
   }
 };
 ```
+
+##### 1.5.2 vue-router 路由封装
+
+配置静态和错误路由
+
+src/router/modules/staticRouter.ts
+
+```ts
+import { type RouteRecordRaw } from 'vue-router';
+import { HOME_URL } from '@/config';
+
+/**
+ * staticRouter(静态路由)
+ */
+export const staticRouter: RouteRecordRaw[] = [
+  {
+    path: '/',
+    redirect: HOME_URL,
+  },
+  {
+    path: HOME_URL,
+    name: 'test',
+    component: () => import('@/views/test/index.vue'),
+    meta: {
+      title: '测试框架模块功能',
+    },
+  },
+];
+
+/**
+ * errorRouter(错误页面路由)
+ */
+export const errorRouter = [
+  {
+    path: '/403',
+    name: '403',
+    component: () => import('@/components/ErrorMessage/403.vue'),
+    meta: {
+      title: '403页面',
+    },
+  },
+  {
+    path: '/404',
+    name: '404',
+    component: () => import('@/components/ErrorMessage/404.vue'),
+    meta: {
+      title: '404页面',
+    },
+  },
+  {
+    path: '/500',
+    name: '500',
+    component: () => import('@/components/ErrorMessage/500.vue'),
+    meta: {
+      title: '500页面',
+    },
+  },
+  // 解决刷新页面，路由警告
+  {
+    path: '/:pathMatch(.*)*',
+    component: () => import('@/components/ErrorMessage/404.vue'),
+  },
+];
+```
+
+src/router/index.ts
+
+```ts
+import { createRouter, createWebHashHistory } from 'vue-router';
+import { staticRouter, errorRouter } from '@/router/modules/staticRouter';
+
+/**
+ * @description 动态路由参数配置简介 📚
+ * @param path ==> 菜单路径
+ * @param name ==> 菜单别名
+ * @param redirect ==> 重定向地址
+ * @param component ==> 视图文件路径
+ * @param meta ==> 菜单信息
+ * @param meta.icon ==> 菜单图标
+ * @param meta.moduleId ==> 模块Id,判断是否有权限进入
+ * @param meta.img ==> 模块背景图
+ * @param meta.code ==> 模块编号
+ * @param meta.title ==> 菜单标题
+ * @param meta.activeMenu ==> 当前路由为详情页时，需要高亮的菜单
+ * @param meta.isLink ==> 是否外链
+ * @param meta.isHide ==> 是否隐藏
+ * @param meta.isFull ==> 是否全屏(示例：数据大屏页面)
+ * @param meta.isAffix ==> 是否固定在 tabs nav
+ * @param meta.isKeepAlive ==> 是否缓存
+ * */
+const router = createRouter({
+  history: createWebHashHistory(),
+  routes: [...staticRouter, ...errorRouter],
+  strict: false,
+  scrollBehavior: () => ({ left: 0, top: 0 }),
+});
+
+export default router;
+```
+
+修改 App.vue
+
+```vue
+<template>
+  <div class="app">
+    <router-view></router-view>
+  </div>
+</template>
+
+<script setup lang="ts"></script>
+
+<style lang="scss" scoped>
+.app {
+  width: 100%;
+  height: 100%;
+}
+</style>
+```

@@ -1,10 +1,12 @@
 <template>
   <div>111</div>
-  <el-input
-    placeholder=""
-    v-model="value"
-    v-validate="validateInput"
-  ></el-input>
+  <div class="v-input">
+    <el-input
+      placeholder=""
+      v-model="value"
+      v-validate="validateInput"
+    ></el-input>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -20,3 +22,9 @@ onMounted(() => {
   ElMessage.info('自动导入测试');
 });
 </script>
+
+<style lang="scss" scoped>
+.v-input {
+  width: 200px;
+}
+</style>
