@@ -1,6 +1,15 @@
-## 一些问题
+## 这是一个 vue3 的模板
 
-### LF will be replaced by CRLF the next time Git touches it
+注意这里的模板基于 vite 与 ts
+
+- `vue3` 分支
+  - web 端模板
+- `vue3-nuxt3` 分支
+  - web 端服务器渲染模板
+
+### 0、一些问题
+
+#### LF will be replaced by CRLF the next time Git touches it
 
 行尾序列编码不一致导致的问题
 
@@ -10,7 +19,7 @@ windows 系统使用 git 时，在提交代码时会把 CRLF 更改为 LF，在�
 
 windows 端行尾序列为 CRLF。MAC 端行尾序列为 LF
 
-### yarn 安装问题 There appears to be trouble with your network connection. Retrying…
+#### yarn 安装问题 There appears to be trouble with your network connection. Retrying…
 
 yarn 安装超时
 
@@ -27,7 +36,7 @@ yarn config set registry https://registry.npm.taobao.org
 yarn config set strict-ssl false
 ```
 
-### 通过 @ 导入的文件找不到 .vue 模块
+#### 通过 @ 导入的文件找不到 .vue 模块
 
 _找不到 .vue 模块_
 
@@ -40,17 +49,6 @@ declare module '*.vue' {
   export default component;
 }
 ```
-
-## 一些工具
-
-- `nvm`
-  - 管理 node 版本
-- `ncu`
-  - 更新 npm 包依赖
-- `tree-cli`
-  - npm 包，可以生成文件目录树结构
-
-## 一些规范
 
 ### git 代码提交信息规范
 
@@ -89,35 +87,457 @@ hotfix：紧急修复
 dependencies：依赖管理
 ```
 
-## 1、项目搭建
+### 1、搭建 `vue3` 分支项目
 
-### 1.1 使用 `vite-cli`
+前置环境：
 
-_使用 `vite-cli`_
+- [nodejs](https://nodejs.org/zh-cn)
+  - 你可以预览 [nodejs版本](https://nodejs.org/en/download/releases)，找到 lts 版本下载。
+  - 推荐使用 [nvm](https://github.com/coreybutler/nvm-windows/releases) 作为 node 版本管理工具，这样遇到低版本项目可以随时切换。
+
+工程化配置：
+
+vite4 + vue3 + ts + pinia + vue-router + axios + commit 规范 + 代码质量检验
+
+#### 1.1 项目脚手架
+
+目前主流搭建 vue3 项目的脚手架包含：
+
+- `vue-cli`
+  - 早期 vue 项目搭建脚手架，使用 webpack 构建
+- `create-vue`
+  - vue3 专用脚手架，使用 vite 构建
+
+如果你还没有安装 yarn，运行以下：
+
+```bash
+npm add yarn -g
+```
+
+使用脚手架：
 
 ```bash
 yarn create vite
 ```
 
-> 选择 vue typescript
+_-> 选择一个依赖_
 
-_安装依赖、运行、打包_
+![image.png](https://s2.loli.net/2025/02/12/3ZIApC9S5yYgQtN.png)
+
+_-> 选择 vue_
+
+![image.png](https://s2.loli.net/2025/02/12/BWSnPzlkCmevbuV.png)
+
+_-> 选择 typescript_
+
+![image.png](https://s2.loli.net/2025/02/12/fJUNt4Go7awcyjW.png)
+
+_安装依赖并运行_
 
 ```bash
+# 安装依赖
 yarn
+# 运行
 yarn dev
-yarn build
 ```
 
-### 1.2 集成配置
+_可以一键初始化，通过命令行参数创建_
 
-_安装 nodejs 的类型定义文件_
+```bash
+yarn create vite my-vue-app --template vue
+```
+
+#### 1.2 优化下项目结构
+
+![image.png](https://s2.loli.net/2025/02/12/Je9vU6tgVwlkzLa.png)
+
+#### 1.3 配置 vite.config.ts
+
+_先安装下 node 类型_
 
 ```bash
 yarn add @types/node -D
 ```
 
-_修改 tsconfig.node.json_
+##### 1.3.1 常用的项目配置
+
+- 配置别名
+- 代理服务器
+- 全局样式引入
+- 打包配置
+
+```typescript
+import { type UserConfig, defineConfig, loadEnv, ConfigEnv } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import * as path from 'path';
+import {
+  name,
+  version,
+  engines,
+  dependencies,
+  devDependencies,
+} from './package.json';
+
+// 平台的名称、版本、运行所需的 node 版本、依赖、构建时间的类型提示
+const __APP_INFO__ = {
+  pkg: { name, version, engines, dependencies, devDependencies },
+  buildTimestamp: Date.now(),
+};
+
+// https://vite.dev/config/
+export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
+  const env = loadEnv(mode, process.cwd());
+  return {
+    resolve: {
+      // extensions: ['.js', '.ts', '.json', '.tsx'],
+      //设置别名
+      alias: {
+        '@': path.resolve(__dirname, 'src'),
+      },
+    },
+    plugins: [vue()],
+    server: {
+      port: 8080, //启动端口
+      hmr: {
+        host: '127.0.0.1',
+        port: 8080,
+      },
+      // 设置 https 代理
+      open: false,
+      proxy: {
+        // 代理 /dev-api 的请求
+        [env.VITE_APP_BASE_API]: {
+          changeOrigin: true,
+          // 代理目标地址：https://api.youlai.tech
+          target: env.VITE_APP_API_URL,
+          rewrite: (path: any) =>
+            path.replace(new RegExp('^' + env.VITE_APP_BASE_API), ''),
+        },
+      },
+    },
+    css: {
+      preprocessorOptions: {
+        // 定义全局 SCSS 变量
+        scss: {
+          api: 'modern-compiler',
+          additionalData: `
+            @use "@/styles/variables.scss" as *;
+          `,
+        },
+      },
+    },
+    build: {
+      // polyfillModulePreload: true, // 是否自动注入 module preload 的 polyfill
+      outDir: 'dist', // 指定输出路径
+      assetsDir: 'assets', // 指定生成静态文件目录
+      cssCodeSplit: true, // 启用 CSS 代码拆分
+      cssTarget: '', // 允许用户为 CSS 的压缩设置一个不同的浏览器 target 与 build.target 一致
+      sourcemap: false, // 构建后是否生成 source map 文件
+      manifest: false, // 当设置为 true，构建后将会生成 manifest.json 文件
+      ssrManifest: false, // 构建不生成 SSR 的 manifest 文件
+      ssr: undefined, // 生成面向 SSR 的构建
+      write: true, // 启用将构建后的文件写入磁盘
+      emptyOutDir: true, // 构建时清空该目录
+      chunkSizeWarningLimit: 500, // chunk 大小警告的限制
+      watch: null, // 设置为 {} 则会启用 rollup 的监听器
+      // minify:false, // 表示打包后的文件内容不进行压缩，方便阅读
+      terserOptions: {
+        compress: {
+          // 打包的时候可以移除console和debugger
+          drop_console: true,
+          drop_debugger: true,
+        },
+      }, // 传递给 minify: "terser" 的更多 minify 选项
+    },
+    define: {
+      __APP_INFO__: JSON.stringify(__APP_INFO__),
+    },
+  };
+});
+```
+
+##### 1.3.2 常用插件配置
+
+###### 1.3.2.1 自动导入依赖 `unplugin-auto-import`\*
+
+可以自动导入 vue vue-router pinia vueuse 的依赖项
+
+安装依赖：
+
+```bash
+yarn add unplugin-auto-import -D
+```
+
+在 `vite.config.ts` 中引入
+
+```bash
+import AutoImport from 'unplugin-auto-import/vite';
+```
+
+```ts
+......
+plugin: [
+  ......,
+  AutoImport({
+    include: [/\.[tj]sx?$/, /\.vue$/, /\.vue\?vue/, /\.md$/],
+    imports: [
+      // 直接使用预设
+      'vue',
+      // 'vue-router',
+      // 'pinia',
+      // '@vueuse/core',
+    ],
+    //注意这个配置和src同级
+    dts: './src/types/auto-imports.d.ts',
+  }),
+]
+......
+```
+
+引入自动导入后，将节省很多写依赖导入的时间，如下示例，不需再手动引入 `ref`：
+
+```vue
+<template>
+  <div>{{ appTitle }}</div>
+</template>
+
+<script setup lang="ts">
+/** 自动引入 */
+const appTitle = ref('vue3-template');
+</script>
+
+<style scoped></style>
+```
+
+###### 1.3.2.2 自动注册文件夹下的 vue 组件
+
+实际上，在 vue3 中，我们可以利用 install 函数，通过 import.meta.glob 遍历组件模块实现自动注册。
+
+不过，既然有插件，那为什么不用呢：
+
+安装依赖：
+
+```bash
+yarn add unplugin-vue-components -D
+```
+
+```ts
+import Components from 'unplugin-vue-components/vite';
+
+......
+plugin: [
+  ......,
+  Components({
+    deep: true, // 搜索子目录
+    dirs: ['src/components', 'src/**/components'], // 指定自定义组件位置(默认:src/components)
+  }),
+]
+......
+```
+
+###### 1.3.2.3 利用 `unplugin-auto-import` 和 `unplugin-vue-components` 自动引入 element-plus
+
+具体实现可以看这篇文章：[你真的了解 ElementPlus 的按需导入吗？](https://juejin.cn/post/7344567644174336035)
+如果有自己的组件库和工具库，可以写 resolver 让自动引入组件支持。
+
+_引入 resolver_
+
+```ts
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
+```
+
+```ts
+......
+plugin: [
+  ......
+  Components({
+    ......
+    resolvers: [ElementPlusResolver()],
+    ......
+  }),
+  AutoImport({
+    ......
+    resolvers: [ElementPlusResolver()],
+    ......
+  }),
+]
+......
+```
+
+###### 1.3.2.4 增强开发体验插件
+
+_vite 重启_
+
+安装：
+
+```bash
+yarn add vite-plugin-restart -D
+```
+
+引入：
+
+```ts
+import ViteRestart from 'vite-plugin-restart';
+
+......
+plugin: [
+  ViteRestart({
+    restart: ['vite.config.[jt]s'],
+  }),
+]
+......
+```
+
+_查看构建包大小_
+
+安装
+
+```bash
+yarn add rollup-plugin-visualizer -D
+```
+
+引入
+
+```ts
+import { visualizer } from 'rollup-plugin-visualizer'; // 查看构建的包大小
+
+......
+plugin: [
+  visualizer({ open: false }),
+]
+......
+```
+
+###### 1.3.2.5 打包优化
+
+_vite-plugin-compression 压缩成 gzip_
+_vite-plugin-imagemin 压缩图片_
+
+```bash
+yarn add vite-plugin-compression vite-plugin-imagemin -D
+```
+
+```ts
+import viteCompression from 'vite-plugin-compression';
+import viteImagemin from 'vite-plugin-imagemin';
+
+......
+plugin: [
+  viteCompression({
+    threshold: 10240, // 对大于 10kb 的文件进行压缩
+  }),
+  viteImagemin({
+    gifsicle: {
+      optimizationLevel: 7,
+      interlaced: false,
+    },
+    optipng: {
+      optimizationLevel: 7,
+    },
+    mozjpeg: {
+      quality: 20,
+    },
+    pngquant: {
+      quality: [0.8, 0.9],
+      speed: 4,
+    },
+    svgo: {
+      plugins: [
+        {
+          name: 'removeViewBox',
+        },
+        {
+          name: 'removeEmptyAttrs',
+          active: false,
+        },
+      ],
+    },
+  }),
+]
+......
+```
+
+在 package.json 中添加以下配置用来解决网络问题
+
+```json
+"resolutions": {
+    "bin-wrapper": "npm:bin-wrapper-china"
+}
+```
+
+###### 1.3.2.6 更多的功能引入
+
+- 支持 jsx
+- css 样式快速实现 unocss
+
+```ts
+/** 支持功能 */
+import vueJsx from '@vitejs/plugin-vue-jsx';
+/** 样式相关 */
+import UnoCSS from 'unocss/vite';
+
+......
+      vueJsx({}),
+      UnoCSS({
+        hmrTopLevelAwait: false,
+      }),
+......
+```
+
+定义 unocss 规则：
+
+在项目 `uno.config.ts`
+
+```ts
+// uno.config.ts
+import {
+  defineConfig,
+  presetAttributify,
+  presetIcons,
+  presetTypography,
+  presetUno,
+  presetWebFonts,
+  transformerDirectives,
+  transformerVariantGroup,
+} from 'unocss';
+
+export default defineConfig({
+  shortcuts: {
+    'flex-center': 'flex justify-center items-center',
+    'flex-x-center': 'flex justify-center',
+    'flex-y-center': 'flex items-center',
+    'wh-full': 'w-full h-full',
+    'flex-x-start': 'flex items-center justify-start',
+    'flex-x-between': 'flex items-center justify-between',
+    'flex-x-end': 'flex items-center justify-end',
+    'absolute-lt': 'absolute left-0 top-0',
+    'absolute-rt': 'absolute right-0 top-0 ',
+    'fixed-lt': 'fixed left-0 top-0',
+  },
+  theme: {
+    colors: {
+      primary: 'var(--el-color-primary)',
+      primary_dark: 'var(--el-color-primary-light-5)',
+    },
+  },
+  presets: [
+    presetUno(),
+    presetAttributify(),
+    presetIcons(),
+    presetTypography(),
+    presetWebFonts({
+      fonts: {
+        // ...
+      },
+    }),
+  ],
+  transformers: [transformerDirectives(), transformerVariantGroup()],
+});
+```
+
+#### 1.4 集成配置与代码统一规范
+
+##### 1.4.1 修改 tsconfig.node.json
 
 ```json
 {
@@ -166,49 +586,15 @@ _修改 tsconfig.node.json_
 }
 ```
 
-_修改 vite.config.ts_
+##### 1.4.2 集成 eslint 和 prettier
 
-```ts
-import { defineConfig } from 'vite';
-import vue from '@vitejs/plugin-vue';
-import * as path from 'path';
-
-// https://vite.dev/config/
-export default defineConfig({
-  resolve: {
-    //设置别名
-    alias: {
-      '@': path.resolve(__dirname, 'src'),
-    },
-  },
-  plugins: [vue()],
-  server: {
-    port: 8080, //启动端口
-    hmr: {
-      host: '127.0.0.1',
-      port: 8080,
-    },
-    // 设置 https 代理
-    proxy: {
-      '/api': {
-        target: '127.0.0.1:55510',
-        changeOrigin: true,
-        rewrite: (path: string) => path.replace(/^\/api/, ''),
-      },
-    },
-  },
-});
-```
-
-### 1.3 集成 `eslint` 和 `prettier`
-
-_安装 eslint、ts 解析器、默认规则的补充_
+安装 eslint、ts 解析器、默认规则的补充
 
 ```bash
 yarn add eslint eslint-plugin-vue @typescript-eslint/parser @typescript-eslint/eslint-plugin -D
 ```
 
-_安装 .eslintrc.config.cjs_
+配置 .eslintrc.config.cjs
 
 ```cjs
 module.exports = {
@@ -248,15 +634,13 @@ module.exports = {
 };
 ```
 
-### 1.4 集成 `prettier`
-
-_安装 prettier 和相关插件_
+安装 prettier 和相关插件
 
 ```bash
 yarn add prettier eslint-plugin-prettier eslint-config-prettier -D
 ```
 
-_修改 .prettier.config.cjs_
+修改 .prettier.config.cjs
 
 ```cjs
 module.exports = {
@@ -298,7 +682,7 @@ module.exports = {
 };
 ```
 
-_修改 .eslint.config.cjs 配置_
+修改 .eslint.config.cjs 配置
 
 ```cjs
 extends: [
@@ -310,104 +694,17 @@ extends: [
 ],
 ```
 
-### 1.5 按需引入 UI 库
+##### 1.4.3 设置代码自动保存
 
-通过 unplugin-vue-components 按需引入组件
+[如何设置自动保存](https://blog.csdn.net/baidu_20313315/article/details/130007845)
 
-```ts
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
-import Components from 'unplugin-vue-components/vite';
+1、安装插件 Prettier
+2、files.autoSave 设置为onFocuschange
+3、editor.defaultFormatter 设置为 Prettier
+4、设置 editor.formatOnSave
 
-......
+##### 1.4.4 提交规范
 
-  plugins: [
-    Components({
-      resolvers: [ElementPlusResolver()],
-    }),
-    ......
-  ],
+参考：
 
-......
-```
-
-### 1.6 自动引入 vue、vue-router、pinia
-
-注意将类型导出配置导出到 src 同级
-
-```ts
-AutoImport({
-  include: [/\.[tj]sx?$/, /\.vue$/, /\.vue\?vue/, /\.md$/],
-  imports: [
-    // 直接使用预设
-    'vue',
-    'vue-router',
-    'pinia',
-    // TODO： 自定义预设
-    // {
-    //   from: 'vue',
-    //   imports: ['ref', 'reactive'],
-    //   type: true
-    // }
-  ],
-  //注意这个配置和src同级
-  dts: './src/types/auto-imports.d.ts',
-}),
-```
-
-### 1.7 图片打包优化
-
-在 package.json 中添加以下配置：
-
-```json
-"resolutions": {
-    "bin-wrapper": "npm:bin-wrapper-china"
-}
-```
-
-配置插件
-
-```ts
-import viteImagemin from 'vite-plugin-imagemin';
-
-export default () => {
-  return {
-    plugins: [
-      viteImagemin({
-        gifsicle: {
-          optimizationLevel: 7,
-          interlaced: false,
-        },
-        optipng: {
-          optimizationLevel: 7,
-        },
-        mozjpeg: {
-          quality: 20,
-        },
-        pngquant: {
-          quality: [0.8, 0.9],
-          speed: 4,
-        },
-        svgo: {
-          plugins: [
-            {
-              name: 'removeViewBox',
-            },
-            {
-              name: 'removeEmptyAttrs',
-              active: false,
-            },
-          ],
-        },
-      }),
-    ],
-  };
-};
-```
-
-## 2、模块实现思路
-
-### 2.1 登录模块
-
-#### 2.1.1 后端
-
-#### 2.1.2 前端
+[【vue3-element-admin】Husky + Lint-staged + Commitlint + Commitizen + cz-git 配置 Git 提交规范](https://blog.csdn.net/u013737132/article/details/130191363)

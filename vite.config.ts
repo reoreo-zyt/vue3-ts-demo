@@ -1,17 +1,6 @@
 import { type UserConfig, defineConfig, loadEnv, ConfigEnv } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import * as path from 'path';
-import { resolve } from 'path';
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
-import Components from 'unplugin-vue-components/vite';
-import AutoImport from 'unplugin-auto-import/vite';
-import viteCompression from 'vite-plugin-compression';
-import viteImagemin from 'vite-plugin-imagemin';
-import { visualizer } from 'rollup-plugin-visualizer';
-// import postcssPxToViewport from 'postcss-px-to-viewport';
-import ViteRestart from 'vite-plugin-restart';
-import vueJsx from '@vitejs/plugin-vue-jsx';
-import UnoCSS from 'unocss/vite';
 import {
   name,
   version,
@@ -19,20 +8,26 @@ import {
   dependencies,
   devDependencies,
 } from './package.json';
-import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 
-import {
-  createStyleImportPlugin,
-  ElementPlusResolve,
-} from 'vite-plugin-style-import';
+/** 增强开发体验插件 */
+import AutoImport from 'unplugin-auto-import/vite'; // 自动导入
+import Components from 'unplugin-vue-components/vite'; // 全局组件自动注册
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'; // 自动导入 element-plus
+import ViteRestart from 'vite-plugin-restart'; // 自动重启
+import { visualizer } from 'rollup-plugin-visualizer'; // 查看构建的包大小
+/** 打包优化插件 */
+import viteCompression from 'vite-plugin-compression';
+import viteImagemin from 'vite-plugin-imagemin';
+/** 支持功能 */
+import vueJsx from '@vitejs/plugin-vue-jsx';
+/** 样式相关 */
+import UnoCSS from 'unocss/vite';
 
 // 平台的名称、版本、运行所需的 node 版本、依赖、构建时间的类型提示
 const __APP_INFO__ = {
   pkg: { name, version, engines, dependencies, devDependencies },
   buildTimestamp: Date.now(),
 };
-
-const pathSrc = resolve(__dirname, 'src');
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
@@ -43,20 +38,33 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
       //设置别名
       alias: {
         '@': path.resolve(__dirname, 'src'),
-        'vue-i18n': 'vue-i18n/dist/vue-i18n.cjs.js',
       },
     },
     plugins: [
-      UnoCSS({
-        hmrTopLevelAwait: false,
+      AutoImport({
+        include: [/\.[tj]sx?$/, /\.vue$/, /\.vue\?vue/, /\.md$/],
+        imports: [
+          // 直接使用预设
+          'vue',
+          // 'vue-router',
+          // 'pinia',
+          // '@vueuse/core',
+        ],
+        resolvers: [ElementPlusResolver()],
+        //注意这个配置和src同级
+        dts: './src/types/auto-imports.d.ts',
       }),
-      vueJsx({}),
-      visualizer({ open: true }), // 查看打包构建的包大小
+      Components({
+        deep: true, // 搜索子目录
+        resolvers: [ElementPlusResolver()],
+        dirs: ['src/components', 'src/**/components'], // 指定自定义组件位置(默认:src/components)
+      }),
       ViteRestart({
         restart: ['vite.config.[jt]s'],
       }),
-      createStyleImportPlugin({
-        resolves: [ElementPlusResolve()],
+      visualizer({ open: false }),
+      viteCompression({
+        threshold: 10240, // 对大于 10kb 的文件进行压缩
       }),
       viteImagemin({
         gifsicle: {
@@ -85,123 +93,12 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
           ],
         },
       }),
-      AutoImport({
-        include: [/\.[tj]sx?$/, /\.vue$/, /\.vue\?vue/, /\.md$/],
-        imports: [
-          // 直接使用预设
-          'vue',
-          'vue-router',
-          'pinia',
-          '@vueuse/core',
-          // TODO： 自定义预设
-          // {
-          //   from: 'vue',
-          //   imports: ['ref', 'reactive'],
-          //   type: true
-          // }
-        ],
-        //注意这个配置和src同级
-        dts: './src/types/auto-imports.d.ts',
-      }),
-      Components({
-        resolvers: [ElementPlusResolver()],
-        // 指定自定义组件位置(默认:src/components)
-        dirs: ['src/components', 'src/**/components'],
-      }),
-      createSvgIconsPlugin({
-        // 缓存图标位置
-        iconDirs: [resolve(pathSrc, 'assets/icons')],
-        symbolId: 'icon-[dir]-[name]',
-      }),
-      viteCompression({
-        threshold: 10240, // 对大于 10kb 的文件进行压缩
-      }),
       vue(),
+      vueJsx({}),
+      UnoCSS({
+        hmrTopLevelAwait: false,
+      }),
     ],
-    // 预加载项目必需的组件
-    optimizeDeps: {
-      include: [
-        'vue',
-        'vue-router',
-        'element-plus',
-        'pinia',
-        'axios',
-        '@vueuse/core',
-        'sortablejs',
-        // 'echarts',
-        'vue-i18n',
-        'path-browserify',
-        'path-to-regexp',
-        'exceljs',
-        'element-plus/es/components/form/style/css',
-        'element-plus/es/components/form-item/style/css',
-        'element-plus/es/components/button/style/css',
-        'element-plus/es/components/input/style/css',
-        'element-plus/es/components/input-number/style/css',
-        'element-plus/es/components/switch/style/css',
-        'element-plus/es/components/upload/style/css',
-        'element-plus/es/components/menu/style/css',
-        'element-plus/es/components/col/style/css',
-        'element-plus/es/components/icon/style/css',
-        'element-plus/es/components/row/style/css',
-        'element-plus/es/components/tag/style/css',
-        'element-plus/es/components/dialog/style/css',
-        'element-plus/es/components/loading/style/css',
-        'element-plus/es/components/radio/style/css',
-        'element-plus/es/components/radio-group/style/css',
-        'element-plus/es/components/popover/style/css',
-        'element-plus/es/components/scrollbar/style/css',
-        'element-plus/es/components/tooltip/style/css',
-        'element-plus/es/components/dropdown/style/css',
-        'element-plus/es/components/dropdown-menu/style/css',
-        'element-plus/es/components/dropdown-item/style/css',
-        'element-plus/es/components/sub-menu/style/css',
-        'element-plus/es/components/menu-item/style/css',
-        'element-plus/es/components/divider/style/css',
-        'element-plus/es/components/card/style/css',
-        'element-plus/es/components/link/style/css',
-        'element-plus/es/components/breadcrumb/style/css',
-        'element-plus/es/components/breadcrumb-item/style/css',
-        'element-plus/es/components/table/style/css',
-        'element-plus/es/components/tree-select/style/css',
-        'element-plus/es/components/table-column/style/css',
-        'element-plus/es/components/select/style/css',
-        'element-plus/es/components/option/style/css',
-        'element-plus/es/components/pagination/style/css',
-        'element-plus/es/components/tree/style/css',
-        'element-plus/es/components/alert/style/css',
-        'element-plus/es/components/radio-button/style/css',
-        'element-plus/es/components/checkbox-group/style/css',
-        'element-plus/es/components/checkbox/style/css',
-        'element-plus/es/components/tabs/style/css',
-        'element-plus/es/components/tab-pane/style/css',
-        'element-plus/es/components/rate/style/css',
-        'element-plus/es/components/date-picker/style/css',
-        'element-plus/es/components/notification/style/css',
-        'element-plus/es/components/image/style/css',
-        'element-plus/es/components/statistic/style/css',
-        'element-plus/es/components/watermark/style/css',
-        'element-plus/es/components/config-provider/style/css',
-        'element-plus/es/components/text/style/css',
-        'element-plus/es/components/drawer/style/css',
-        'element-plus/es/components/color-picker/style/css',
-        'element-plus/es/components/backtop/style/css',
-        'element-plus/es/components/message-box/style/css',
-        'element-plus/es/components/skeleton/style/css',
-        'element-plus/es/components/skeleton/style/css',
-        'element-plus/es/components/skeleton-item/style/css',
-        'element-plus/es/components/badge/style/css',
-        'element-plus/es/components/steps/style/css',
-        'element-plus/es/components/step/style/css',
-        'element-plus/es/components/avatar/style/css',
-        'element-plus/es/components/descriptions/style/css',
-        'element-plus/es/components/descriptions-item/style/css',
-        'element-plus/es/components/checkbox-group/style/css',
-        'element-plus/es/components/progress/style/css',
-        'element-plus/es/components/image-viewer/style/css',
-        'element-plus/es/components/empty/style/css',
-      ],
-    },
     server: {
       port: 8080, //启动端口
       hmr: {
@@ -222,13 +119,6 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
       },
     },
     css: {
-      // postcss: {
-      //   plugins: [
-      //     postcssPxToViewport({
-      //       viewportWidth: 1920, //---基于1920宽度为100vw
-      //     }),
-      //   ],
-      // },
       preprocessorOptions: {
         // 定义全局 SCSS 变量
         scss: {
