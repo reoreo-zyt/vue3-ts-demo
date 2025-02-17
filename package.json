@@ -11,7 +11,7 @@
     "lint:eslint": "eslint --fix",
     "lint:prettier": "prettier --write --log-level log \"src/**/*.{js,ts,json,tsx,css,less,scss,vue,html,md}\"",
     "lint:lint-staged": "lint-staged",
-    "commit": "git add -A && git-cz && git push"
+    "commit": "git pull && git add -A && git-cz && git push"
   },
   "lint-staged": {
     "*.{js,ts,vue}": [
