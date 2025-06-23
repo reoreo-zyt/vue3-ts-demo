@@ -11,8 +11,8 @@ export const staticRouter: RouteRecordRaw[] = [
   },
   {
     path: HOME_URL,
-    name: 'test',
-    component: () => import('@/views/test/index.vue'),
+    name: 'homepage',
+    component: () => import('@/views/homepage/index.vue'),
     meta: {
       title: '测试框架模块功能',
     },

@@ -1,2 +1,2 @@
 // * 首页地址（默认）
-export const HOME_URL: string = '/test';
+export const HOME_URL: string = '/homepage';
