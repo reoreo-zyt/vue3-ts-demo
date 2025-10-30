@@ -1,0 +1,7 @@
+{
+  "mega": "Мега-{{pokemonName}}",
+  "megaX": "Мега-{{pokemonName}} X",
+  "megaY": "Мега-{{pokemonName}} Y",
+  "primal": "Прото-{{pokemonName}}",
+  "gigantamax": "Гигантамакс-{{pokemonName}}"
+}

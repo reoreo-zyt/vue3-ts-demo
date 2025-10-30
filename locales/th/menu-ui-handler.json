@@ -1,0 +1,21 @@
+{
+  "gameSettings": "ตั้งค่าเกม",
+  "achievements": "ความสำเร็จ",
+  "stats": "สถิติ",
+  "eggList": "รายการไข่",
+  "eggGacha": "กาชาไข่",
+  "pokedex": "โปเกเด็กซ์",
+  "manageData": "จัดการข้อมูล",
+  "community": "ชุมชน",
+  "saveAndQuit": "บันทึกและออก",
+  "logOut": "ออกจากระบบ",
+  "slot": "ช่อง {{slotNumber}}",
+  "importSession": "นำเข้าเซสชัน",
+  "importSlotSelect": "เลือกช่องที่ต้องการนำเข้า",
+  "exportSession": "ส่งออกเซสชัน",
+  "exportSlotSelect": "เลือกช่องที่ต้องการส่งออก",
+  "importData": "นำเข้าข้อมูล",
+  "exportData": "ส่งออกข้อมูล",
+  "cancel": "ยกเลิก",
+  "losingProgressionWarning": "คุณจะสูญเสียความคืบหน้าทั้งหมดตั้งแต่เริ่มต้นการต่อสู้ ยืนยันที่จะดำเนินการต่อหรือไม่?"
+}

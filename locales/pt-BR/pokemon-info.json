@@ -1,0 +1,40 @@
+{
+  "stat": {
+    "hp": "PS",
+    "hpShortened": "PS",
+    "atk": "Ataque",
+    "atkShortened": "Ata",
+    "def": "Defesa",
+    "defShortened": "Def",
+    "spatk": "At. Esp.",
+    "spatkShortened": "AtEsp",
+    "spdef": "Def. Esp.",
+    "spdefShortened": "DefEsp",
+    "spd": "Veloc.",
+    "spdShortened": "Veloc.",
+    "acc": "Precisão",
+    "eva": "Evasão"
+  },
+  "type": {
+    "unknown": "Desconhecido",
+    "normal": "Normal",
+    "fighting": "Lutador",
+    "flying": "Voador",
+    "poison": "Veneno",
+    "ground": "Terra",
+    "rock": "Pedra",
+    "bug": "Inseto",
+    "ghost": "Fantasma",
+    "steel": "Aço",
+    "fire": "Fogo",
+    "water": "Água",
+    "grass": "Grama",
+    "electric": "Elétrico",
+    "psychic": "Psíquico",
+    "ice": "Gelo",
+    "dragon": "Dragão",
+    "dark": "Sombrio",
+    "fairy": "Fada",
+    "stellar": "Estelar"
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "moneyOwned": "{{formattedMoney}} ₽",
+  "levelUp": "Nv. UP",
+  "levelUpWithLevel": "Nv. UP: {{level}}"
+}
